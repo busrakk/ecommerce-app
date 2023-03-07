@@ -2,24 +2,27 @@ import React from "react";
 import { FaHeart } from "react-icons/fa";
 import { MdAddCircle } from "react-icons/md";
 import { AiFillEye } from "react-icons/ai";
+// import moment from "moment";
 
-const ProductItem = () => {
+const ProductItem = ({ item }) => {
   return (
     <div className="group group-hover:bg-opacity-60 transition duration-500 relative bg-gray-50 sm:p-25 py-28 px-10 flex justify-center items-center">
       <img
         className="group-hover:opacity-60 transition duration-500"
         src=""
         alt=""
+        loading="lazy"
       />
       <div className="absolute sm:top-8 top-4 left-4 sm:left-8 flex justify-start items-start flex-col space-y-2">
         <div>
           <p className="group-hover:opacity-60 transition duration-500 text-lg leading-5 text-gray-600">
-            product.title
+           {item.name}
+           {/* {moment(item.created_at).format("DD/MM/YYYY")} */}
           </p>
         </div>
         <div>
           <p className="group-hover:opacity-60 transition duration-500 text-md font-semibold leading-5 text-gray-800">
-            $ product.price
+            $ {item.price}
           </p>
         </div>
       </div>
