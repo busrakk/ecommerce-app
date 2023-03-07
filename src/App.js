@@ -1,10 +1,24 @@
-import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Home from "./components/frontend/Home";
+import Master from "./layouts/frontend/Master";
+import Login from "./components/frontend/auth/Login";
+import Register from "./components/frontend/auth/Register";
 
 function App() {
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Master />}>
+          <Route path="" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
+        {/* <Route path="users" element={<UserLayout />}>
+          <Route index={true} element={<Users />} />
+          <Route path=":id" element={<User />} />
+        </Route> */}
+      </Routes>
+    </>
   );
 }
 
