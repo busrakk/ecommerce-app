@@ -1,9 +1,13 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/frontend/Home";
 import Master from "./layouts/frontend/Master";
 import Login from "./components/frontend/auth/Login";
 import Register from "./components/frontend/auth/Register";
 import ProductDetail from "./components/Product/ProductDetail";
+import AdminRoute from './protectedRoute/AdminRoute';
+import Dashboard from "./components/admin/Dashboard";
+import Profile from "./components/admin/Profile";
+import Page404 from './layouts/error/Page404';
 import axios from "axios";
 
 axios.defaults.baseURL = 'http://127.0.0.1:8000';
@@ -31,6 +35,15 @@ function App() {
           <Route index={true} element={<Users />} />
           <Route path=":id" element={<User />} />
         </Route> */}
+        <Route path='/admin/' element={<AdminRoute/>} >
+            <Route
+              path=""
+              element={<Navigate replace to="/admin/dashboard" />}
+            />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
+          <Route path='*' element={<Page404 />} />
       </Routes>
     </>
   );

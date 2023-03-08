@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { RiShoppingBasketLine } from "react-icons/ri";
 import { HiOutlineUserAdd, HiOutlineUser } from "react-icons/hi";
 import { AiOutlineLock } from "react-icons/ai";
 import { MdOutlineAlternateEmail } from "react-icons/md";
@@ -55,18 +54,17 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4 py-8">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4 py-1">
       <div className="inline-flex">
-        <Link to="/" className="inline-flex flex-row items-center">
-          <RiShoppingBasketLine size={40} className="text-gray-900" />
-          <span className="leading-10 text-gray-800 text-4xl font-bold ml-1 uppercase">
-            Shopper
+        <div className="inline-flex flex-row items-center">
+          <span className="leading-10 text-gray-800 text-3xl font-bold ml-1 uppercase">
+          Merhaba,
           </span>
-        </Link>
+        </div>
       </div>
 
       <div className="text-sm sm:text-base text-gray-600 my-4">
-        Yeni hesap oluştur.
+      Shopper’a giriş yap veya hesap oluştur, satış yapmaya başla!
       </div>
 
       <div className="rounded-md bg-white w-full max-w-sm sm:max-w-md border border-gray-200 shadow-md px-4 py-6 sm:p-8">

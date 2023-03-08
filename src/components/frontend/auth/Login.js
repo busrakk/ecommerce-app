@@ -1,69 +1,72 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { RiShoppingBasketLine } from "react-icons/ri";
 import { ImFacebook } from "react-icons/im";
 import { HiOutlineUserAdd } from "react-icons/hi";
 import { AiOutlineLock } from "react-icons/ai";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { FiArrowRightCircle } from "react-icons/fi";
-import axios from 'axios';
-import swal from 'sweetalert';
+import axios from "axios";
+import swal from "sweetalert";
 import { TailSpin } from "react-loader-spinner";
 
 const Login = () => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [loginInput, setLoginInput] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     error_list: [],
-    isloading: false
-  })
+    isloading: false,
+  });
 
   const handleInput = (e) => {
     e.persist();
-    setLoginInput({...loginInput, [e.target.name]: e.target.value})
-  }
+    setLoginInput({ ...loginInput, [e.target.name]: e.target.value });
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
-    setLoginInput({...loginInput, isLoading: true});
+    setLoginInput({ ...loginInput, isLoading: true });
     const data = {
       email: loginInput.email,
-      password: loginInput.password
-    }
+      password: loginInput.password,
+    };
 
-    axios.get('/sanctum/csrf-cookie').then(response => {
-      axios.post('/api/login', data).then(res => {
-        if(res.data.success){
-          localStorage.setItem('auth_token', res.data.token);
-          localStorage.setItem('auth_name', res.data.username);
-          swal('Success', res.data.message, 'success');
+    axios.get("/sanctum/csrf-cookie").then((response) => {
+      axios.post("/api/login", data).then((res) => {
+        if (res.data.success) {
+          localStorage.setItem("auth_token", res.data.token);
+          localStorage.setItem("auth_name", res.data.username);
+          swal("Success", res.data.message, "success");
           setTimeout(() => {
-            navigate('/');
-          }, "500")
-        }else{
-          swal('Error', res.data.message, 'error');
-          setLoginInput({...loginInput, isLoading: false, error_list: []})
+            //   navigate('/');
+            // }, "500")
+            if (res.data.role === "admin") {
+              navigate("/admin/dashboard");
+            } else {
+              navigate("/");
+            }
+          }, "500");
+        } else {
+          swal("Error", res.data.message, "error");
+          setLoginInput({ ...loginInput, isLoading: false, error_list: [] });
         }
-      })
-    })
-  }
+      });
+    });
+  };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4 py-8">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4 py-1">
       <div className="inline-flex">
-        <Link to="/" className="inline-flex flex-row items-center">
-          <RiShoppingBasketLine size={40} className="text-gray-900" />
-          <span className="leading-10 text-gray-800 text-4xl font-bold ml-1 uppercase">
-            Shopper
+        <div className="inline-flex flex-row items-center">
+          <span className="leading-10 text-gray-800 text-3xl font-bold ml-1 uppercase">
+          Merhaba,
           </span>
-        </Link>
+        </div>
       </div>
 
       <div className="text-sm sm:text-base text-gray-600 my-4">
-        Hesabınıza giriş yapın.
+      Shopper’a giriş yap veya hesap oluştur, satış yapmaya başla!
       </div>
 
       <div className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-md">
@@ -189,7 +192,7 @@ const Login = () => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
