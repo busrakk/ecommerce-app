@@ -1,26 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Title from "../UI/Title";
 import ProductItem from "./ProductItem";
-import axios from "axios";
+import useDelayCallback from "../helpers/useDelayCallback";
+import { productAllApi } from "../../service/serviceApi"
 
 function Product() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getProducts = () => {
-    axios("http://127.0.0.1:8000/api/allproduct")
-      //.then((res) => res.json())
-      .then((res) => {
-        setProducts(res.data.data);
-        console.log(res.data.data);
-      })
-      .catch((e) => console.log(e))
-      .finally(() => setIsLoading(false));
-  };
-
-  useEffect(() => {
-    getProducts();
+  useDelayCallback(() => {
+    getProductList();
   }, []);
+
+  const getProductList = () =>{
+    productAllApi().then(res => {
+      if(res.data.success){
+        if(res.data.status === 'success'){
+          setIsLoading(false)
+          setProducts(res.data.data)
+        }
+      }
+      else{
+        setProducts([]);
+      }
+      
+    });
+  }
 
   return (
     <div className="mx-auto container">

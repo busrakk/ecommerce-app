@@ -1,25 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { categoryAllApi } from "../../service/serviceApi"
+import useDelayCallback from "../../components/helpers/useDelayCallback"
 
 const MegaMenu = () => {
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getCategoryList = () => {
-    axios("http://127.0.0.1:8000/api/allcategory")
-      //.then((res) => res.json())
-      .then((res) => {
-        setCategories(res.data.data);
-        console.log(res.data.data);
-      })
-      .catch((e) => console.log(e))
-      .finally(() => setIsLoading(false));
-  };
+  useDelayCallback(() => {
+    getCategoryList()
+  }, [])
 
-  useEffect(() => {
-    getCategoryList();
-  }, []);
+  const getCategoryList = () => {
+    categoryAllApi().then(res => {
+      if(res.data.success){
+        if(res.data.status === 'success'){
+          setIsLoading(false)
+          setCategories(res.data.data)
+        }
+      }
+      else{
+        setCategories([])
+      }
+    })
+  }
 
   return (
     <div className="shadow-xl mt-16">

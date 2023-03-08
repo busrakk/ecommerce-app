@@ -1,22 +1,49 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { Link, useParams } from "react-router-dom";
 import { AiOutlineHome, AiOutlineRight } from "react-icons/ai";
 import { BsFacebook, BsTwitter, BsInstagram } from "react-icons/bs";
+import useDelayCallback from "../helpers/useDelayCallback";
+import { productFindApi } from "../../service/serviceApi"
 
 const ProductDetail = () => {
   const [product, setProduct] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  let { product_id } = useParams(); // gelen parametreler
+   let { id } = useParams(); // gelen parametreler
 
-  useEffect(() => {
-    axios(`http://127.0.0.1:8000/api/productdetail/${product_id}`)
-      .then((response) => setProduct(response.data.data))
-      .catch((err) => console.log(err))
-      .finally(() => setIsLoading(false));
-  }, [product_id]);
+  useDelayCallback(() => {
+    getProduct(id);
+  }, []);
 
-  // const images =  product.photos.map((url) => ({original: url}))
+  const getProduct = (id) =>{
+    productFindApi(id).then(res => {
+      if(res.data.success){
+        if(res.data.status === 'success'){
+          setIsLoading(false)
+          setProduct(res.data.data)
+        }
+      }
+      else{
+        setProduct([]);
+      }
+      
+    });
+  }
+
+  // const getProductg = () => {
+  //   axios
+  //     .get(`http://127.0.0.1:8000/api/product/${id}`)
+  //     //.then((res) => res.json())
+  //     .then((res) => {
+  //       setProduct(res.data.data);
+  //       console.log(res.data.data);
+  //     })
+  //     .catch((e) => console.log(e))
+  //     .finally(() => setIsLoading(false));
+  // };
+
+  // useEffect(() => {
+  //   getProduct();
+  // }, []);
 
   return (
     //   {isLoading && <h4>Loading...</h4>}
@@ -25,6 +52,7 @@ const ProductDetail = () => {
     //   </ul>
 
     <>
+      {isLoading && <h4>Loading...</h4>}
       <div className="container py-4 flex items-center gap-3">
         <a href="../index.html" className="text-primary text-base">
           <AiOutlineHome />
@@ -36,7 +64,7 @@ const ProductDetail = () => {
       </div>
       <div className="container grid grid-cols-2 gap-16 rounded-lg">
         <div>
-            {/* <ImageGallery items={images} /> */}
+          {/* <ImageGallery items={images} /> */}
           <img
             src="https://picsum.photos/id/1/300/280"
             alt="product"
@@ -81,16 +109,20 @@ const ProductDetail = () => {
             asperiores inventore suscipit,
           </p>
           <div className="flex items-baseline mb-1 space-x-6 mt-4">
-            <p className="text-3xl text-primary font-semibold">${product.price}</p>
-            <p className="text-2xl text-gray-400 line-through">${product.special_price}</p>
+            <p className="text-3xl text-primary font-semibold">
+              ${product.price}
+            </p>
+            <p className="text-2xl text-gray-400 line-through">
+              ${product.special_price}
+            </p>
             <span className="text-green-600 font-medium">In Stock</span>
           </div>
           <div className="pt-4">
             <h3 className="text-lg text-gray-800 mb-3 font-medium">Color</h3>
             <div className="flex items-center gap-2">
-              <button class="border-2 border-gray-300 rounded-full w-8 h-8 focus:outline-none"></button>
-              <button class="border-2 border-gray-300 ml-1 bg-gray-700 rounded-full w-8 h-8 focus:outline-none"></button>
-              <button class="border-2 border-gray-300 ml-1 bg-indigo-500 rounded-full w-8 h-8 focus:outline-none"></button>
+              <button className="border-2 border-gray-300 rounded-full w-8 h-8 focus:outline-none"></button>
+              <button className="border-2 border-gray-300 ml-1 bg-gray-700 rounded-full w-8 h-8 focus:outline-none"></button>
+              <button className="border-2 border-gray-300 ml-1 bg-indigo-500 rounded-full w-8 h-8 focus:outline-none"></button>
             </div>
           </div>
 
@@ -111,18 +143,18 @@ const ProductDetail = () => {
 
           <div className="mt-6 flex gap-3 border-b border-gray-200 pb-5 pt-5">
             <Link href="#">
-              <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+              <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
                 Button
               </button>
             </Link>
             <Link href="#">
-              <button class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
+              <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                 <svg
                   fill="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  class="w-5 h-5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  className="w-5 h-5"
                   viewBox="0 0 24 24"
                 >
                   <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
