@@ -2,6 +2,7 @@ import React from "react";
 import { FaHeart } from "react-icons/fa";
 import { MdAddCircle } from "react-icons/md";
 import { AiFillEye } from "react-icons/ai";
+import { Link } from "react-router-dom";
 // import moment from "moment";
 
 const ProductItem = ({ item }) => {
@@ -34,9 +35,9 @@ const ProductItem = ({ item }) => {
         <button>
           <MdAddCircle size={21} />
         </button>
-        <button>
+        <Link to={`/product/${item.id}`}>
           <AiFillEye size={21} />
-        </button>
+        </Link>
         <button>
           <FaHeart size={21} />
         </button>

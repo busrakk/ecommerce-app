@@ -3,6 +3,7 @@ import Home from "./components/frontend/Home";
 import Master from "./layouts/frontend/Master";
 import Login from "./components/frontend/auth/Login";
 import Register from "./components/frontend/auth/Register";
+import ProductDetail from "./components/Product/ProductDetail";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Master />}>
           <Route path="" element={<Home />} />
+          <Route path="product/:product_id" element={<ProductDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>

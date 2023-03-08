@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const MegaMenu = () => {
+  const [categories, setCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const getCategoryList = () => {
+    axios("http://127.0.0.1:8000/api/allcategory")
+      //.then((res) => res.json())
+      .then((res) => {
+        setCategories(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((e) => console.log(e))
+      .finally(() => setIsLoading(false));
+  };
+
+  useEffect(() => {
+    getCategoryList();
+  }, []);
+
   return (
     <div className="shadow-xl mt-16">
       <nav className="container">
@@ -23,9 +42,17 @@ const MegaMenu = () => {
                 >
                   <div>
                     <ul className="p-2">
-                      <li>
+                      {isLoading && <div>Loading...</div>}
+                      {categories.map((item) => (
+                        <li key={item.id}>
+                          <div className="mega-sub-item-title">
+                            {item.name}
+                          </div>
+                        </li>
+                      ))}
+                      {/* <li>
                         <div className="mega-sub-item-title">ategory_name</div>
-                      </li>
+                      </li> */}
                       <li>
                         <Link to="/#" className="mega-sub-item">
                           subcategory_name

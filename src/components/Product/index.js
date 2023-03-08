@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Title from "../UI/Title";
 import ProductItem from "./ProductItem";
+import axios from "axios";
 
 function Product() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const getProducts = () => {
-    fetch("http://127.0.0.1:8000/api/allproduct")
-      .then((res) => res.json())
+    axios("http://127.0.0.1:8000/api/allproduct")
+      //.then((res) => res.json())
       .then((res) => {
-        setProducts(res.data);
-        console.log(res.data);
+        setProducts(res.data.data);
+        console.log(res.data.data);
       })
       .catch((e) => console.log(e))
       .finally(() => setIsLoading(false));
