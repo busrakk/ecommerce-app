@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Title from "../UI/Title";
 import ProductItem from "./ProductItem";
-import useDelayCallback from "../helpers/useDelayCallback";
+//import useDelayCallback from "../helpers/useDelayCallback";
 import { productAllApi } from "../../service/serviceApi"
 
 function Product() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  useDelayCallback(() => {
+  useEffect(() => {
     getProductList();
   }, []);
 
