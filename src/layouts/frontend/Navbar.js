@@ -1,12 +1,30 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RiShoppingBasketLine } from "react-icons/ri";
 import { HiOutlineUser } from "react-icons/hi";
 import { AiOutlineSearch, AiOutlineLogout } from "react-icons/ai";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { MdFavoriteBorder, MdOutlineShoppingCart } from "react-icons/md";
+import axios from 'axios';
+import swal from 'sweetalert';
 
 const Navbar = () => {
+
+  const navigate = useNavigate();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    axios.post('/api/logout').then(res => {
+      if(res.data.success){
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('auth_name');
+        swal('Success', res.data.message, 'success');
+        navigate('/');
+      }
+    })
+  }
+
+
   return (
     <div className="bg-white fixed top-0 z-50 w-full">
       <div className="border py-3 px-6 container">
@@ -56,7 +74,7 @@ const Navbar = () => {
             </>
           ) : (
             <>
-
+{(localStorage.getItem('auth_name')) ? localStorage.getItem('auth_name'): 'UNDEFIND'}
               <div className="ml-2 flex space-x-1">
                 <Link to="#" className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100">
                   <div className="relative">
@@ -87,6 +105,7 @@ const Navbar = () => {
                 </Link>
                 <Link
                   to="/"
+                  onClick={handleLogout}
                   className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100"
                 >
                   <AiOutlineLogout size={20} />
