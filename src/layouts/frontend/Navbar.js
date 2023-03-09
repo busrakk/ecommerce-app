@@ -1,29 +1,36 @@
-import React from 'react'
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { RiShoppingBasketLine } from "react-icons/ri";
 import { HiOutlineUser } from "react-icons/hi";
-import { AiOutlineSearch, AiOutlineLogout } from "react-icons/ai";
+import { AiOutlineSearch } from "react-icons/ai";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { MdFavoriteBorder, MdOutlineShoppingCart } from "react-icons/md";
-import axios from 'axios';
-import swal from 'sweetalert';
+import { FaRegUserCircle } from "react-icons/fa";
+import axios from "axios";
+import swal from "sweetalert";
+
+import {
+  RiUserLine,
+  RiUserSettingsLine,
+  RiUserReceivedLine,
+} from "react-icons/ri";
 
 const Navbar = () => {
-
   const navigate = useNavigate();
+
+  const [open, setOpen] = useState(false);
 
   const handleLogout = (e) => {
     e.preventDefault();
-    axios.post('/api/logout').then(res => {
-      if(res.data.success){
-        localStorage.removeItem('auth_token');
-        localStorage.removeItem('auth_name');
-        swal('Success', res.data.message, 'success');
-        navigate('/');
+    axios.post("/api/logout").then((res) => {
+      if (res.data.success) {
+        localStorage.removeItem("auth_token");
+        localStorage.removeItem("auth_name");
+        swal("Success", res.data.message, "success");
+        navigate("/");
       }
-    })
-  }
-
+    });
+  };
 
   return (
     <div className="bg-white fixed top-0 z-50 w-full">
@@ -54,7 +61,10 @@ const Navbar = () => {
           {!localStorage.getItem("auth_token") ? (
             <>
               <div className="ml-2 flex space-x-1">
-                <Link to="#" className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100">
+                <Link
+                  to="#"
+                  className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100"
+                >
                   <div className="relative">
                     <MdOutlineShoppingCart size={20} />
                     <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-white">
@@ -74,9 +84,11 @@ const Navbar = () => {
             </>
           ) : (
             <>
-{(localStorage.getItem('auth_name')) ? localStorage.getItem('auth_name'): 'UNDEFIND'}
               <div className="ml-2 flex space-x-1">
-                <Link to="#" className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100">
+                <Link
+                  to="#"
+                  className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100"
+                >
                   <div className="relative">
                     <MdOutlineShoppingCart size={20} />
                     <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-white">
@@ -86,7 +98,10 @@ const Navbar = () => {
                   <span className="text-sm font-normal">Sepetim</span>
                 </Link>
 
-                <Link to="#" className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100">
+                <Link
+                  to="#"
+                  className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100"
+                >
                   <MdFavoriteBorder size={20} />
                   <span className="text-sm font-normal">Favorilerim</span>
                 </Link>
@@ -103,23 +118,65 @@ const Navbar = () => {
                   </div>
                   <span className="text-sm font-normal">Bildirimlerim</span>
                 </Link>
-                <Link
-                  to="/"
-                  onClick={handleLogout}
+                <div
                   className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100"
+                  onClick={() => setOpen(!open)}
                 >
-                  <AiOutlineLogout size={20} />
-                  <span className="text-sm font-normal">Logout</span>
-                </Link>
+                  <div className="relative">
+                    <FaRegUserCircle size={24} />
+                    {open && (
+                      <div className="bg-white z-0 hover:z-50 p-4 w-52 shadow-lg absolute -left-28 top-10">
+                        <div className="space-x-4">
+                          <div
+                            onClick={() => setOpen(false)}
+                            className="text-sm cursor-pointer flex flex-col"
+                          >
+                            <Link
+                              to="/profile"
+                              className="text-gray-900 font-normal hover:text-gray-900 hover:bg-gray-100 p-2 rounded"
+                            >
+                              <div className="flex hover:font-bold items-center space-x-4">
+                                <RiUserLine />
+                                <span>Profilim</span>
+                              </div>
+                            </Link>
+                            <Link
+                              to="#"
+                              className="text-gray-900 font-normal hover:text-gray-900 hover:bg-gray-100 p-2 rounded"
+                            >
+                              <div className="flex hover:font-bold items-center space-x-4">
+                                <RiUserSettingsLine />
+                                <span>Ayarlar</span>
+                              </div>
+                            </Link>
+                            <Link
+                              to="#"
+                              className="text-gray-900 font-normal hover:text-gray-900 hover:bg-gray-100 p-2 rounded"
+                              onClick={handleLogout}
+                            >
+                              <div className="flex hover:font-bold items-center space-x-4">
+                                <RiUserReceivedLine />
+                                <span>Logout</span>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <span className="text-sm font-normal">
+                    {localStorage.getItem("auth_name")
+                      ? localStorage.getItem("auth_name")
+                      : "UNDEFIND"}
+                  </span>
+                </div>
               </div>
-
             </>
           )}
-
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

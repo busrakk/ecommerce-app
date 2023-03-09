@@ -26,18 +26,18 @@ const MegaMenu = () => {
   }
 
   return (
-    <div className="shadow-xl mt-16">
+    <div className="shadow-md mt-16">
       <nav className="container">
         <div className="max-w-7xl flex justify-between items-center mx-auto relative">
           <div>
             <ul className="flex font-semibold text-sm">
               <li className="group">
-                <a
-                  href="/#"
+                <Link
+                  to="/#"
                   className="menu-item group-hover:border-black uppercase font-semibold"
                 >
                   TÜM KATEGORİLER
-                </a>
+                </Link>
                 {/* MEGA MENU CONTENT */}
                 <div
                   className="grid grid-cols-4 bg-white z-50 w-full p-5 absolute top-full left-0 mt-14
@@ -68,28 +68,28 @@ const MegaMenu = () => {
                 {/* MEGA MENU CONTENT END*/}
               </li>
               <li>
-                <a
-                  href="/#"
+                <Link 
+                  to="/#"
                   className="p-4 inline-block hover:font-bold font-normal"
                 >
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/#"
+                <Link
+                  to="/#"
                   className="p-4 inline-block hover:font-bold font-normal"
                 >
                   İlanlar
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/#"
+                <Link
+                  to="/#"
                   className="p-4 inline-block hover:font-bold font-normal"
                 >
                   Favoriler
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

@@ -7,6 +7,7 @@ import { BsBoxArrowInLeft } from "react-icons/bs";
 import swal from "sweetalert";
 import axios from "axios";
 import { TailSpin } from "react-loader-spinner";
+import validationScheme from "./validations"
 
 const Register = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const Register = () => {
     password_confirmation: "",
     error_list: [],
     isLoading: false,
+    validationScheme
   });
 
   const handleInput = (e) => {
@@ -57,7 +59,7 @@ const Register = () => {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4 py-1">
       <div className="inline-flex">
         <div className="inline-flex flex-row items-center">
-          <span className="leading-10 text-gray-800 text-3xl font-bold ml-1 uppercase">
+          <span className="leading-2 text-gray-800 text-3xl font-bold ml-1 uppercase">
           Merhaba,
           </span>
         </div>
@@ -92,6 +94,7 @@ const Register = () => {
                 value={registerInput.name}
               />
             </div>
+            <span className="text-red-500 text-sm">{registerInput.error_list.name}</span>
           </div>
           <div className="flex flex-col mb-4">
             <label
@@ -116,6 +119,7 @@ const Register = () => {
                 value={registerInput.email}
               />
             </div>
+            <span className="text-red-500 text-sm">{registerInput.error_list.email}</span>
           </div>
           <div className="flex flex-col mb-4">
             <label
@@ -142,6 +146,7 @@ const Register = () => {
                 value={registerInput.password}
               />
             </div>
+            <span className="text-red-500 text-sm">{registerInput.error_list.password}</span>
           </div>
           <div className="flex flex-col mb-4">
             <label
@@ -168,6 +173,7 @@ const Register = () => {
                 value={registerInput.password_confirmation}
               />
             </div>
+            <span className="text-red-500 text-sm">{registerInput.error_list.password_confirmation}</span>
           </div>
 
           <div className="flex w-full mt-6">

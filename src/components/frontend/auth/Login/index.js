@@ -8,6 +8,7 @@ import { FiArrowRightCircle } from "react-icons/fi";
 import axios from "axios";
 import swal from "sweetalert";
 import { TailSpin } from "react-loader-spinner";
+import validationScheme from "./validations"
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const Login = () => {
     password: "",
     error_list: [],
     isloading: false,
+    validationScheme
   });
 
   const handleInput = (e) => {
@@ -59,7 +61,7 @@ const Login = () => {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4 py-1">
       <div className="inline-flex">
         <div className="inline-flex flex-row items-center">
-          <span className="leading-10 text-gray-800 text-3xl font-bold ml-1 uppercase">
+          <span className="leading-2 text-gray-800 text-3xl font-bold ml-1 uppercase">
           Merhaba,
           </span>
         </div>
@@ -107,6 +109,7 @@ const Login = () => {
                   value={loginInput.email}
                 />
               </div>
+              <span className="text-red-500 text-sm m-2">{loginInput.error_list.email}</span>
             </div>
 
             <div className="flex flex-col mb-6">
@@ -133,6 +136,7 @@ const Login = () => {
                   value={loginInput.password}
                 />
               </div>
+              <span className="text-red-500 text-sm m-2">{loginInput.error_list.password}</span>
             </div>
 
             <div className="flex items-center mb-6 -mt-4">
