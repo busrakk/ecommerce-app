@@ -6,7 +6,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 const Navbar = () => {
   return (
     <div className="">
-          <div className="bg-white shadow rounded-lg p-3">
+          <div className="bg-white mt-16 shadow rounded-lg p-3">
             <div className="flex flex-col gap-1 text-center items-center">
               <img
                 className="h-32 w-32 bg-white p-2 rounded-full shadow mb-4"

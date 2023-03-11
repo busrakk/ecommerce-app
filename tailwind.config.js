@@ -4,7 +4,14 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      spacing: {
+        '0.1': '0.063rem'
+      },
+      colors: {
+        primary: "#4A3AFF",
+      }
+    },
     container: {
       padding: {
         DEFAULT: '1rem',

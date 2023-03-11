@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 // import moment from "moment";
 
 const ProductItem = ({ item }) => {
+
+  //console.log(item)
+
   return (
     <div className="group group-hover:bg-opacity-60 transition duration-500 relative bg-gray-50 sm:p-25 py-28 px-10 flex justify-center items-center">
       <img

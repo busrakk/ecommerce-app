@@ -56,7 +56,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4 py-1">
+    <div className="flex flex-col items-center justify-center mt-20 min-h-screen bg-gray-100 px-4 py-1">
       <div className="inline-flex">
         <div className="inline-flex flex-row items-center">
           <span className="leading-2 text-gray-800 text-3xl font-bold ml-1 uppercase">

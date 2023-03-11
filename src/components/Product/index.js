@@ -28,7 +28,7 @@ function Product() {
   }
 
   return (
-    <div className="mx-auto container">
+    <div className="mx-auto container mt-24">
       <div className="flex flex-col">
         <div className="flex items-center space-x-8">
           <Title className="sr-only">İlanlar</Title>
