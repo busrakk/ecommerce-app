@@ -9,15 +9,14 @@ const ProductItem = ({ item }) => {
   return (
     <div className="group group-hover:bg-opacity-60 transition duration-500 relative bg-gray-50 sm:p-25 py-28 px-10 flex justify-center items-center">
       <img
-        className="group-hover:opacity-60 transition duration-500"
-        src=""
-        alt=""
-        loading="lazy"
+        className="group-hover:opacity-60 w-[200px] h-[150px] transition duration-500"
+        src={item.images[0].thumbnail}
+        alt={item.name}
       />
       <div className="absolute sm:top-8 top-4 left-4 sm:left-8 flex justify-start items-start flex-col space-y-2">
         <div>
           <p className="group-hover:opacity-60 transition duration-500 text-lg leading-5 text-gray-600">
-           {item.name}
+           {item.name} - {item.user.name}
            {/* {moment(item.created_at).format("DD/MM/YYYY")} */}
           </p>
         </div>

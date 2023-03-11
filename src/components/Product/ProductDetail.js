@@ -7,18 +7,18 @@ import { productFindApi } from "../../service/serviceApi"
 
 const ProductDetail = () => {
   const [product, setProduct] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  //const [isLoading, setIsLoading] = useState(true);
    let { id } = useParams(); // gelen parametreler
 
   useDelayCallback(() => {
-    getProduct(id);
+    getProduct();
   }, []);
 
-  const getProduct = (id) =>{
+  const getProduct = () =>{
     productFindApi(id).then(res => {
       if(res.data.success){
         if(res.data.status === 'success'){
-          setIsLoading(false)
+          //setIsLoading(false)
           setProduct(res.data.data)
         }
       }
@@ -28,6 +28,7 @@ const ProductDetail = () => {
       
     });
   }
+  console.log(product.user_id)
 
   // const getProductg = () => {
   //   axios
@@ -52,7 +53,7 @@ const ProductDetail = () => {
     //   </ul>
 
     <>
-      {isLoading && <h4>Loading...</h4>}
+      {/* {isLoading && <h4>Loading...</h4>} */}
       <div className="container py-4 flex items-center gap-3">
         <a href="../index.html" className="text-primary text-base">
           <AiOutlineHome />

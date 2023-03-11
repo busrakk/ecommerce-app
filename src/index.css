@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Mpntserrat:wght@400;600;700;800&family=Roboto+Condensed:wght@300;400;700&display=swap");
-@import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css');
+/* @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'); */
 
 /* MEGA MENU */
 @layer components {
