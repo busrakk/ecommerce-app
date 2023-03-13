@@ -10,6 +10,10 @@ export const categoryAllApi = async (payload = []) => {
     return sendRequest(GET, '/api/allcategory' ,payload);
 }
 
+export const brandAllApi = async (payload = []) => {
+    return sendRequest(GET, '/api/allbrand' ,payload);
+}
+
 export const productFindApi = async (id, payload = []) => {
     return sendRequest(GET, `/api/product/${id}`, payload);
 }

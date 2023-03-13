@@ -19,7 +19,6 @@ import swal from "sweetalert";
 const MegaMenu = () => {
   const [open, setOpen] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = (e) => {
@@ -41,7 +40,7 @@ const MegaMenu = () => {
     categoryAllApi().then((res) => {
       if (res.data.success) {
         if (res.data.status === "success") {
-          setIsLoading(false);
+          // setIsLoading(false);
           setCategories(res.data.data);
         }
       } else {
@@ -73,7 +72,6 @@ const MegaMenu = () => {
               Home
             </Link>
           </li> */}
-          {isLoading && <div>Loading...</div>}
           <MenuLinks categories={categories} setCategories={setCategories} />
           <li>
             <Link to="/" className="py-7 px-3 inline-block">
@@ -223,7 +221,6 @@ const MegaMenu = () => {
       duration-500 ${open ? "left-0" : "left-[-100%]"}
       `}
         > 
-          {isLoading && <div>Loading...</div>}
           <MenuLinks categories={categories} setCategories={setCategories}  />
           <li>
             <Link to="/" className="py-7 px-3 inline-block">

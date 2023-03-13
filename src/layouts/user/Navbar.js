@@ -4,6 +4,7 @@ import { FiMapPin } from "react-icons/fi";
 import { AiOutlineEdit } from "react-icons/ai";
 
 const Navbar = () => {
+
   return (
     <div className="">
           <div className="bg-white mt-16 shadow rounded-lg p-3">

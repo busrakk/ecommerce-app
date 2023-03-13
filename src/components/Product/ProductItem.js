@@ -13,7 +13,7 @@ const ProductItem = ({ item }) => {
     <div className="group group-hover:bg-opacity-60 transition duration-500 relative bg-gray-50 sm:p-25 py-28 px-10 flex justify-center items-center">
       <img
         className="group-hover:opacity-60 w-[200px] h-[150px] transition duration-500"
-        src={item.images[0].thumbnail}
+        src={item.image1}
         alt={item.name}
       />
       <div className="absolute sm:top-8 top-4 left-4 sm:left-8 flex justify-start items-start flex-col space-y-2">
@@ -45,9 +45,9 @@ const ProductItem = ({ item }) => {
         </button>
       </div>
       <div className="absolute top-4 right-6">
-        <p className="text-base leading-4 pb-0.5 text-gray-600 border-b-2 border-gray-600">
+        {/* <p className="text-base leading-4 pb-0.5 text-gray-600 border-b-2 border-gray-600">
           New
-        </p>
+        </p> */}
       </div>
     </div>
   );
