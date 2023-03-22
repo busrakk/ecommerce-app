@@ -31,9 +31,9 @@ function Brand() {
  // console.log(brands)
 
   return (
-    <div className="container mt-20 py-4">
+    <div className="container mt-32 mx-auto">
       <Title>Markalar</Title>
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 2xl:grid-cols-10">
+      <div className="grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 2xl:grid-cols-8">
       {isLoading && <div>Loading...</div>}
           {brands.map((item, key) => (
             <BrandItem key={key} item={item} />

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Title from "../UI/Title";
 import ProductItem from "./ProductItem";
 //import useDelayCallback from "../helpers/useDelayCallback";
-import { productAllApi } from "../../service/serviceApi"
+import { productAllApi } from "../../service/serviceApi";
 
 function Product() {
   const [products, setProducts] = useState([]);
@@ -12,29 +12,25 @@ function Product() {
     getProductList();
   }, []);
 
-  const getProductList = () =>{
-    productAllApi().then(res => {
-      if(res.data.success){
-        if(res.data.status === 'success'){
-          setIsLoading(false)
-          setProducts(res.data.data)
+  const getProductList = () => {
+    productAllApi().then((res) => {
+      if (res.data.success) {
+        if (res.data.status === "success") {
+          setIsLoading(false);
+          setProducts(res.data.data);
         }
-      }
-      else{
+      } else {
         setProducts([]);
       }
-      
     });
-  }
+  };
 
   return (
     <div className="mx-auto container mt-24">
       <div className="flex flex-col">
-        <div className="flex items-center space-x-8">
-          <Title className="sr-only">İlanlar</Title>
-        </div>
+        <Title>Öne Çıkan İlanlar</Title>
 
-        <div className="grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-8 items-center">
+        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-8 gap-y-8 items-center">
           {isLoading && <div>Loading...</div>}
           {products.map((item, key) => (
             <ProductItem key={key} item={item} />

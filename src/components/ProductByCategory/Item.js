@@ -5,26 +5,21 @@ import { AiFillEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../features/cartSlice";
-// import moment from "moment";
 
-const ProductItem = ({ item }) => {
-
+const Item = ({ item }) => {
   const dispatch = useDispatch();
-
-  //console.log(item)
-
   return (
     <div className="group group-hover:bg-opacity-60 transition duration-500 relative bg-gray-50 sm:p-25 py-28 px-10 flex justify-center items-center">
       <img
-        className="group-hover:opacity-60 w-[250px] h-[180px] transition duration-500"
+        className="group-hover:opacity-60 w-[200px] h-[150px] transition duration-500"
         src={item.image1}
         alt={item.name}
       />
       <div className="absolute sm:top-8 top-4 left-4 sm:left-8 flex justify-start items-start flex-col space-y-2">
         <div>
           <p className="group-hover:opacity-60 transition duration-500 text-lg leading-5 text-gray-600">
-           {item.name} - {item.user.name}
-           {/* {moment(item.created_at).format("DD/MM/YYYY")} */}
+            {item.name} - {item.user.name}
+            {/* {moment(item.created_at).format("DD/MM/YYYY")} */}
           </p>
         </div>
         <div>
@@ -57,4 +52,4 @@ const ProductItem = ({ item }) => {
   );
 };
 
-export default ProductItem;
+export default Item;

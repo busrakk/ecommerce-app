@@ -33,7 +33,7 @@ const [open, setOpen] = useState(false);
                 <div className="bg-white shadow-lg p-5 grid grid-cols-3 max-w-7xl gap-10">
                   {categories.map((links) => (
                     <div key={links.id}>
-                      <Link to={`/category/product/${links.id}`} className="hover:text-primary text-sm font-semibold">
+                      <Link to={`/product/category/${links.id}`} className="hover:text-primary text-sm font-semibold">
                             {links.name}
                           </Link>
                       {/* {links.subcategories.map((slink) => (

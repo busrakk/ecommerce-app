@@ -11,7 +11,7 @@ const BrandItem = ({ item }) => {
         <img
           src={item.logo}
           alt={item.name}
-          className="h-[70px] w-[70px] rounded-full border border-gray-200"
+          className="h-[120px] w-[120px] rounded-full border border-gray-200"
         />
         <span className="text-sm font-semibold text-gray-700 whitespace-nowrap group-hover:text-gray-900 tracking-tighter">
           {item.name}

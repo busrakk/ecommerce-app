@@ -1,12 +1,14 @@
 import React from 'react'
 import Brand from '../Brand'
 import Product from "../Product"
+import ShopByCategory from '../ProductByCategory/ShopByCategory'
 
 const Home = () => {
   return (
     <div>
-      <Product />
       <Brand />
+      <Product />
+      <ShopByCategory />
     </div>
   )
 }

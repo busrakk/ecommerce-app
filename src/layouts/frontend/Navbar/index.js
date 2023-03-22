@@ -41,6 +41,7 @@ const MegaMenu = () => {
       }
     });
   };
+
   useEffect(() => {
     getCategoryList();
   }, []);

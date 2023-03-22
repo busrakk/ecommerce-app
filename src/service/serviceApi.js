@@ -17,3 +17,7 @@ export const brandAllApi = async (payload = []) => {
 export const productFindApi = async (id, payload = []) => {
     return sendRequest(GET, `/api/product/${id}`, payload);
 }
+
+export const productByCategorApi = async (id, payload = []) => {
+    return sendRequest(GET, `/api/product/category/${id}`, payload);
+}
