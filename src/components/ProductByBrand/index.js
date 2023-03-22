@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { productByCategoryApi } from "../../service/serviceApi";
+import { productByBrandApi } from "../../service/serviceApi";
 
 import { AiOutlineHome, AiOutlineRight } from "react-icons/ai";
 import { TbCategory } from "react-icons/tb";
 import Item from "./Item";
 
-const ProductByCategory = () => {
-  const params = useParams();
+const ProductByBrand = () => {
+
+    const params = useParams();
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
-    productByCategoryApi(params.id).then((res) => {
+    productByBrandApi(params.id).then((res) => {
       if (res.data.success) {
         if (res.data.status === "success") {
           //setIsLoading(false)
@@ -42,7 +43,7 @@ const ProductByCategory = () => {
           <div className="divide-y divide-gray-200 space-y-5">
             <div className="pt-4">
               <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">
-                Markalar
+                Kategoriler
               </h3>
               <div className="space-y-2">
                 <div className="flex items-center">
@@ -242,7 +243,7 @@ const ProductByCategory = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProductByCategory;
+export default ProductByBrand
