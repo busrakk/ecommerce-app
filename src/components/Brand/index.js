@@ -28,7 +28,7 @@ function Brand() {
     });
   }
 
-  console.log(brands)
+ // console.log(brands)
 
   return (
     <div className="container mt-20 py-4">

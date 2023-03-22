@@ -15,11 +15,20 @@ import {
 import { FaRegUserCircle } from "react-icons/fa";
 import axios from "axios";
 import swal from "sweetalert";
+import { useDispatch, useSelector } from "react-redux";
+import { getCartTotal } from "../../../features/cartSlice";
 
 const MegaMenu = () => {
   const [open, setOpen] = useState(false);
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
+
+  const { cart, totalQuantity } = useSelector((state) => state.allcart);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCartTotal())
+  }, [cart, dispatch])
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -53,7 +62,7 @@ const MegaMenu = () => {
 
   return (
     <nav className="bg-white fixed z-50 w-full top-0">
-      <div className="flex items-center font-medium shadow-2xl justify-around">
+      <div className="flex items-center font-medium shadow-lg justify-around">
         <div className="z-50 p-4 md:w-auto w-full flex justify-between">
           <Link to="/" className="flex items-center">
             <RiShoppingBasketLine size={32} className="text-gray-900" />
@@ -90,13 +99,13 @@ const MegaMenu = () => {
               <>
                 <div className="ml-2 flex space-x-1">
                   <Link
-                    to="#"
+                    to="/cart"
                     className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100"
                   >
                     <div className="relative">
                       <HiOutlineShoppingBag size={25} />
                       <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-white">
-                        3
+                      { totalQuantity }
                       </span>
                     </div>
                     <span className="text-sm font-normal">Sepetim</span>
@@ -146,13 +155,13 @@ const MegaMenu = () => {
               <>
                 <div className="ml-2 flex space-x-1">
                   <Link
-                    to="#"
+                    to="/cart"
                     className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100"
                   >
                     <div className="relative">
                       <HiOutlineShoppingBag size={25} />
                       <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-white">
-                        3
+                      { totalQuantity }
                       </span>
                     </div>
                     <span className="text-sm font-normal">Sepetim</span>

@@ -30,7 +30,7 @@ const [open, setOpen] = useState(false);
                     mt-1 bg-white rotate-45"
                   ></div>
                 </div>
-                <div className="bg-white p-5 grid grid-cols-3 max-w-7xl gap-10">
+                <div className="bg-white shadow-lg p-5 grid grid-cols-3 max-w-7xl gap-10">
                   {categories.map((links) => (
                     <div key={links.id}>
                       <Link to={`/category/product/${links.id}`} className="hover:text-primary text-sm font-semibold">
