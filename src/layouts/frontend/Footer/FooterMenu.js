@@ -28,7 +28,7 @@ const FooterMenu = ({ title, items }) => {
       <nav className="grid gap-y-2 md:gap-y-4">
         <h6
           onClick={toggleCollapse}
-          className="text-lg text-black flex items-center justify-between"
+          className="text-xl text-black flex items-center justify-between"
         >
           {title}
           <button className="grid md:hidden w-6 h-6 place-items-center rounded-lg bg-black bg-opacity-10 text-black">
@@ -46,7 +46,7 @@ const FooterMenu = ({ title, items }) => {
             <ul className="grid gap-y-1 md:gap-y-2">
               {items.map((item, key) => (
                 <li key={key}>
-                  <Link to="#" className="text-sm hover:text-gray-400">
+                  <Link to="#" className="text-base hover:text-gray-400">
                     {item.title}
                   </Link>
                 </li>

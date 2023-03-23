@@ -75,7 +75,7 @@ const Footer = () => {
 
   return (
     <div className="bg-white mt-14">
-      <div className="container mx-auto xl:px-60 md:px-0 items-center justify-between">
+      <div className="container mx-auto items-center justify-between">
         <div className="grid gap-y-6 md:grid-cols-2 lg:grid-cols-4 pt-5 md:pt-10">
           {menus.map((menu, index) => (
             <FooterMenu key={index} {...menu} />

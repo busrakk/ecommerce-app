@@ -25,7 +25,7 @@ const ShopByCategory = () => {
   };
 
   return (
-    <div className="mx-auto container mt-24">
+    <div className="mx-auto container mt-16">
       <div className="flex flex-col">
         <Title>Kategoriye Göre Alışveriş</Title>
 
@@ -39,7 +39,7 @@ const ShopByCategory = () => {
                 <img src={item.image} alt={item.name} className="w-full" />
                 <Link
                   to={`/product/category/${item.id}`}
-                  className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-60 transition"
+                  className="absolute inset-0 hover:scale-105 duration-300 bg-black bg-opacity-30 rounded-xl flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-50 transition"
                 >
                   {item.name}
                 </Link>
