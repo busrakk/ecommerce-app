@@ -142,6 +142,7 @@ const Register = () => {
                 className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-indigo-400"
                 placeholder="Şifre"
                 required
+                autoComplete="on"
                 onChange={handleInput}
                 value={registerInput.password}
               />
@@ -169,6 +170,7 @@ const Register = () => {
                 className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-indigo-400"
                 placeholder="Şifreyi Onayla"
                 required
+                autoComplete="on"
                 onChange={handleInput}
                 value={registerInput.password_confirmation}
               />

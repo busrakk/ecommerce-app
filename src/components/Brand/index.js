@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Title from "../UI/Title";
+// import Title from "../UI/Title";
 import { brandAllApi } from "../../service/serviceApi";
 import BrandItem from "./BrandItem";
 
@@ -11,7 +11,7 @@ function Brand() {
 
   useEffect(() => {
     getBrandList();
-  }, []);
+  }, [brands]);
 
   const getBrandList = () =>{
     brandAllApi().then(res => {
@@ -31,8 +31,8 @@ function Brand() {
  // console.log(brands)
 
   return (
-    <div className="container mx-auto">
-      <Title>Markalar</Title>
+    <div className="container mx-auto py-10">
+      {/* <Title>Markalar</Title> */}
       <div className='grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8'>
       {isLoading && <div>Loading...</div>}
           {brands.map((item, key) => (

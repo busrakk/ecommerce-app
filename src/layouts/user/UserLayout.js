@@ -1,23 +1,31 @@
 import React from "react";
-import Navbar from "./Navbar";
+import { Link, Outlet } from "react-router-dom";
+import { AiOutlineHome, AiOutlineRight } from "react-icons/ai";
+
 import Sidebar from "./Sidebar";
-// import { Outlet } from "react-router-dom";
 
-const MasterLayout = () => {
+const UserLayout = () => {
   return (
-    <div className="container bg-gray-100">
-      <main className="grid grid-cols-1 mt-1 w-2xl px-2 mx-auto pt-12">
-        <Navbar />
-      </main>
-
-      <div className="py-3 w-2xl px-2 mx-auto gap-5 grid grid-cols-1 lg:grid-cols-4">
-        <div>
-          <Sidebar />
+    <div className="bg-gray-50">
+      <div className="mt-24 container ">
+        <div className="py-4 flex items-center gap-3">
+          <Link to="/" className="text-primary text-base">
+            <AiOutlineHome />
+          </Link>
+          <span className="text-sm text-gray-400">
+            <AiOutlineRight />
+          </span>
+          <p className="text-gray-600 font-medium">Hesap</p>
         </div>
-        {/* <Outlet /> */}
+
+        <div className="grid grid-cols-1 md:grid-cols-12 items-start gap-6 pt-4 pb-16">
+          <Sidebar />
+
+          <Outlet />
+        </div>
       </div>
     </div>
   );
 };
 
-export default MasterLayout;
+export default UserLayout;

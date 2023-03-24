@@ -190,7 +190,7 @@ const MegaMenu = () => {
                                 </div>
                               </Link>
                               <Link
-                                to="#"
+                                to="/profile/setting"
                                 className="text-gray-900 font-normal hover:text-gray-900 hover:bg-gray-100 p-2 rounded"
                               >
                                 <div className="flex hover:font-bold items-center space-x-4">

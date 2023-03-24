@@ -15,10 +15,9 @@ const ProductDetail = () => {
   const [product, setProduct] = useState({});
   // const [isLoading, setIsLoading] = (true)
 
-  useEffect(() => {
-    getProduct();
-  }, [params]);
 
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getProduct = () => {
     productFindApi(params.id).then((res) => {
       if (res.data.success) {
@@ -31,6 +30,10 @@ const ProductDetail = () => {
       }
     });
   };
+
+  useEffect(() => {
+    getProduct();
+  }, [params, getProduct]);
 
   // console.log(product?.['user']?.name)
 

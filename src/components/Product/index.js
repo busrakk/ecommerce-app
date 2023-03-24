@@ -10,7 +10,7 @@ function Product() {
 
   useEffect(() => {
     getProductList();
-  }, []);
+  }, [products]);
 
   const getProductList = () => {
     productAllApi().then((res) => {

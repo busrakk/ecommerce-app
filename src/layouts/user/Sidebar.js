@@ -1,66 +1,126 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  RiUserSettingsLine,
-  RiUserHeartLine,
-  RiUserFollowLine,
-  RiUserAddLine,
-  RiUserStarLine,
-} from "react-icons/ri";
+import { ImProfile } from "react-icons/im";
+import { MdFavoriteBorder } from "react-icons/md";
+import { AiOutlineDashboard } from "react-icons/ai";
+import { BsArchive, BsCreditCard } from "react-icons/bs";
 
 const Sidebar = () => {
   return (
-    <aside className="flex w-72 flex-col space-y-2 border-r-2 border-gray-200 bg-white shadow rounded-lg p-3 justify-center">
-      <Link
-        to="#"
-        className="flex items-center space-x-4 rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600"
-      >
-        <span className="text-2xl">
-          <RiUserSettingsLine size={20} />
-        </span>
-        <span>Bilgilerim</span>
-      </Link>
+    <div className="col-span-3 rounded-lg">
+      <div className="px-4 py-3 shadow-lg bg-white flex items-center gap-4">
+        <div className="flex-shrink-0">
+          <img
+            src=""
+            alt="/profile"
+            className="rounded-full w-14 h-14 border p-1 object-cover"
+          />
+        </div>
+        <div className="flex-grow">
+          <p className="text-gray-600">Merhaba,</p>
+          <h4 className="text-gray-800 font-medium">
+            {localStorage.getItem("auth_name")
+              ? localStorage.getItem("auth_name")
+              : "UNDEFIND"}
+          </h4>
+        </div>
+      </div>
 
-      <Link
-        to="#"
-        className="flex items-center space-x-4 rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600"
-      >
-        <span className="text-2xl">
-          <RiUserAddLine size={20} />
-        </span>
-        <span>Ürünlerim</span>
-      </Link>
+      <div className="mt-6 bg-white shadow-lg rounded p-4 divide-y divide-gray-200 space-y-4 text-gray-600">
+        <div className="space-y-1 pl-8">
+          <Link
+            to="/profile"
+            className="relative hover:text-primary block font-medium capitalize transition"
+          >
+            <span className="absolute -left-8 top-0 text-base">
+              <AiOutlineDashboard size={22} />
+            </span>
+            Dashboard
+          </Link>
+        </div>
 
-      <Link
-        to="#"
-        className="flex items-center space-x-4 rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600"
-      >
-        <span className="text-2xl">
-          <RiUserFollowLine size={20} />
-        </span>
-        <span>Siparişlerim</span>
-      </Link>
+        <div className="space-y-1 pl-8 pt-4">
+          <div className="relative text-primary block font-medium capitalize transition">
+            <span className="absolute -left-8 top-0 text-base">
+              <BsArchive size={22} />
+            </span>
+            Ürünlerim
+          </div>
+          <Link
+            to="#"
+            className="relative hover:text-primary block capitalize transition"
+          >
+            Ürün Listem
+          </Link>
+          <Link
+            to="#"
+            className="relative hover:text-primary block capitalize transition"
+          >
+            Ürün Ekle
+          </Link>
+        </div>
 
-      <Link
-        to="#"
-        className="flex items-center space-x-4 rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600"
-      >
-        <span className="text-2xl">
-          <RiUserStarLine size={20} />
-        </span>
-        <span>Bildirimler</span>
-      </Link>
+        <div className="space-y-1 pl-8 pt-4">
+          <div className="relative text-primary block font-medium capitalize transition">
+            <span className="absolute -left-8 top-0 text-base">
+              <BsArchive size={22} />
+            </span>
+            Siparişlerim
+          </div>
+          <Link
+            to="#"
+            className="relative hover:text-primary block capitalize transition"
+          >
+            Sipariş Listem
+          </Link>
+          <Link
+            to="#"
+            className="relative hover:text-primary block capitalize transition"
+          >
+            İadelerim
+          </Link>
+        </div>
 
-      <Link
-        to="#"
-        className="flex items-center space-x-4 rounded-md px-2 py-3 hover:bg-gray-100 hover:text-blue-600"
-      >
-        <span className="text-2xl">
-          <RiUserHeartLine size={20} />
-        </span>
-        <span>Favorilerim</span>
-      </Link>
-    </aside>
+        <div className="space-y-1 pl-8 pt-4">
+          <div className="relative text-primary block font-medium capitalize transition">
+            <span className="absolute -left-8 top-0 text-base">
+              <BsCreditCard size={22} />
+            </span>
+            Ödeme Yöntemleri
+          </div>
+          <Link
+            to="#"
+            className="relative hover:text-primary block capitalize transition"
+          >
+            Kupon
+          </Link>
+        </div>
+
+        <div className="space-y-1 pl-8 pt-4">
+          <Link
+            to="/profile/setting"
+            className="relative hover:text-primary block font-medium capitalize transition"
+          >
+            <span className="absolute -left-8 top-0 text-base">
+              <ImProfile size={22} />
+            </span>
+            Hesap Ayarları
+          </Link>
+        </div>
+
+        <div className="space-y-1 pl-8 pt-4">
+          <Link
+            to="#"
+            className="relative hover:text-primary block font-medium capitalize transition"
+          >
+            <span className="absolute -left-8 top-0 text-base">
+              <MdFavoriteBorder size={22} />
+            </span>
+            Favorilerim
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -9,7 +9,7 @@ const ShopByCategory = () => {
 
   useEffect(() => {
     getCategoryList();
-  }, []);
+  }, [categories]);
 
   const getCategoryList = () => {
     categoryAllApi().then((res) => {
