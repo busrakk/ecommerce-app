@@ -6,7 +6,7 @@ import { BsArchive} from "react-icons/bs";
 
 const UserDashboard = () => {
   return (
-    <div className="col-span-9 grid grid-cols-3 gap-4">
+    <div className="px-4 col-span-9 grid grid-cols-3 gap-4">
       <Link
         to="/#"
         className="transform  hover:scale-105 transition duration-300 shadow-md rounded-lg col-span-3 md:col-span-1 intro-y bg-white"

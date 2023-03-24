@@ -8,13 +8,14 @@ import AdminRoute from "./protectedRoute/AdminRoute";
 import Dashboard from "./components/admin/Dashboard";
 import Profile from "./components/admin/Profile";
 import UserDashboard from "./layouts/user/UserDashboard";
-import User from "./layouts/user/User";
 import Page404 from "./layouts/error/Page404";
 import axios from "axios";
 import UserRoute from "./protectedRoute/UserRoute";
 import Cart from "./components/Cart";
 import ProductByCategory from "./components/ProductByCategory";
 import ProductByBrand from "./components/ProductByBrand";
+import AddProduct from "./components/User/Product/AddProduct";
+import UserSetting from "./components/User/UserSetting";
 
 axios.defaults.baseURL = "http://127.0.0.1:8000";
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -41,7 +42,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route element={<UserRoute />}>
             <Route path="profile" element={<UserDashboard />} />
-            <Route path="profile/setting" element={<User />} />
+            <Route path="profile/setting" element={<UserSetting />} />
+            <Route path="profile/add-product" element={<AddProduct />} />
           </Route>
         </Route>
 

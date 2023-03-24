@@ -4,11 +4,12 @@ import { ImProfile } from "react-icons/im";
 import { MdFavoriteBorder } from "react-icons/md";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { BsArchive, BsCreditCard } from "react-icons/bs";
+import { HiOutlineShoppingBag } from "react-icons/hi";
 
 const Sidebar = () => {
   return (
-    <div className="col-span-3 rounded-lg">
-      <div className="px-4 py-3 shadow-lg bg-white flex items-center gap-4">
+    <div className="col-span-3 rounded-lg pb-4">
+      <div className="px-4 py-3 shadow-xl bg-white flex items-center gap-4">
         <div className="flex-shrink-0">
           <img
             src=""
@@ -42,7 +43,7 @@ const Sidebar = () => {
         <div className="space-y-1 pl-8 pt-4">
           <div className="relative text-primary block font-medium capitalize transition">
             <span className="absolute -left-8 top-0 text-base">
-              <BsArchive size={22} />
+              <HiOutlineShoppingBag size={22} />
             </span>
             Ürünlerim
           </div>
@@ -53,7 +54,7 @@ const Sidebar = () => {
             Ürün Listem
           </Link>
           <Link
-            to="#"
+            to="/profile/add-product"
             className="relative hover:text-primary block capitalize transition"
           >
             Ürün Ekle
