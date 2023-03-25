@@ -1,6 +1,92 @@
-import React from "react";
+import React, { useState } from "react";
+import swal from "sweetalert";
+import { productSaveApi } from "../../../service/serviceApi";
+import Select from "react-select";
 
-const AddProduct = () => {
+const AddProduct = (props) => {
+
+  const initialData = {
+    category: null,
+    brand: null,
+    name: "",
+    description: "",
+    price: "",
+    special_price: "",
+    quantity: "",
+    in_stock: true,
+    status: true,
+    featured: false,
+    popular: false,
+    error_list: [],
+  };
+
+  const DEFAULT_CATEGORY = { label: "Select Category", value: "" };
+  const [productInput, setProductInput] = useState(initialData);
+  // const [isLoading, setIsLoading] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(DEFAULT_CATEGORY);
+  const [picture, setPicture] = useState([]);
+
+  const handleImage = (e) => {
+    setPicture({ image1: e.target.files[0] });
+  };
+
+  const handleInput = (e) => {
+    e.persist();
+    setProductInput({ ...productInput, [e.target.name]: e.target.value });
+  };
+
+  const handleCreate = (formData) => {
+    productSaveApi(formData).then((res) => {
+      if (res.data.success) {
+        if (res.data.status === "success") {
+          swal({
+            title: "Success",
+            text: res.data.message,
+            icon: "success",
+            timer: 2000,
+            buttons: false,
+          });
+          props.onClose("success");
+        }
+      } else {
+        if (res.data.status === "validation-error") {
+          setProductInput({ ...productInput, error_list: res.data.errors });
+        } else {
+          swal({
+            title: "Error",
+            text: res.data.message,
+            icon: "error",
+            timer: 2000,
+            buttons: false,
+          });
+        }
+      }
+     // setIsLoading(false);
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    //setIsLoading(true);
+    setProductInput({ ...productInput, error_list: [] });
+
+    const formData = new FormData();
+    formData.append("image1", picture.image1);
+    formData.append("category", selectedCategory.value);
+    formData.append("brand", selectedCategory.value);
+    formData.append("name", productInput.name);
+    formData.append("description", productInput.description);
+    formData.append("price", productInput.price);
+    formData.append("special_price", productInput.special_price);
+    formData.append("quantity", productInput.quantity);
+    formData.append("in_stock", productInput.in_stock === true ? 1 : 0);
+    formData.append("featured", productInput.featured === true ? 1 : 0);
+    formData.append("status", productInput.status === true ? 1 : 0);
+    formData.append("popular", productInput.popular === true ? 1 : 0);
+
+    handleCreate(formData);
+  };
+
   return (
     <div className="col-span-9">
       <div className="w-full px-4 mx-auto">
@@ -13,7 +99,7 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-            <form>
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
               <hr className="mt-6 border-b-1 border-blueGray-300" />
               <h6 className="text-blueGray-400 font-semibold text-sm mt-3 mb-6 uppercase">
                 ÜRÜN BİLGİSİ
@@ -25,13 +111,21 @@ const AddProduct = () => {
                       Kategori Adı
                     </label>
                     <div className="w-full inline-flex border">
-                      <select
-                        class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
+                    <Select
+                options={props.categoryList}
+                onChange={setSelectedCategory}
+                value={selectedCategory}
+              />
+              <span className="text-danger">
+                {productInput.error_list.category}
+              </span>
+                      {/* <select
+                        className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                         name="categories"
                       >
                         <option value="">Select an option</option>
                         <option value="dog">Dog</option>
-                      </select>
+                      </select> */}
                     </div>
                   </div>
                 </div>
@@ -39,14 +133,14 @@ const AddProduct = () => {
                   <div className="relative w-full mb-3">
                     <label className="text-sm text-gray-400">Marka Adı</label>
                     <div className="w-full inline-flex border">
-                      <select
-                        class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
-                        name="brand"
-                      >
-                        <option value="">Select an option</option>
-                        <option value="dog">Dog</option>
-                        <option value="cat">Cat</option>
-                      </select>
+                    <Select
+                options={props.categoryList}
+                onChange={setSelectedCategory}
+                value={selectedCategory}
+              />
+              <span className="text-danger">
+                {productInput.error_list.category}
+              </span>
                     </div>
                   </div>
                 </div>
@@ -57,8 +151,13 @@ const AddProduct = () => {
                       <input
                         type="text"
                         name="name"
+                        onChange={handleInput}
+                value={productInput.name}
                         className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                       />
+                      <span className="text-danger">
+                {productInput.error_list.name}
+              </span>
                     </div>
                   </div>
                 </div>
@@ -70,10 +169,15 @@ const AddProduct = () => {
                         className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                         id="comment"
                         placeholder="Enter your comment"
+                        onChange={handleInput}
+                value={productInput.description}
                         name="description"
                         rows="5"
                         cols="40"
                       ></textarea>
+                      <span className="text-danger">
+                {productInput.error_list.description}
+              </span>
                     </div>
                   </div>
                 </div>
@@ -84,8 +188,13 @@ const AddProduct = () => {
                       <input
                         type="number"
                         name="price"
+                        value={productInput.price}
+                    onChange={handleInput}
                         className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                       />
+                      <span className="text-danger">
+                    {productInput.error_list.price}
+                  </span>
                     </div>
                   </div>
                 </div>
@@ -98,8 +207,13 @@ const AddProduct = () => {
                       <input
                         type="number"
                         name="special_price"
+                        value={productInput.special_price}
+                    onChange={handleInput}
                         className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                       />
+                      <span className="text-danger">
+                    {productInput.error_list.special_price}
+                  </span>
                     </div>
                   </div>
                 </div>
@@ -110,8 +224,13 @@ const AddProduct = () => {
                       <input
                         type="number"
                         name="quantity"
+                        value={productInput.quantity}
+                    onChange={handleInput}
                         className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                       />
+                      <span className="text-danger">
+                    {productInput.error_list.quantity}
+                  </span>
                     </div>
                   </div>
                 </div>
@@ -132,8 +251,13 @@ const AddProduct = () => {
                       <input
                         type="file"
                         name="image1"
+                        onChange={handleImage}
+                    accept="image/png, image/jpg, image/jpeg"
                         className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
                       />
+                      <span className="text-danger">
+                    {productInput.error_list.image1}
+                  </span>
                     </div>
                   </div>
                 </div>
@@ -175,33 +299,33 @@ const AddProduct = () => {
                 <div className="w-full lg:w-4/12 px-4">
                   <div className="relative w-full mb-3">
                     <label className="text-sm text-gray-400">Stok</label>
-                      <div class="flex items-center mt-4 mb-4">
+                      <div className="flex items-center mt-4 mb-4">
                         <input
-                        checked
+                        defaultChecked
                           id="default-radio-1"
                           type="radio"
                           value=""
                           name="stok"
-                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                          className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                         />
                         <label
-                          for="default-radio-1"
-                          class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                          htmlFor="default-radio-1"
+                          className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
                           Evet
                         </label>
                       </div>
-                      <div class="flex items-center">
+                      <div className="flex items-center">
                         <input
                           id="default-radio-2"
                           type="radio"
                           value=""
                           name="stok"
-                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                          className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                         />
                         <label
-                          for="default-radio-2"
-                          class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                          htmlFor="default-radio-2"
+                          className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
                           Hayır
                         </label>
@@ -211,33 +335,33 @@ const AddProduct = () => {
                 <div className="w-full lg:w-4/12 px-4">
                   <div className="relative w-full mb-3">
                     <label className="text-sm text-gray-400">Öne Çıkar</label>
-                      <div class="flex items-center mt-4 mb-4">
+                      <div className="flex items-center mt-4 mb-4">
                         <input
                           id="default-radio-1"
                           type="radio"
                           value=""
                           name="default-radio"
-                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                          className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                         />
                         <label
-                          for="default-radio-1"
-                          class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                          htmlFor="default-radio-1"
+                          className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
                           Evet
                         </label>
                       </div>
-                      <div class="flex items-center">
+                      <div className="flex items-center">
                         <input
-                          checked
+                          defaultChecked
                           id="default-radio-2"
                           type="radio"
                           value=""
                           name="default-radio"
-                          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                          className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                         />
                         <label
-                          for="default-radio-2"
-                          class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                          htmlFor="default-radio-2"
+                          className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
                           Hayır
                         </label>
@@ -245,6 +369,9 @@ const AddProduct = () => {
                   </div>
                 </div>
               </div>
+              <button type="submit" className="btn btn-primary px-4 mb-4 float-end">
+          "Submit"
+        </button>
             </form>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { sendRequest } from "./rootApi";
 const GET = 'get';
-// const POST = 'post';
+const POST = 'post';
 
 export const productAllApi = async (payload = []) => {
     return sendRequest(GET, '/api/allproduct' ,payload);
@@ -24,4 +24,8 @@ export const productByCategoryApi = async (id, payload = []) => {
 
 export const productByBrandApi = async (id, payload = []) => {
     return sendRequest(GET, `/api/product/brand/${id}`, payload);
+}
+
+export const productSaveApi = async (payload = []) => {
+    return sendRequest(POST, '/api/admin/product-save', payload);
 }
