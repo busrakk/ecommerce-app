@@ -6,6 +6,7 @@ import Title from "../UI/Title";
 
 const ShopByCategory = () => {
   const [categories, setCategories] = useState([]);
+  const[isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     getCategoryList();
@@ -15,7 +16,7 @@ const ShopByCategory = () => {
     categoryAllApi().then((res) => {
       if (res.data.success) {
         if (res.data.status === "success") {
-          // setIsLoading(false);
+          setIsLoading(false);
           setCategories(res.data.data);
         }
       } else {
@@ -30,6 +31,7 @@ const ShopByCategory = () => {
         <Title>Kategoriye Göre Alışveriş</Title>
 
         <div className="grid grid-cols-4 gap-6">
+        {isLoading && <div>Loading...</div>}
           {categories &&
             categories?.map((item) => (
               <div

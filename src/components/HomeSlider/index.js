@@ -6,6 +6,7 @@ import { useWindowWidth } from "@react-hook/window-size";
 import slider1 from "../../assets/images/slider1.jpg";
 import slider2 from "../../assets/images/slider2.jpg";
 import slider3 from "../../assets/images/slider3.jpg";
+import { Link } from "react-router-dom";
 
 const HomeSlider = () => {
   const windowWidth = useWindowWidth();
@@ -62,9 +63,11 @@ const HomeSlider = () => {
             </p>
           </div>
           <div className="flex mt-10">
-            <button className="inline-block rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-center font-medium text-white hover:bg-indigo-700">
-              İlanlara Göz At
-            </button>
+            <Link to="/productlist">
+              <button className="inline-block rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-center font-medium text-white hover:bg-indigo-700">
+                İlanlara Göz At
+              </button>
+            </Link>
           </div>
         </div>
       </div>

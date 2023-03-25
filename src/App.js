@@ -17,6 +17,7 @@ import ProductByBrand from "./components/ProductByBrand";
 import AddProduct from "./components/User/Product/AddProduct";
 import UserSetting from "./components/User/UserSetting";
 import UserProductList from "./components/User/Product/UserProductList";
+import ProductList from "./components/Product/ProductList";
 
 axios.defaults.baseURL = "http://127.0.0.1:8000";
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -36,6 +37,7 @@ function App() {
         <Route path="/" element={<Master />}>
           <Route path="" element={<Home />} />
           <Route path="product/:id" element={<ProductDetail />} />
+          <Route path="productlist" element={<ProductList />} />
           <Route path="product/category/:id" element={<ProductByCategory />} />
           <Route path="product/brand/:id" element={<ProductByBrand />} />
           <Route path="cart" element={<Cart />} />
