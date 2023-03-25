@@ -48,7 +48,7 @@ const Sidebar = () => {
             Ürünlerim
           </div>
           <Link
-            to="#"
+            to="/profile/list-product"
             className="relative hover:text-primary block capitalize transition"
           >
             Ürün Listem

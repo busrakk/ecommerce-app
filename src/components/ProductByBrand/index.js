@@ -237,7 +237,7 @@ const ProductByBrand = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-6">
             {product && product.map((item, key) => <Item key={key} item={item} />)}
           </div>
         </div>

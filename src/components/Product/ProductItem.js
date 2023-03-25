@@ -14,7 +14,7 @@ const ProductItem = ({ item }) => {
   //console.log(item)
 
   return (
-    <div className="group group-hover:bg-opacity-60 transition duration-500 relative bg-gray-50 sm:p-25 py-28 px-10 flex justify-center items-center">
+    <div className="group group-hover:bg-opacity-10 transition duration-500 relative transform  hover:scale-105 shadow-md bg-gray-50 sm:p-25 py-28 px-10 flex justify-center items-center">
       <img
         className="group-hover:opacity-60 w-[250px] h-[180px] transition duration-500"
         src={item.image1}
