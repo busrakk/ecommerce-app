@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AiOutlineHome, AiOutlineRight } from "react-icons/ai";
 import { BsFacebook, BsTwitter, BsInstagram } from "react-icons/bs";
-// import useDelayCallback from "../helpers/useDelayCallback";
+import useDelayCallback from "../helpers/useDelayCallback";
 import { productFindApi } from "../../service/serviceApi";
 import { addToCart } from "../../features/cartSlice";
 import { useDispatch } from "react-redux";
@@ -15,9 +15,6 @@ const ProductDetail = () => {
   const [product, setProduct] = useState({});
   // const [isLoading, setIsLoading] = (true)
 
-
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getProduct = () => {
     productFindApi(params.id).then((res) => {
       if (res.data.success) {
@@ -31,9 +28,9 @@ const ProductDetail = () => {
     });
   };
 
-  useEffect(() => {
+  useDelayCallback(() => {
     getProduct();
-  }, [params, getProduct]);
+  }, []);
 
   // console.log(product?.['user']?.name)
 

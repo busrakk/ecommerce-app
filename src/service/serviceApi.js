@@ -26,6 +26,10 @@ export const productByBrandApi = async (id, payload = []) => {
     return sendRequest(GET, `/api/product/brand/${id}`, payload);
 }
 
+export const productByFeaturedApi = async (payload = []) => {
+    return sendRequest(GET, '/api/featured' ,payload);
+}
+
 export const productSaveApi = async (payload = []) => {
     return sendRequest(POST, '/api/admin/product-save', payload);
 }

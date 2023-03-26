@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Title from "../UI/Title";
 import ProductItem from "./ProductItem";
 //import useDelayCallback from "../helpers/useDelayCallback";
-import { productAllApi } from "../../service/serviceApi";
+import { productByFeaturedApi } from "../../service/serviceApi";
 
 function Product() {
   const [products, setProducts] = useState([]);
@@ -13,7 +13,7 @@ function Product() {
   }, [products]);
 
   const getProductList = () => {
-    productAllApi().then((res) => {
+    productByFeaturedApi().then((res) => {
       if (res.data.success) {
         if (res.data.status === "success") {
           setIsLoading(false);

@@ -89,7 +89,7 @@ const MegaMenu = () => {
             </Link>
           </li>
           <li>
-            <Link to="/" className="py-7 px-3 inline-block">
+            <Link to="/product/featured" className="py-7 px-3 inline-block">
               Öne Çıkan Ürünler
             </Link>
           </li>

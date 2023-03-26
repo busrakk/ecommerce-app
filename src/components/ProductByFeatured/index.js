@@ -1,29 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import { productByBrandApi } from "../../service/serviceApi";
+import ProductItem from "../Product/ProductItem";
+import { productByFeaturedApi } from "../../service/serviceApi";
 
 import { AiOutlineHome, AiOutlineRight } from "react-icons/ai";
 import { TbCategory } from "react-icons/tb";
-import Item from "./Item";
 
-const ProductByBrand = () => {
-
-  const params = useParams();
-  const [product, setProduct] = useState([]);
+const ProductByFeatured = () => {
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    productByBrandApi(params.id).then((res) => {
+    getProductList();
+  }, [products]);
+
+  const getProductList = () => {
+    productByFeaturedApi().then((res) => {
       if (res.data.success) {
         if (res.data.status === "success") {
-          //setIsLoading(false)
-          setProduct(res.data.data);
+          setIsLoading(false);
+          setProducts(res.data.data);
         }
       } else {
-        setProduct([]);
+        setProducts([]);
       }
     });
-  }, [params]);
+  };
 
   return (
     <div className="mx-auto container mt-24">
@@ -34,13 +36,34 @@ const ProductByBrand = () => {
         <span className="text-sm text-gray-400">
           <AiOutlineRight />
         </span>
-        <p className="text-gray-600 font-medium">
-           Ürünler
-        </p>
+        <p className="text-gray-600 font-medium">Ürünler</p>
       </div>
       <div className="grid grid-cols-4 gap-6 pt-4 pb-16 items-start">
         <div className="col-span-1 bg-white px-4 pb-6 shadow rounded overflow-hidden">
           <div className="divide-y divide-gray-200 space-y-5">
+            <div className="pt-4">
+              <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">
+                Markalar
+              </h3>
+              <div className="space-y-2">
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    name="cat-1"
+                    id="cat-1"
+                    className="text-primary focus:ring-0 rounded-sm cursor-pointer"
+                  />
+                  <label
+                    htmlFor="cat-1"
+                    className="text-gray-600 ml-3 cusror-pointer"
+                  >
+                    Bedroom
+                  </label>
+                  <div className="ml-auto text-gray-600 text-sm">(15)</div>
+                </div>
+              </div>
+            </div>
+
             <div className="pt-4">
               <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">
                 Kategoriler
@@ -238,12 +261,15 @@ const ProductByBrand = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-6">
-            {product && product.map((item, key) => <Item key={key} item={item} />)}
+            {isLoading && <div>Loading...</div>}
+            {products.map((item, key) => (
+              <ProductItem key={key} item={item} />
+            ))}
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductByBrand
+export default ProductByFeatured;
