@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import Title from "../UI/Title";
 import ProductItem from "../Product/ProductItem";
-//import useDelayCallback from "../helpers/useDelayCallback";
+import useDelayCallback from "../helpers/useDelayCallback";
 import { productByFeaturedApi } from "../../service/serviceApi";
 
 function ProductByFeatured() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
+  useDelayCallback(() => {
     getProductList();
   }, [products]);
 
@@ -16,12 +16,13 @@ function ProductByFeatured() {
     productByFeaturedApi().then((res) => {
       if (res.data.success) {
         if (res.data.status === "success") {
-          setIsLoading(false);
+          
           setProducts(res.data.data);
         }
       } else {
         setProducts([]);
       }
+      setIsLoading(false);
     });
   };
 

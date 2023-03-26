@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineShopping } from "react-icons/ai";
 import { MdFavoriteBorder } from "react-icons/md";
 import { BsArchive} from "react-icons/bs";
 import { productByUserCountApi } from "../../service/serviceApi";
+import useDelayCallback from "../../components/helpers/useDelayCallback";
 
 const UserDashboard = () => {
 
   const [count, setCount] = useState('');
 
-  useEffect(() => {
+  useDelayCallback(() => {
     getProductCount();
   }, [count]);
 

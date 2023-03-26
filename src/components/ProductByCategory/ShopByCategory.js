@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { categoryAllApi } from "../../service/serviceApi";
+import useDelayCallback from "../helpers/useDelayCallback";
 
 import Title from "../UI/Title";
 
@@ -8,7 +9,7 @@ const ShopByCategory = () => {
   const [categories, setCategories] = useState([]);
   const[isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
+  useDelayCallback(() => {
     getCategoryList();
   }, [categories]);
 
@@ -16,12 +17,13 @@ const ShopByCategory = () => {
     categoryAllApi().then((res) => {
       if (res.data.success) {
         if (res.data.status === "success") {
-          setIsLoading(false);
+          
           setCategories(res.data.data);
         }
       } else {
         setCategories([]);
       }
+      setIsLoading(false);
     });
   };
 

@@ -1,25 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { productByCategoryApi } from "../../service/serviceApi";
 import Item from "./Item";
 import ProductByFilter from "../ProductByFilter";
 import Subtitle from "../UI/Subtitle";
 import TypeFilter from "../ProductByFilter/TypeFilter";
+import useDelayCallback from "../helpers/useDelayCallback";
 
 const ProductByCategory = () => {
   const params = useParams();
   const [product, setProduct] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
+  useDelayCallback(() => {
     productByCategoryApi(params.id).then((res) => {
       if (res.data.success) {
         if (res.data.status === "success") {
-          //setIsLoading(false)
           setProduct(res.data.data);
         }
       } else {
         setProduct([]);
       }
+      setIsLoading(false);
     });
   }, [params]);
 
@@ -33,7 +35,9 @@ const ProductByCategory = () => {
           <TypeFilter />
 
           <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-6">
-            {product && product.map((item, key) => <Item key={key} item={item} />)}
+            {isLoading && <div>Loading...</div>}
+            {product &&
+              product.map((item, key) => <Item key={key} item={item} />)}
           </div>
         </div>
       </div>

@@ -17,10 +17,12 @@ import axios from "axios";
 import swal from "sweetalert";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartTotal } from "../../../features/cartSlice";
+import useDelayCallback from "../../../components/helpers/useDelayCallback";
 
 const MegaMenu = () => {
   const [open, setOpen] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   const { cart, totalQuantity } = useSelector((state) => state.allcart);
@@ -42,7 +44,7 @@ const MegaMenu = () => {
     });
   };
 
-  useEffect(() => {
+  useDelayCallback(() => {
     getCategoryList();
   }, []);
 
@@ -56,6 +58,7 @@ const MegaMenu = () => {
       } else {
         setCategories([]);
       }
+      setIsLoading(false);
     });
   };
 
@@ -82,6 +85,7 @@ const MegaMenu = () => {
               Home
             </Link>
           </li> */}
+          {isLoading && <div>Loading...</div>}
           <MenuLinks categories={categories} setCategories={setCategories} />
           <li>
             <Link to="/" className="py-7 px-3 inline-block">

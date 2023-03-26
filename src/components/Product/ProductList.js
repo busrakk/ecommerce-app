@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ProductItem from "./ProductItem";
 import { productAllApi } from "../../service/serviceApi";
 import ProductByFilter from "../ProductByFilter";
 import Subtitle from "../UI/Subtitle";
 import TypeFilter from "../ProductByFilter/TypeFilter";
+import useDelayCallback from "../helpers/useDelayCallback";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
+  useDelayCallback(() => {
     getProductList();
   }, [products]);
 
@@ -17,12 +18,13 @@ const ProductList = () => {
     productAllApi().then((res) => {
       if (res.data.success) {
         if (res.data.status === "success") {
-          setIsLoading(false);
+          
           setProducts(res.data.data);
         }
       } else {
         setProducts([]);
       }
+      setIsLoading(false);
     });
   };
 

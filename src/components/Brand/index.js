@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // import Title from "../UI/Title";
 import { brandAllApi } from "../../service/serviceApi";
 import BrandItem from "./BrandItem";
+import useDelayCallBack from "../helpers/useDelayCallback";
 
 
 function Brand() {
@@ -9,7 +10,7 @@ function Brand() {
   const [brands, setBrands] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
+  useDelayCallBack(() => {
     getBrandList();
   }, [brands]);
 

@@ -38,7 +38,9 @@ const ProductDetail = () => {
     <div>
       {product && (
         <>
-          <Subtitle>Ürün</Subtitle>
+          <div className="container px-32">
+            <Subtitle>Ürün</Subtitle>
+          </div>
           <div className="container grid grid-cols-2 gap-16 rounded-lg">
             <div>
               <img
@@ -95,7 +97,10 @@ const ProductDetail = () => {
 
               <div className="mt-6 flex gap-3 border-b border-gray-200 pb-5 pt-5">
                 <Link href="#">
-                  <button onClick={() => dispatch(addToCart(product))} className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                  <button
+                    onClick={() => dispatch(addToCart(product))}
+                    className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
+                  >
                     Sepete Ekle
                   </button>
                 </Link>

@@ -8,7 +8,9 @@ const UserLayout = () => {
   return (
     <div>
       <div className="mt-24 bg-gray-50">
-        <Subtitle>Hesap</Subtitle>
+        <div className="container">
+          <Subtitle>Hesap</Subtitle>
+        </div>
 
         <div className="grid px-20 grid-cols-1 md:grid-cols-12 items-start pt-4 pb-16">
           <Sidebar />
