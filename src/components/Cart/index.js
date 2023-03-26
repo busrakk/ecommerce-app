@@ -2,9 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartTotal } from "../../features/cartSlice";
 import Item from "./Item";
-import { Link } from "react-router-dom";
-import { AiOutlineHome, AiOutlineRight } from "react-icons/ai";
 import { HiOutlineShoppingBag } from "react-icons/hi";
+import Subtitle from "../UI/Subtitle";
 
 const Cart = () => {
   const { cart, totalQuantity, totalPrice } = useSelector(
@@ -16,14 +15,8 @@ const Cart = () => {
 
   return (
     <div>
-      <div className="container py-4 flex items-center gap-3 mt-24">
-        <Link to="/" className="text-primary text-base">
-          <AiOutlineHome />
-        </Link>
-        <span className="text-sm text-gray-400">
-          <AiOutlineRight />
-        </span>
-        <p className="text-gray-600 font-medium">Sepetim</p>
+      <div className="container">
+        <Subtitle>Sepetim</Subtitle>
       </div>
       <div className="bg-gray-50 pb-10">
         <h1 className="mb-10 pt-4 text-center text-2xl font-medium">

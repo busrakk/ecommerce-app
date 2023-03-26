@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import ProductItem from "./ProductItem";
-import { productAllApi } from "../../service/serviceApi";
+import React, { useEffect, useState } from "react";
+import ProductItem from "../Product/ProductItem";
+import { productByFeaturedApi } from "../../service/serviceApi";
 import ProductByFilter from "../ProductByFilter";
 import Subtitle from "../UI/Subtitle";
 import TypeFilter from "../ProductByFilter/TypeFilter";
 
-const ProductList = () => {
+const List = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -14,7 +14,7 @@ const ProductList = () => {
   }, [products]);
 
   const getProductList = () => {
-    productAllApi().then((res) => {
+    productByFeaturedApi().then((res) => {
       if (res.data.success) {
         if (res.data.status === "success") {
           setIsLoading(false);
@@ -47,4 +47,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default List;

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { AiOutlineHome, AiOutlineRight } from "react-icons/ai";
 import { BsFacebook, BsTwitter, BsInstagram } from "react-icons/bs";
 import useDelayCallback from "../helpers/useDelayCallback";
 import { productFindApi } from "../../service/serviceApi";
 import { addToCart } from "../../features/cartSlice";
 import { useDispatch } from "react-redux";
+import Subtitle from "../UI/Subtitle";
 
 const ProductDetail = () => {
   const params = useParams();
@@ -35,18 +35,10 @@ const ProductDetail = () => {
   // console.log(product?.['user']?.name)
 
   return (
-    <>
+    <div>
       {product && (
         <>
-          <div className="container py-4 flex items-center gap-3 mt-24">
-            <Link to="/" className="text-primary text-base">
-              <AiOutlineHome />
-            </Link>
-            <span className="text-sm text-gray-400">
-              <AiOutlineRight />
-            </span>
-            <p className="text-gray-600 font-medium">Product</p>
-          </div>
+          <Subtitle>Ürün</Subtitle>
           <div className="container grid grid-cols-2 gap-16 rounded-lg">
             <div>
               <img
@@ -147,7 +139,7 @@ const ProductDetail = () => {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 };
 

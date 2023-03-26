@@ -14,7 +14,7 @@ import UserRoute from "./protectedRoute/UserRoute";
 import Cart from "./components/Cart";
 import ProductByCategory from "./components/ProductByCategory";
 import ProductByBrand from "./components/ProductByBrand";
-import ProductByFeatured from "./components/ProductByFeatured";
+import ProductByFeatured from "./components/ProductByFeatured/List";
 import AddProduct from "./components/User/Product/AddProduct";
 import UserSetting from "./components/User/UserSetting";
 import UserProductList from "./components/User/Product/UserProductList";
