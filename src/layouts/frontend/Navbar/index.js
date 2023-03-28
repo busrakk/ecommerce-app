@@ -66,9 +66,9 @@ const MegaMenu = () => {
 
   return (
     <nav className="bg-white fixed z-50 w-full top-0">
-      <div className="flex items-center font-medium shadow-lg justify-around">
+      <div className="flex items-center font-medium shadow-lg justify-between">
         <div className="z-50 p-4 md:w-auto w-full flex justify-between">
-          <Link to="/" className="flex items-center">
+          <Link to="/" className="flex items-center ml-6">
             <RiShoppingBasketLine size={32} className="text-gray-900" />
             <span className="ml-2 text-2xl font-bold uppercase text-gray-900">
               Shopper
@@ -98,7 +98,7 @@ const MegaMenu = () => {
             </Link>
           </li>
         </ul>
-        <div className="flex flex-row space-x-4">
+        <div className="flex flex-row space-x-4 mr-6">
           <div className="md:block hidden">
             {!localStorage.getItem("auth_token") ? (
               <>

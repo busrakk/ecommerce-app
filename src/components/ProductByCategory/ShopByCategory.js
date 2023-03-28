@@ -33,7 +33,7 @@ const ShopByCategory = () => {
       <div className="flex flex-col">
         <Title>Kategoriye Göre Alışveriş</Title>
 
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-2 xl:grid-cols-4">
           {isLoading && <div>Loading...</div>}
           {categories &&
             categories.map((item, key) => (

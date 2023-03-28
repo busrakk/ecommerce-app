@@ -29,7 +29,7 @@ const ProductList = () => {
   };
 
   return (
-    <div className="mx-auto container mt-24">
+    <div className="mx-16 mt-24">
       <Subtitle>Ürünler</Subtitle>
       <div className="grid grid-cols-4 gap-6 pt-4 pb-16 items-start">
         <ProductByFilter />

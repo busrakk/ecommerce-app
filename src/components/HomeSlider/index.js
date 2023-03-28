@@ -58,7 +58,7 @@ const HomeSlider = () => {
               hoşgeldİnİz
             </h1>
             <p className="mt-4 text-2xl text-gray-300">
-              Milyonlarca satılacak ve satın alınacak ürünler, kısaca keşfedilecek ilanlar...
+              Milyonlarca satılan ürünler, aranan ürünler, kısaca keşfedilecek bütün ilanlar...
             </p>
           </div>
           <div className="flex mt-10">

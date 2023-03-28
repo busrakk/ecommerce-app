@@ -54,11 +54,7 @@ const ProductDetail = () => {
               <h2 className="text-xl font-medium uppercase mb-2">
                 {product.name}
               </h2>
-              <p className="mt-4 text-gray-600">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
-                eius eum reprehenderit dolore vel mollitia optio consequatur hic
-                asperiores inventore suscipit,
-              </p>
+              <p className="mt-4 text-gray-600">{product.description}</p>
               <div className="flex items-baseline mb-1 space-x-6 mt-4">
                 <p className="text-3xl text-primary font-semibold">
                   ${product.price}
@@ -74,7 +70,9 @@ const ProductDetail = () => {
               </div>
               <div className="space-y-2 mt-4">
                 <p className="space-x-2">
-                  <span className="text-gray-800 font-semibold">Satıcı: </span>
+                  <span className="text-gray-800 font-semibold">
+                    {product.type ? "Ürünü Satan:" : "Ürünü Arayan:"}{" "}
+                  </span>
                   <span className="text-gray-600">
                     {product?.["user"]?.name}
                   </span>
