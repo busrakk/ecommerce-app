@@ -55,17 +55,16 @@ const HomeSlider = () => {
         <div className="hidden md:block">
           <div className="sm:max-w-lg">
             <h1 className="font text-3xl font-bold uppercase tracking-tight text-white sm:text-5xl">
-              Summer styles are finally here
+              hoşgeldİnİz
             </h1>
-            <p className="mt-4 text-lg text-gray-300">
-              This year, our new summer collection will shelter you from the
-              harsh elements of a world that doesn't care if you live or die.
+            <p className="mt-4 text-2xl text-gray-300">
+              Milyonlarca satılacak ve satın alınacak ürünler, kısaca keşfedilecek ilanlar...
             </p>
           </div>
           <div className="flex mt-10">
             <Link to="/productlist">
               <button className="inline-block rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-center font-medium text-white hover:bg-indigo-700">
-                İlanlara Göz At
+              Şimdi keşfedin
               </button>
             </Link>
           </div>
