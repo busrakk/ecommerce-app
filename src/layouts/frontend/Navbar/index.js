@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { categoryAllApi } from "../../../service/serviceApi";
 // import useDelayCallback from "../../../components/helpers/useDelayCallback";
 import MenuLinks from "./MenuLinks";
 import { HiOutlineShoppingBag, HiOutlineUser } from "react-icons/hi";
@@ -10,23 +9,25 @@ import {
   RiUserSettingsLine,
   RiUserReceivedLine,
 } from "react-icons/ri";
-// import { IoIosNotificationsOutline } from "react-icons/io";
-// import { MdFavoriteBorder, MdOutlineShoppingCart } from "react-icons/md";
 import { FaRegUserCircle } from "react-icons/fa";
 import axios from "axios";
 import swal from "sweetalert";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartTotal } from "../../../features/cartSlice";
-import useDelayCallback from "../../../components/helpers/useDelayCallback";
+import { getCategories } from "../../../redux/services";
+import { getAllCategories } from "../../../features/categorySlice";
 
 const MegaMenu = () => {
   const [open, setOpen] = useState(false);
-  const [categories, setCategories] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const categories = useSelector(getAllCategories);
   const navigate = useNavigate();
 
   const { cart, totalQuantity } = useSelector((state) => state.allcart);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCategories())
+  }, [dispatch])
 
   useEffect(() => {
     dispatch(getCartTotal())
@@ -43,26 +44,6 @@ const MegaMenu = () => {
       }
     });
   };
-
-  useDelayCallback(() => {
-    getCategoryList();
-  }, []);
-
-  const getCategoryList = () => {
-    categoryAllApi().then((res) => {
-      if (res.data.success) {
-        if (res.data.status === "success") {
-          // setIsLoading(false);
-          setCategories(res.data.data);
-        }
-      } else {
-        setCategories([]);
-      }
-      setIsLoading(false);
-    });
-  };
-
- // console.log(categories);
 
   return (
     <nav className="bg-white fixed z-50 w-full top-0">
@@ -85,8 +66,7 @@ const MegaMenu = () => {
               Home
             </Link>
           </li> */}
-          {isLoading && <div>Loading...</div>}
-          <MenuLinks categories={categories} setCategories={setCategories} />
+          <MenuLinks categories={categories} />
           <li>
             <Link to="/" className="py-7 px-3 inline-block">
               İndİrİmlİ Ürünler
@@ -235,7 +215,7 @@ const MegaMenu = () => {
       duration-500 ${open ? "left-0" : "left-[-100%]"}
       `}
         > 
-          <MenuLinks categories={categories} setCategories={setCategories}  />
+          <MenuLinks categories={categories} />
           <li>
             <Link to="/" className="py-7 px-3 inline-block">
               İndirimli Ürünler

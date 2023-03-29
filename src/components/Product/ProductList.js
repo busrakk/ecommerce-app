@@ -1,32 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import ProductItem from "./ProductItem";
-import { productAllApi } from "../../service/serviceApi";
 import ProductByFilter from "../ProductByFilter";
 import Subtitle from "../UI/Subtitle";
 import TypeFilter from "../ProductByFilter/TypeFilter";
-import useDelayCallback from "../helpers/useDelayCallback";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../redux/services";
+import { getAllProducts } from "../../features/productSlice";
+// import useDelayCallback from "../helpers/useDelayCallback";
 
 const ProductList = () => {
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const products = useSelector(getAllProducts);
+  const dispatch = useDispatch();
 
-  useDelayCallback(() => {
-    getProductList();
-  }, [products]);
-
-  const getProductList = () => {
-    productAllApi().then((res) => {
-      if (res.data.success) {
-        if (res.data.status === "success") {
-          
-          setProducts(res.data.data);
-        }
-      } else {
-        setProducts([]);
-      }
-      setIsLoading(false);
-    });
-  };
+  useEffect(() => {
+    dispatch(getProducts())
+  }, [dispatch]);
 
   return (
     <div className="mx-16 mt-24">
@@ -38,7 +26,6 @@ const ProductList = () => {
           <TypeFilter />
 
           <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-6">
-            {isLoading && <div>Loading...</div>}
             {products.map((item, key) => (
               <ProductItem key={key} item={item} />
             ))}
