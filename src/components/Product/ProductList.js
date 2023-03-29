@@ -5,15 +5,22 @@ import Subtitle from "../UI/Subtitle";
 import TypeFilter from "../ProductByFilter/TypeFilter";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/services";
-import { getAllProducts } from "../../features/productSlice";
+import {
+  getAllProducts,
+  getAllProductsStatus,
+} from "../../features/productSlice";
+import { STATUS } from "../../utils/status";
+import Loader from "../Loader";
 // import useDelayCallback from "../helpers/useDelayCallback";
 
 const ProductList = () => {
   const products = useSelector(getAllProducts);
+  const productStatus = useSelector(getAllProductsStatus);
   const dispatch = useDispatch();
 
+
   useEffect(() => {
-    dispatch(getProducts())
+    dispatch(getProducts());
   }, [dispatch]);
 
   return (
@@ -26,9 +33,15 @@ const ProductList = () => {
           <TypeFilter />
 
           <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-6">
-            {products.map((item, key) => (
-              <ProductItem key={key} item={item} />
-            ))}
+            {productStatus === STATUS.LOADING ? (
+              <Loader />
+            ) : (
+              <>
+                {products.map((item, key) => (
+                  <ProductItem key={key} item={item} />
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>

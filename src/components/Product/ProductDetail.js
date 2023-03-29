@@ -1,36 +1,28 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { BsFacebook, BsTwitter, BsInstagram } from "react-icons/bs";
-import useDelayCallback from "../helpers/useDelayCallback";
-import { productFindApi } from "../../service/serviceApi";
+// import useDelayCallback from "../helpers/useDelayCallback";
 import { addToCart } from "../../features/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Subtitle from "../UI/Subtitle";
+import { getSingleProduct, getSingleProductStatus } from "../../features/productSlice";
+import { getProductSingle } from "../../redux/services";
+import { STATUS } from "../../utils/status";
+import Loader from "../Loader";
 
 const ProductDetail = () => {
-  const params = useParams();
-
+  const {id} = useParams();
   const dispatch = useDispatch();
+  const product = useSelector(getSingleProduct);
+  const productSingleStatus = useSelector(getSingleProductStatus);
 
-  const [product, setProduct] = useState({});
-  // const [isLoading, setIsLoading] = (true)
+  useEffect(() => {
+    dispatch(getProductSingle(id));
+  }, [dispatch, id])
 
-  const getProduct = () => {
-    productFindApi(params.id).then((res) => {
-      if (res.data.success) {
-        if (res.data.status === "success") {
-          //setIsLoading(false)
-          setProduct(res.data.data);
-        }
-      } else {
-        setProduct([]);
-      }
-    });
-  };
-
-  useDelayCallback(() => {
-    getProduct();
-  }, []);
+  if(productSingleStatus === STATUS.LOADING){
+    return <Loader />
+  }
 
   // console.log(product?.['user']?.name)
 
@@ -45,22 +37,22 @@ const ProductDetail = () => {
             <div>
               <img
                 src={product.image1}
-                alt={product.name}
+                alt={product?.name}
                 className="w-full h-[500px] rounded-lg"
               />
             </div>
 
             <div>
               <h2 className="text-xl font-medium uppercase mb-2">
-                {product.name}
+                {product?.name}
               </h2>
-              <p className="mt-4 text-gray-600">{product.description}</p>
+              <p className="mt-4 text-gray-600">{product?.description}</p>
               <div className="flex items-baseline mb-1 space-x-6 mt-4">
                 <p className="text-3xl text-primary font-semibold">
-                  ${product.price}
+                  ${product?.price}
                 </p>
                 <p className="text-2xl text-gray-400 line-through">
-                  ${product.special_price}
+                  ${product?.special_price}
                 </p>
                 {product.in_stock ? (
                   <span className="text-green-600 font-medium">Stokta</span>
@@ -71,7 +63,7 @@ const ProductDetail = () => {
               <div className="space-y-2 mt-4">
                 <p className="space-x-2">
                   <span className="text-gray-800 font-semibold">
-                    {product.type ? "Ürünü Satan:" : "Ürünü Arayan:"}{" "}
+                    {product?.type ? "Ürünü Satan:" : "Ürünü Arayan:"}{" "}
                   </span>
                   <span className="text-gray-600">
                     {product?.["user"]?.name}

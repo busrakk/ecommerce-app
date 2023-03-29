@@ -15,3 +15,8 @@ export const getProducts = createAsyncThunk("products/getproducts", async () => 
   const res = await axios("/api/allproduct");
   return res.data.data;
 });
+
+export const getProductSingle = createAsyncThunk("product/getproduct", async (id) => {
+  const res = await axios(`/api/product/${id}`);
+  return res.data.data;
+})

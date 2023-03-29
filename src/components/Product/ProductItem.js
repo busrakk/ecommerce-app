@@ -40,7 +40,7 @@ const ProductItem = ({ item }) => {
         <button onClick={() => dispatch(addToCart(item))}>
           <MdAddCircle size={21} />
         </button>
-        <Link to={`/product/${item.id}`}>
+        <Link to={`/product/${item?.id}`}>
           <AiFillEye size={21} />
         </Link>
         <button>
