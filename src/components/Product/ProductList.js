@@ -18,6 +18,18 @@ const ProductList = () => {
   const productStatus = useSelector(getAllProductsStatus);
   const dispatch = useDispatch();
 
+  // randomizing the products in the list
+  const tempProducts = [];
+  if (products.length > 0) {
+    for (let i in products) {
+      let randomIndex = Math.floor(Math.random() * products.length);
+
+      while (tempProducts.includes(products[randomIndex])) {
+        randomIndex = Math.floor(Math.random() * products.length);
+      }
+      tempProducts[i] = products[randomIndex];
+    }
+  }
 
   useEffect(() => {
     dispatch(getProducts());
@@ -37,7 +49,7 @@ const ProductList = () => {
               <Loader />
             ) : (
               <>
-                {products.map((item, key) => (
+                {tempProducts.map((item, key) => (
                   <ProductItem key={key} item={item} />
                 ))}
               </>
