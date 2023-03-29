@@ -13,25 +13,31 @@ import { FaRegUserCircle } from "react-icons/fa";
 import axios from "axios";
 import swal from "sweetalert";
 import { useDispatch, useSelector } from "react-redux";
-import { getCartTotal } from "../../../features/cartSlice";
 import { getCategories } from "../../../redux/services";
 import { getAllCategories } from "../../../features/categorySlice";
+import {
+  getAllCarts,
+  getCartItemsCount,
+  getCartTotal,
+} from "../../../features/cartSlice";
+import CartModal from "../../../components/CartModal";
 
 const MegaMenu = () => {
   const [open, setOpen] = useState(false);
+  const [open1, setOpen1] = useState(false);
+  const dispatch = useDispatch();
   const categories = useSelector(getAllCategories);
+  const carts = useSelector(getAllCarts);
+  const itemsCount = useSelector(getCartItemsCount);
   const navigate = useNavigate();
 
-  const { cart, totalQuantity } = useSelector((state) => state.allcart);
-  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getCategories())
-  }, [dispatch])
-
-  useEffect(() => {
-    dispatch(getCartTotal())
-  }, [cart, dispatch])
+    dispatch(getCartTotal());
+  }, [carts]);
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -83,18 +89,16 @@ const MegaMenu = () => {
             {!localStorage.getItem("auth_token") ? (
               <>
                 <div className="ml-2 flex space-x-1">
-                  <Link
-                    to="/cart"
-                    className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100"
-                  >
+                  <button onClick={() => setOpen1(!open1)} className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100">
                     <div className="relative">
                       <HiOutlineShoppingBag size={25} />
                       <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-white">
-                      { totalQuantity }
+                        {itemsCount}
                       </span>
+                      <CartModal carts={carts} open1={open1} setOpen1={setOpen1} />
                     </div>
                     <span className="text-sm font-normal">Sepetim</span>
-                  </Link>
+                  </button>
 
                   <div
                     className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100"
@@ -139,18 +143,17 @@ const MegaMenu = () => {
             ) : (
               <>
                 <div className="ml-2 flex space-x-1">
-                  <Link
-                    to="/cart"
-                    className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100"
-                  >
+                  <button onClick={() => setOpen1(!open1)} className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100">
                     <div className="relative">
                       <HiOutlineShoppingBag size={25} />
                       <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-white">
-                      { totalQuantity }
+                        {itemsCount}
                       </span>
+                      <CartModal carts={carts} open1={open1} setOpen1={setOpen1} />
                     </div>
                     <span className="text-sm font-normal">Sepetim</span>
-                  </Link>
+                  </button>
+
                   <div
                     className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100"
                     onClick={() => setOpen(!open)}
@@ -214,7 +217,7 @@ const MegaMenu = () => {
       md:hidden bg-white fixed w-full top-0 overflow-y-auto bottom-0 py-24 pl-4
       duration-500 ${open ? "left-0" : "left-[-100%]"}
       `}
-        > 
+        >
           <MenuLinks categories={categories} />
           <li>
             <Link to="/" className="py-7 px-3 inline-block">

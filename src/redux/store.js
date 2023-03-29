@@ -9,6 +9,6 @@ export const store = configureStore({
         brand: brandReducer,
         category: categoryReducer,
         product: productReducer,
-        allcart: cartReducer,
+        cart: cartReducer,
     },
 });

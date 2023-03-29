@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { MdAddCircle } from "react-icons/md";
 import { AiFillEye } from "react-icons/ai";
@@ -8,7 +8,14 @@ import { addToCart } from "../../features/cartSlice";
 // import moment from "moment";
 
 const ProductItem = ({ item }) => {
+  const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
+
+  const addToCartHandler = (product) => {
+    let totalPrice = quantity * product?.price;
+
+    dispatch(addToCart({ ...product, quantity: quantity, totalPrice }));
+  };
 
   //console.log(item)
 
@@ -37,7 +44,11 @@ const ProductItem = ({ item }) => {
         <button className="bg-white border rounded-full focus:bg-gray-800 border-gray-600 p-1.5" />
       </div>
       <div className="flex flex-col bottom-8 left-8 space-y-4 absolute opacity-0 group-hover:opacity-100 transition duration-500">
-        <button onClick={() => dispatch(addToCart(item))}>
+        <button
+          onClick={() => {
+            addToCartHandler(item);
+          }}
+        >
           <MdAddCircle size={21} />
         </button>
         <Link to={`/product/${item?.id}`}>

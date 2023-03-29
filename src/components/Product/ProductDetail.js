@@ -1,28 +1,68 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { BsFacebook, BsTwitter, BsInstagram } from "react-icons/bs";
 // import useDelayCallback from "../helpers/useDelayCallback";
-import { addToCart } from "../../features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Subtitle from "../UI/Subtitle";
-import { getSingleProduct, getSingleProductStatus } from "../../features/productSlice";
+import {
+  getSingleProduct,
+  getSingleProductStatus,
+} from "../../features/productSlice";
 import { getProductSingle } from "../../redux/services";
 import { STATUS } from "../../utils/status";
 import Loader from "../Loader";
+import {
+  addToCart,
+  getCartMessageStatus,
+  setCartMessageOff,
+  setCartMessageOn,
+} from "../../features/cartSlice";
+import CartMessage from "../CartMessage";
 
 const ProductDetail = () => {
-  const {id} = useParams();
+  const { id } = useParams();
+  const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const product = useSelector(getSingleProduct);
   const productSingleStatus = useSelector(getSingleProductStatus);
+  const cartMessageStatus = useSelector(getCartMessageStatus);
 
   useEffect(() => {
     dispatch(getProductSingle(id));
-  }, [dispatch, id])
 
-  if(productSingleStatus === STATUS.LOADING){
-    return <Loader />
+    if (cartMessageStatus) {
+      setTimeout(() => {
+        dispatch(setCartMessageOff());
+      }, 2000);
+    }
+  }, [cartMessageStatus]);
+
+  if (productSingleStatus === STATUS.LOADING) {
+    return <Loader />;
   }
+
+  const increaseQty = () => {
+    setQuantity((prevQty) => {
+      let tempQty = prevQty + 1;
+      if (tempQty > product?.quantity) tempQty = product?.quantity;
+      return tempQty;
+    });
+  };
+
+  const decreaseQty = () => {
+    setQuantity((prevQty) => {
+      let tempQty = prevQty - 1;
+      if (tempQty < 1) tempQty = 1;
+      return tempQty;
+    });
+  };
+
+  const addToCartHandler = (product) => {
+    let totalPrice = quantity * product?.price;
+
+    dispatch(addToCart({ ...product, quantity: quantity, totalPrice }));
+    dispatch(setCartMessageOn(true));
+  };
 
   // console.log(product?.['user']?.name)
 
@@ -85,10 +125,38 @@ const ProductDetail = () => {
                 </p>
               </div>
 
+          {cartMessageStatus && <CartMessage />}
+
+
               <div className="mt-6 flex gap-3 border-b border-gray-200 pb-5 pt-5">
+                <div className="h-10 w-32 flex border-1 focus:outline-none rounded">
+                  <div className="flex flex-row h-10 w-full rounded-lg relative bg-transparent">
+                    <button
+                      onClick={() => decreaseQty()}
+                      className=" bg-gray-100 text-gray-600 hover:text-gray-700 hover:bg-gray-300 h-full w-20 rounded-l rounded-r cursor-pointer outline-none"
+                    >
+                      <span className="m-auto text-2xl font-thin">−</span>
+                    </button>
+                    <div
+                      type="number"
+                      className="focus:outline-none text-center w-full bg-gray-50 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
+                    >
+                      {quantity}
+                    </div>
+                    <button
+                      onClick={() => increaseQty()}
+                      className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:bg-gray-300 h-full w-20 rounded-l rounded-r cursor-pointer"
+                    >
+                      <span className="m-auto text-2xl font-thin">+</span>
+                    </button>
+                  </div>
+                </div>
+
                 <Link href="#">
                   <button
-                    onClick={() => dispatch(addToCart(product))}
+                    onClick={() => {
+                      addToCartHandler(product);
+                    }}
                     className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
                   >
                     Sepete Ekle
