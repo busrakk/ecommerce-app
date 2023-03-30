@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProducts, getProductSingle } from "../redux/services";
+import { getProducts, getProductSingle, getProductFeatured } from "../redux/services";
 import { STATUS } from "../utils/status";
 
 const initialState = {
   products: [],
   productsStatus: STATUS.IDLE,
   productSingle: [],
-  productSingleStatus: STATUS.IDLE
+  productSingleStatus: STATUS.IDLE,
+  productFeatured: [],
+  productFeaturedStatus: STATUS.IDLE
 }
 
 const productSlice = createSlice({
@@ -36,6 +38,17 @@ const productSlice = createSlice({
     .addCase(getProductSingle.rejected, (state, action) => {
       state.productSingleStatus = STATUS.FAILED;
     })
+    // product featured
+    .addCase(getProductFeatured.pending, (state, action) => {
+      state.productFeaturedStatus = STATUS.LOADING;
+    })
+    .addCase(getProductFeatured.fulfilled, (state, action) => {
+      state.productFeatured = action.payload;
+      state.productFeaturedStatus = STATUS.SUCCEEDED;
+    })
+    .addCase(getProductFeatured.rejected, (state, action) => {
+      state.productFeaturedStatus = STATUS.FAILED;
+    })
   }
 })
 
@@ -43,4 +56,6 @@ export const getAllProducts = (state) => state.product.products;
 export const getAllProductsStatus = (state) => state.product.productsStatus;
 export const getSingleProduct = (state) => state.product.productSingle;
 export const getSingleProductStatus = (state) => state.product.productSingleStatus;
+export const getProducstFeatured = (state) => state.product.productFeatured;
+export const getSingleProductsFeturedStatus = (state) => state.product.productFeaturedStatus;
 export default productSlice.reducer;

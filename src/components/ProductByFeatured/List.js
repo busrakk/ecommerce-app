@@ -1,32 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import ProductItem from "../Product/ProductItem";
-import { productByFeaturedApi } from "../../service/serviceApi";
 import ProductByFilter from "../ProductByFilter";
 import Subtitle from "../UI/Subtitle";
 import TypeFilter from "../ProductByFilter/TypeFilter";
-import useDelayCallback from "../helpers/useDelayCallback";
+//import useDelayCallback from "../helpers/useDelayCallback";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getProducstFeatured,
+  getSingleProductsFeturedStatus,
+} from "../../features/productSlice";
+import { getProductFeatured } from "../../redux/services";
+import { STATUS } from "../../utils/status";
+import Loader from "../Loader";
 
 const List = () => {
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const productFetured = useSelector(getProducstFeatured);
+  const productFeaturedStatus = useSelector(getSingleProductsFeturedStatus);
+  const dispatch = useDispatch();
 
-  useDelayCallback(() => {
-    getProductList();
-  }, [products]);
+  useEffect(() => {
+    dispatch(getProductFeatured());
+  }, [dispatch]);
 
-  const getProductList = () => {
-    productByFeaturedApi().then((res) => {
-      if (res.data.success) {
-        if (res.data.status === "success") {
-          
-          setProducts(res.data.data);
-        }
-      } else {
-        setProducts([]);
+  // randomizing the products in the list
+  const tempProductsFetured = [];
+  if (productFetured.length > 0) {
+    for (let i in productFetured) {
+      let randomIndex = Math.floor(Math.random() * productFetured.length);
+
+      while (tempProductsFetured.includes(productFetured[randomIndex])) {
+        randomIndex = Math.floor(Math.random() * productFetured.length);
       }
-      setIsLoading(false);
-    });
-  };
+      tempProductsFetured[i] = productFetured[randomIndex];
+    }
+  }
 
   return (
     <div className="mx-16 mt-24">
@@ -38,10 +45,15 @@ const List = () => {
           <TypeFilter />
 
           <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-6">
-            {isLoading && <div>Loading...</div>}
-            {products.map((item, key) => (
-              <ProductItem key={key} item={item} />
-            ))}
+          {productFeaturedStatus === STATUS.LOADING ? (
+            <Loader />
+          ) : (
+            <>
+              {tempProductsFetured.map((item, key) => (
+                <ProductItem key={key} item={item} />
+              ))}
+            </>
+          )}
           </div>
         </div>
       </div>

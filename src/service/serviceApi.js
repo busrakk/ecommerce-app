@@ -3,11 +3,6 @@ import { sendRequest } from "./rootApi";
 const GET = 'get';
 const POST = 'post';
 
-
-export const productByFeaturedApi = async (payload = []) => {
-    return sendRequest(GET, '/api/featured' ,payload);
-}
-
 export const productSaveApi = async (payload = []) => {
     return sendRequest(POST, '/api/product-save', payload);
 }
