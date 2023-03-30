@@ -1,46 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import ProductItem from "../../Product/ProductItem";
-import useDelayCallback from "../../helpers/useDelayCallback";
-import { productByUserApi } from "../../../service/serviceApi";
+// import useDelayCallback from "../../helpers/useDelayCallback";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getUserProducts,
+  getUserProductsStatus,
+} from "../../../features/userSlice";
+import { getProductByUser } from "../../../redux/services";
+import { STATUS } from "../../../utils/status";
+import Loader from "../../Loader";
 
 const UserProductList = () => {
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+  const userProducts = useSelector(getUserProducts);
+  const userProductsStatus = useSelector(getUserProductsStatus);
 
-  useDelayCallback(() => {
-    getProductList();
-  }, [products]);
+  useEffect(() => {
+    dispatch(getProductByUser());
+  }, [dispatch]);
 
-  const getProductList = () => {
-    productByUserApi().then((res) => {
-      if (res.data.success) {
-        if (res.data.status === "success") {
-          
-          setProducts(res.data.data);
-        }
-      } else {
-        setProducts([]);
-      }
-      setIsLoading(false);
-    });
-  };
+  const products = userProducts.length;
 
   return (
     <div className="col-span-9 px-4 pb-4">
       <div className="rounded-t bg-white mb-0 px-6 py-6">
         <div className="text-center flex justify-between px-4 items-center">
           <h6 className="text-blueGray-700 text-xl uppercase font-bold">
-            Ürünlerİm ({products.length})
+            Ürünlerİm ({products})
           </h6>
         </div>
       </div>
       <div className="flex flex-col bg-white">
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-8 gap-y-8 items-center px-6 py-5">
-          {isLoading && <div>Loading...</div>}
-          {products.map((item, key) => (
-            <ProductItem key={key} item={item} />
-            // <div>{item.name}</div>
-          ))}
+          {userProductsStatus === STATUS.LOADING ? (
+            <Loader />
+          ) : (
+            <>
+              {userProducts.map((item, key) => (
+                <ProductItem key={key} item={item} />
+              ))}
+            </>
+          )}
         </div>
       </div>
     </div>

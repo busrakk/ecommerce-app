@@ -1,30 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineShopping } from "react-icons/ai";
 import { MdFavoriteBorder } from "react-icons/md";
 import { BsArchive} from "react-icons/bs";
-import { productByUserCountApi } from "../../service/serviceApi";
-import useDelayCallback from "../../components/helpers/useDelayCallback";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserProducts } from "../../features/userSlice";
+import { getProductByUser } from "../../redux/services";
 
 const UserDashboard = () => {
 
-  const [count, setCount] = useState('');
+  const dispatch = useDispatch();
+  const userProducts = useSelector(getUserProducts);
 
-  useDelayCallback(() => {
-    getProductCount();
-  }, [count]);
+  useEffect(() => {
+    dispatch(getProductByUser())
+  }, [dispatch])
 
-  const getProductCount = () => {
-    productByUserCountApi().then((res) => {
-      if (res.data.success) {
-        if (res.data.status === "success") {
-          setCount(res.data.data);
-        }
-      } else {
-        setCount('');
-      }
-    });
-  };
+  const productCount = userProducts.length;
 
   return (
     <div className="px-4 col-span-9 grid grid-cols-3 gap-4">
@@ -38,7 +30,7 @@ const UserDashboard = () => {
           </div>
           <div className="ml-2 w-full flex-1">
             <div>
-              <div className="mt-3 text-3xl font-bold leading-8">{count ? <div>{count}</div> : <div>0</div>}</div>
+              <div className="mt-3 text-3xl font-bold leading-8">{productCount}</div>
 
               <div className="mt-1 text-base text-gray-600">Ürünlerim</div>
             </div>
