@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProductByUser, addProductByUser } from "../redux/services";
+import { getProductByUser } from "../redux/services";
 import { STATUS } from "../utils/status";
 
 const initialState = {
@@ -10,7 +10,7 @@ const initialState = {
 }
 
 const userproductSlice = createSlice({
-    name: 'user',
+    name: 'userproduct',
     initialState,
     reducers: {},
     extraReducers: ( builder ) => {
@@ -27,21 +27,21 @@ const userproductSlice = createSlice({
             state.userProductsStatus = STATUS.FAILED;
         })
         // add product
-        .addCase(addProductByUser.pending, (state, action) => {
-            state.addUserProductsStatus = STATUS.LOADING;
-        })
-        .addCase(addProductByUser.fulfilled, (state, action) => {
-            state.addUserProducts = action.payload;
-            state.addUserProductsStatus = STATUS.SUCCEEDED;
-        })
-        .addCase(addProductByUser.rejected, (state, action) => {
-            state.addUserProductsStatus = STATUS.FAILED;
-        })
+        // .addCase(addProductByUser.pending, (state, action) => {
+        //     state.addUserProductsStatus = STATUS.LOADING;
+        // })
+        // .addCase(addProductByUser.fulfilled, (state, action) => {
+        //     state.addUserProducts.push(action.payload);
+        //     state.addUserProductsStatus = STATUS.SUCCEEDED;
+        // })
+        // .addCase(addProductByUser.rejected, (state, action) => {
+        //     state.addUserProductsStatus = STATUS.FAILED;
+        // })
     }
 })
 
-export const getUserProducts = (state) => state.user.userProducts;
-export const getUserProductsStatus = (state) => state.user.userProductsStatus;
-export const getAddUserProducts = (state) => state.user.addUserProducts;
-export const getAddUserProductsStatus = (state) => state.user.addUserProductsStatus;
+export const getUserProducts = (state) => state.userproduct.userProducts;
+export const getUserProductsStatus = (state) => state.userproduct.userProductsStatus;
+export const getAddUserProducts = (state) => state.userproduct.addUserProducts;
+export const getAddUserProductsStatus = (state) => state.userproduct.addUserProductsStatus;
 export default userproductSlice.reducer;

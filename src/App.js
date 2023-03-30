@@ -16,7 +16,8 @@ import ProductByCategory from "./components/ProductByCategory";
 import ProductByBrand from "./components/ProductByBrand";
 import ProductByFeatured from "./components/ProductByFeatured/List";
 import AddProduct from "./components/User/Product/AddProduct";
-import UserSetting from "./components/User/UserSetting";
+import User from "./components/User/User";
+import UserEdit from "./components/User/User/Edit";
 import UserProductList from "./components/User/Product/UserProductList";
 import ProductList from "./components/Product/ProductList";
 
@@ -47,7 +48,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route element={<UserRoute />}>
             <Route path="profile" element={<UserDashboard />} />
-            <Route path="profile/setting" element={<UserSetting />} />
+            <Route path="profile/info" element={<User />} /> 
+            <Route path="profile/edit" element={<UserEdit />} />
             <Route path="profile/add-product" element={<AddProduct />} />
             <Route path="profile/list-product" element={<UserProductList />} />
           </Route>

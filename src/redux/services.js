@@ -36,6 +36,13 @@ export const getProductFeatured = createAsyncThunk("productFeatured/getproductFe
   return res.data.data;
 })
 
+// user
+
+export const getUserAsync = createAsyncThunk("user/getUser", async () => {
+  const res = await axios("/api/user");
+  return res.data.data;
+})
+
 export const getProductByUser = createAsyncThunk("productByUser/getproductByUser", async () => {
   const res = await axios("/api/product-user");
   return res.data.data;

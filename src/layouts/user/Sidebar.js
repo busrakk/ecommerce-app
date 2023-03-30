@@ -4,7 +4,7 @@ import { ImProfile } from "react-icons/im";
 import { MdFavoriteBorder } from "react-icons/md";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { BsArchive, BsCreditCard } from "react-icons/bs";
-import { HiOutlineShoppingBag } from "react-icons/hi";
+import { HiOutlineShoppingBag, HiOutlineUser } from "react-icons/hi";
 
 const Sidebar = () => {
   return (
@@ -37,6 +37,27 @@ const Sidebar = () => {
               <AiOutlineDashboard size={22} />
             </span>
             Dashboard
+          </Link>
+        </div>
+
+        <div className="space-y-1 pl-8 pt-4">
+          <div className="relative text-primary block font-medium capitalize transition">
+            <span className="absolute -left-8 top-0 text-base">
+              <HiOutlineUser size={22} />
+            </span>
+            Kullanıcı Bilgileri
+          </div>
+          <Link
+            to="/profile/info"
+            className="relative hover:text-primary block capitalize transition"
+          >
+            Bilgilerim
+          </Link>
+          <Link
+            to="/profile/edit"
+            className="relative hover:text-primary block capitalize transition"
+          >
+            Bilgilerimi Düzenle
           </Link>
         </div>
 
