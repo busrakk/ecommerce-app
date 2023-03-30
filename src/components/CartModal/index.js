@@ -146,7 +146,6 @@ const CartModal = ({ carts, open1, setOpen1 }) => {
                       <p>
                         <Link
                           to="/"
-                          type="button"
                           className="font-medium text-indigo-600 hover:text-indigo-500"
                         >
                           Alışverişe Devam Et

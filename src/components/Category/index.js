@@ -7,7 +7,7 @@ import { getCategories } from "../../redux/services";
 import Title from "../UI/Title";
 import CategoryItem from "./CategoryItem";
 
-const ShopByCategory = () => {
+const Category = () => {
   const categories = useSelector(getAllCategories);
   // const isLoading = useSelector((state) => state.categories.isLoading);
   // const error = useSelector((state) => state.categories.error);
@@ -43,4 +43,4 @@ const ShopByCategory = () => {
   );
 };
 
-export default ShopByCategory;
+export default Category;
