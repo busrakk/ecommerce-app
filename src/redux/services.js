@@ -40,3 +40,8 @@ export const getProductByUser = createAsyncThunk("productByUser/getproductByUser
   const res = await axios("/api/product-user");
   return res.data.data;
 })
+
+export const addProductByUser = createAsyncThunk("productByUser/getproductByUser", async () => {
+  const res = await axios("/api/product-save");
+  return res.data.data;
+})

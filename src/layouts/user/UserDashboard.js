@@ -4,7 +4,7 @@ import { AiOutlineShopping } from "react-icons/ai";
 import { MdFavoriteBorder } from "react-icons/md";
 import { BsArchive} from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserProducts } from "../../features/userSlice";
+import { getUserProducts } from "../../features/userproductSlice";
 import { getProductByUser } from "../../redux/services";
 
 const UserDashboard = () => {

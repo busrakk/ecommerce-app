@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getUserProducts,
   getUserProductsStatus,
-} from "../../../features/userSlice";
+} from "../../../features/userproductSlice";
 import { getProductByUser } from "../../../redux/services";
 import { STATUS } from "../../../utils/status";
 import Loader from "../../Loader";
