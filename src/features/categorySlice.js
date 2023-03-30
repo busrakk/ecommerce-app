@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCategories } from "../redux/services";
+import { getCategories, productByCategory } from "../redux/services";
 import { STATUS } from "../utils/status";
 
 const initialState = {
@@ -25,8 +25,21 @@ const categorySlice = createSlice({
     .addCase(getCategories.rejected, (state, action) => {
       state.categoriesStatus = STATUS.FAILED;
     })
+    // category-product
+    .addCase(productByCategory.pending, (state, action) => {
+      state.categoryProductsStatus = STATUS.LOADING;
+    })
+    .addCase(productByCategory.fulfilled, (state, action) => {
+      state.categoryProducts = action.payload;
+      state.categoryProductsStatus = STATUS.SUCCEEDED;
+    })
+    .addCase(productByCategory.rejected, (state, action) => {
+      state.categoryProductsStatus = STATUS.FAILED;
+    })
   }
 })
 
 export const getAllCategories = (state) => state.category.categories;
+export const getAllProductByCategory = (state) => state.category.categoryProducts;
+export const getAllProductByCategoryStatus = (state) => state.category.categoryProductsStatus;
 export default categorySlice.reducer;

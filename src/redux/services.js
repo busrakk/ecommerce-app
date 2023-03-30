@@ -20,3 +20,13 @@ export const getProductSingle = createAsyncThunk("product/getproduct", async (id
   const res = await axios(`/api/product/${id}`);
   return res.data.data;
 })
+
+export const productByCategory = createAsyncThunk("categoryProduct/getCategoryProduct", async(id) => {
+  const res = await axios(`/api/product/category/${id}`);
+  return res.data.data;
+})
+
+export const productByBrand = createAsyncThunk("brandProduct/getBrandProduct", async(id) => {
+  const res = await axios(`/api/product/brand/${id}`);
+  return res.data.data;
+})

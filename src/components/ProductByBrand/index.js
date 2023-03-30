@@ -1,29 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { productByBrandApi } from "../../service/serviceApi";
 import ProductByFilter from "../ProductByFilter";
 import Subtitle from "../UI/Subtitle";
 import TypeFilter from "../ProductByFilter/TypeFilter";
-import useDelayCallback from "../helpers/useDelayCallback";
+// import useDelayCallback from "../helpers/useDelayCallback";
 import ProductItem from "../Product/ProductItem";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAllProductByBrand,
+  getAllProductByBrandStatus,
+} from "../../features/brandSlice";
+import { productByBrand } from "../../redux/services";
+import { STATUS } from "../../utils/status";
+import Loader from "../Loader";
 
 const ProductByBrand = () => {
-  const params = useParams();
-  const [product, setProduct] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const brandProducts = useSelector(getAllProductByBrand);
+  const brandProductsStatus = useSelector(getAllProductByBrandStatus);
 
-  useDelayCallback(() => {
-    productByBrandApi(params.id).then((res) => {
-      if (res.data.success) {
-        if (res.data.status === "success") {
-          setIsLoading(false);
-          setProduct(res.data.data);
-        }
-      } else {
-        setProduct([]);
-      }
-    });
-  }, [params]);
+  useEffect(() => {
+    dispatch(productByBrand(id));
+  }, [dispatch, id]);
 
   return (
     <div className="mx-16 mt-24">
@@ -35,9 +34,16 @@ const ProductByBrand = () => {
           <TypeFilter />
 
           <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-6">
-            {isLoading && <div>Loading...</div>}
-            {product &&
-              product.map((item, key) => <ProductItem key={key} item={item} />)}
+            {brandProductsStatus === STATUS.LOADING ? (
+              <Loader />
+            ) : (
+              <>
+                {brandProducts &&
+                  brandProducts.map((item, key) => (
+                    <ProductItem key={key} item={item} />
+                  ))}
+              </>
+            )}
           </div>
         </div>
       </div>
