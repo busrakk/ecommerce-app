@@ -4,20 +4,20 @@ import ProductItem from "../Product/ProductItem";
 // import useDelayCallback from "../helpers/useDelayCallback";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getProducstFeatured,
-  getSingleProductsFeturedStatus,
+  getProductFeatured,
+  getProductsFeturedStatus,
 } from "../../features/productSlice";
-import { getProductFeatured } from "../../redux/services";
+import { getProductFeaturedAsync } from "../../redux/services";
 import { STATUS } from "../../utils/status";
 import Loader from "../Loader";
 
 function ProductByFeatured() {
-  const productFetured = useSelector(getProducstFeatured);
-  const productFeaturedStatus = useSelector(getSingleProductsFeturedStatus);
+  const productFetured = useSelector(getProductFeatured);
+  const productFeaturedStatus = useSelector(getProductsFeturedStatus);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getProductFeatured());
+    dispatch(getProductFeaturedAsync());
   }, [dispatch]);
 
   // randomizing the products in the list

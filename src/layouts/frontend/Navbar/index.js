@@ -37,7 +37,7 @@ const MegaMenu = () => {
 
   useEffect(() => {
     dispatch(getCartTotal());
-  }, [carts]);
+  }, [dispatch, carts]);
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -74,8 +74,13 @@ const MegaMenu = () => {
           </li> */}
           <MenuLinks categories={categories} />
           <li>
-            <Link to="/" className="py-7 px-3 inline-block">
-              İndİrİmlİ Ürünler
+            <Link to="/product/sale" className="py-7 px-3 inline-block">
+              Satılan Ürünler
+            </Link>
+          </li>
+          <li>
+            <Link to="/product/search" className="py-7 px-3 inline-block">
+              Aranan Ürünler
             </Link>
           </li>
           <li>
@@ -220,19 +225,24 @@ const MegaMenu = () => {
         >
           <MenuLinks categories={categories} />
           <li>
-            <Link to="/" className="py-7 px-3 inline-block">
-              İndirimli Ürünler
+            <Link to="/product/sale" className="py-7 px-3 inline-block">
+              Satılan Ürünler
             </Link>
           </li>
           <li>
-            <Link to="/" className="py-7 px-3 inline-block">
+            <Link to="/product/search" className="py-7 px-3 inline-block">
+              Aranan Ürünler
+            </Link>
+          </li>
+          <li>
+            <Link to="/product/featured" className="py-7 px-3 inline-block">
               Öne Çıkan Ürünler
             </Link>
           </li>
           <div className="py-5">
-            <Link to="/login">
+            <Link to="/">
               <button className="bg-gray-800 hover:bg-gray-600 text-white  px-6 py-2 rounded-full">
-                Giriş Yap
+                Şimdi Keşfedin
               </button>
             </Link>
           </div>

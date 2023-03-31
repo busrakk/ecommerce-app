@@ -5,33 +5,33 @@ import Subtitle from "../UI/Subtitle";
 import TypeFilter from "../ProductByFilter/TypeFilter";
 //import useDelayCallback from "../helpers/useDelayCallback";
 import { useDispatch, useSelector } from "react-redux";
+import { getProductSaleAsync } from "../../redux/services";
 import {
-  getProductFeatured,
-  getProductsFeturedStatus,
+  getProductSell,
+  getProductSellStatus,
 } from "../../features/productSlice";
-import { getProductFeaturedAsync } from "../../redux/services";
 import { STATUS } from "../../utils/status";
 import Loader from "../Loader";
 
-const List = () => {
-  const productFetured = useSelector(getProductFeatured);
-  const productFeaturedStatus = useSelector(getProductsFeturedStatus);
+const ProductBySale = () => {
+  const productSell = useSelector(getProductSell);
+  const productSellStatus = useSelector(getProductSellStatus);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getProductFeaturedAsync());
+    dispatch(getProductSaleAsync());
   }, [dispatch]);
 
   // randomizing the products in the list
-  const tempProductsFetured = [];
-  if (productFetured.length > 0) {
-    for (let i in productFetured) {
-      let randomIndex = Math.floor(Math.random() * productFetured.length);
+  const tempProductsSell = [];
+  if (productSell.length > 0) {
+    for (let i in productSell) {
+      let randomIndex = Math.floor(Math.random() * productSell.length);
 
-      while (tempProductsFetured.includes(productFetured[randomIndex])) {
-        randomIndex = Math.floor(Math.random() * productFetured.length);
+      while (tempProductsSell.includes(productSell[randomIndex])) {
+        randomIndex = Math.floor(Math.random() * productSell.length);
       }
-      tempProductsFetured[i] = productFetured[randomIndex];
+      tempProductsSell[i] = productSell[randomIndex];
     }
   }
 
@@ -45,15 +45,15 @@ const List = () => {
           <TypeFilter />
 
           <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-6">
-          {productFeaturedStatus === STATUS.LOADING ? (
-            <Loader />
-          ) : (
-            <>
-              {tempProductsFetured.map((item, key) => (
-                <ProductItem key={key} item={item} />
-              ))}
-            </>
-          )}
+            {productSellStatus === STATUS.LOADING ? (
+              <Loader />
+            ) : (
+              <>
+                {tempProductsSell.map((item, key) => (
+                  <ProductItem key={key} item={item} />
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -61,4 +61,4 @@ const List = () => {
   );
 };
 
-export default List;
+export default ProductBySale;

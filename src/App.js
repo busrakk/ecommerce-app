@@ -20,6 +20,8 @@ import User from "./components/User/User";
 import UserEdit from "./components/User/User/Edit";
 import UserProductList from "./components/User/Product/UserProductList";
 import ProductList from "./components/Product/ProductList";
+import ProductBySale from "./components/ProductBySale";
+import ProductBySearch from "./components/ProductBySearch";
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -43,6 +45,8 @@ function App() {
           <Route path="product/category/:id" element={<ProductByCategory />} />
           <Route path="product/brand/:id" element={<ProductByBrand />} />
           <Route path="product/featured" element={<ProductByFeatured />} />
+          <Route path="product/sale" element={<ProductBySale />} />
+          <Route path="product/search" element={<ProductBySearch />} />
           <Route path="cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

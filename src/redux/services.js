@@ -31,8 +31,18 @@ export const productByBrand = createAsyncThunk("brandProduct/getBrandProduct", a
   return res.data.data;
 })
 
-export const getProductFeatured = createAsyncThunk("productFeatured/getproductFeatured", async () => {
+export const getProductFeaturedAsync = createAsyncThunk("productFeatured/getproductFeatured", async () => {
   const res = await axios("/api/featured");
+  return res.data.data;
+})
+
+export const getProductSaleAsync = createAsyncThunk("productSale/getproductSale", async () => {
+  const res = await axios("/api/sell-product");
+  return res.data.data;
+})
+
+export const getProductSearchAsync = createAsyncThunk("productSearch/getproductSearch", async () => {
+  const res = await axios("/api/search-product");
   return res.data.data;
 })
 
