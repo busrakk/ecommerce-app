@@ -48,7 +48,7 @@ const UserDashboard = () => {
           </div>
           <div className="ml-2 w-full flex-1">
             <div>
-              <div className="mt-3 text-3xl font-bold leading-8">4.510</div>
+              <div className="mt-3 text-3xl font-bold leading-8">{productCount}</div>
 
               <div className="mt-1 text-base text-gray-600">Siparişlerim</div>
             </div>
@@ -66,7 +66,7 @@ const UserDashboard = () => {
           </div>
           <div className="ml-2 w-full flex-1">
             <div>
-              <div className="mt-3 text-3xl font-bold leading-8">4.510</div>
+              <div className="mt-3 text-3xl font-bold leading-8">{productCount}</div>
 
               <div className="mt-1 text-base text-gray-600">Favorilerim</div>
             </div>

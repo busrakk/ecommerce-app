@@ -5,17 +5,19 @@ import { MdFavoriteBorder } from "react-icons/md";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { BsArchive, BsCreditCard } from "react-icons/bs";
 import { HiOutlineShoppingBag, HiOutlineUser } from "react-icons/hi";
+import { FaRegUserCircle } from "react-icons/fa";
 
 const Sidebar = () => {
   return (
-    <div className="col-span-3 rounded-lg pb-4">
+    <div className="col-span-3 rounded-xl pb-4">
       <div className="px-4 py-3 shadow-xl bg-white flex items-center gap-4">
         <div className="flex-shrink-0">
-          <img
+          {/* <img
             src=""
             alt="/profile"
             className="rounded-full w-14 h-14 border p-1 object-cover"
-          />
+          /> */}
+          <FaRegUserCircle className="rounded-full w-14 h-14 border p-1 object-cover" />
         </div>
         <div className="flex-grow">
           <p className="text-gray-600">Merhaba,</p>
@@ -41,7 +43,7 @@ const Sidebar = () => {
         </div>
 
         <div className="space-y-1 pl-8 pt-4">
-          <div className="relative text-primary block font-medium capitalize transition">
+          <div className="relative text-black block font-medium capitalize transition">
             <span className="absolute -left-8 top-0 text-base">
               <HiOutlineUser size={22} />
             </span>
@@ -62,7 +64,7 @@ const Sidebar = () => {
         </div>
 
         <div className="space-y-1 pl-8 pt-4">
-          <div className="relative text-primary block font-medium capitalize transition">
+          <div className="relative text-black block font-medium capitalize transition">
             <span className="absolute -left-8 top-0 text-base">
               <HiOutlineShoppingBag size={22} />
             </span>
@@ -83,7 +85,7 @@ const Sidebar = () => {
         </div>
 
         <div className="space-y-1 pl-8 pt-4">
-          <div className="relative text-primary block font-medium capitalize transition">
+          <div className="relative text-black block font-medium capitalize transition">
             <span className="absolute -left-8 top-0 text-base">
               <BsArchive size={22} />
             </span>
@@ -104,7 +106,7 @@ const Sidebar = () => {
         </div>
 
         <div className="space-y-1 pl-8 pt-4">
-          <div className="relative text-primary block font-medium capitalize transition">
+          <div className="relative text-black block font-medium capitalize transition">
             <span className="absolute -left-8 top-0 text-base">
               <BsCreditCard size={22} />
             </span>
