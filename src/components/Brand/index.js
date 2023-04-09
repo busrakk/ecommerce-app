@@ -22,7 +22,7 @@ function Brand() {
   return (
     <div className="container mx-auto py-10">
       {/* <Title>Markalar</Title> */}
-      <div className='grid grid-cols-5 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 2xl:grid-cols-10'>
+      <div className='grid grid-cols-3 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-10 2xl:grid-cols-10'>
           {brands.map((item, key) => (
             <BrandItem key={key} item={item} />
           ))}

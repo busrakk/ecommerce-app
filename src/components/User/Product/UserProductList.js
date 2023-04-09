@@ -31,7 +31,7 @@ const UserProductList = () => {
         </div>
       </div>
       <div className="flex flex-col bg-white">
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-8 gap-y-8 items-center px-6 py-5">
+        <div className="grid xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-x-8 gap-y-8 items-center px-6 py-5">
           {userProductsStatus === STATUS.LOADING ? (
             <Loader />
           ) : (

@@ -53,7 +53,7 @@ const ProductByFilter = () => {
           </h3>
           <div className="space-y-2">
             {categories.map((item) => (
-              <div className="flex items-center">
+              <div key={item.id} className="flex items-center">
               <input
                 type="checkbox"
                 name="cat-1"

@@ -33,7 +33,7 @@ const ProductByBrand = () => {
         <div className="col-span-3">
           <TypeFilter />
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-6">
             {brandProductsStatus === STATUS.LOADING ? (
               <Loader />
             ) : (
