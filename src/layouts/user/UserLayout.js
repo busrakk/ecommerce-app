@@ -1,19 +1,16 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-
-import Sidebar from "./Sidebar";
-import Subtitle from "../../components/UI/Subtitle";
+import Navbar from "./Navbar";
 
 const UserLayout = () => {
   return (
-    <div>
-      <div className="mt-24 bg-gray-50">
-        <div className="container">
-          <Subtitle>Hesap</Subtitle>
-        </div>
+    <div className="bg-gray-50 mt-20">
+      <div className="mx-16">
+        <main className="grid grid-cols-1 mt-1 px-2 justify-center pt-12">
+          <Navbar />
+        </main>
 
-        <div className="grid px-20 grid-cols-1 md:grid-cols-12 items-start pt-4 pb-16">
-          <Sidebar />
+        <div className="py-3 px-2 mx-auto gap-5">
           <Outlet />
         </div>
       </div>

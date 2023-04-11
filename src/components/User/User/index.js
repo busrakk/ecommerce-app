@@ -18,7 +18,7 @@ const User = () => {
 
   console.log(user)
   return (
-    <div className="col-span-9">
+    <div className="col-span-12">
       <div className="w-full px-4 mx-auto">
         <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg border-0">
           <div className="rounded-t bg-white mb-0 px-6 py-6">

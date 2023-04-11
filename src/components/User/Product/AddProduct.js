@@ -137,8 +137,8 @@ const AddProduct = (props) => {
   };
 
   return (
-    <div className="col-span-9">
-      <div className="w-full px-4 mx-auto">
+    <div className="col-span-10 bg-white shadow">
+      <div className="w-full mx-auto">
         <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg border-0">
           <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
             {loader === true ? (
@@ -153,7 +153,7 @@ const AddProduct = (props) => {
                 <div className="flex flex-wrap">
                   <div className="w-full lg:w-6/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label className="text-sm text-gray-400">
+                      <label className="text-sm text-gray-900">
                         Kategori Adı
                       </label>
                       <div className="w-full inline-flex border">
@@ -170,7 +170,7 @@ const AddProduct = (props) => {
                   </div>
                   <div className="w-full lg:w-6/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label className="text-sm text-gray-400">Marka Adı</label>
+                      <label className="text-sm text-gray-900">Marka Adı</label>
                       <div className="w-full inline-flex border">
                         {/* <Select
                         options={props.categoryList}
@@ -185,7 +185,7 @@ const AddProduct = (props) => {
                   </div>
                   <div className="w-full lg:w-6/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label className="text-sm text-gray-400">Ürün Adı</label>
+                      <label className="text-sm text-gray-900">Ürün Adı</label>
                       <div className="w-full inline-flex border">
                         <input
                           type="text"
@@ -202,7 +202,7 @@ const AddProduct = (props) => {
                   </div>
                   <div className="w-full lg:w-6/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label className="text-sm text-gray-400">
+                      <label className="text-sm text-gray-900">
                         Ürün Tanımı
                       </label>
                       <div className="w-full inline-flex border">
@@ -224,7 +224,7 @@ const AddProduct = (props) => {
                   </div>
                   <div className="w-full lg:w-4/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label className="text-sm text-gray-400">
+                      <label className="text-sm text-gray-900">
                         Ürün Fiyatı
                       </label>
                       <div className="w-full inline-flex border">
@@ -243,7 +243,7 @@ const AddProduct = (props) => {
                   </div>
                   <div className="w-full lg:w-4/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label className="text-sm text-gray-400">
+                      <label className="text-sm text-gray-900">
                         Ürün İndirimli Fiyatı
                       </label>
                       <div className="w-full inline-flex border">
@@ -262,7 +262,7 @@ const AddProduct = (props) => {
                   </div>
                   <div className="w-full lg:w-4/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label className="text-sm text-gray-400">
+                      <label className="text-sm text-gray-900">
                         Ürün Adeti
                       </label>
                       <div className="w-full inline-flex border">
@@ -289,7 +289,7 @@ const AddProduct = (props) => {
                 <div className="flex flex-wrap">
                   <div className="w-full lg:w-4/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label className="text-sm text-gray-400">
+                      <label className="text-sm text-gray-900">
                         Ürün Resmi 1
                       </label>
                       <div className="w-full inline-flex border">
@@ -318,7 +318,7 @@ const AddProduct = (props) => {
                   </div>
                   <div className="w-full lg:w-4/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label className="text-sm text-gray-400">
+                      <label className="text-sm text-gray-900">
                         Ürün Resmi 2
                       </label>
                       <div className="w-full inline-flex border">
@@ -332,7 +332,7 @@ const AddProduct = (props) => {
                   </div>
                   <div className="w-full lg:w-4/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label className="text-sm text-gray-400">
+                      <label className="text-sm text-gray-900">
                         Ürün Resmi 3
                       </label>
                       <div className="w-full inline-flex border">
@@ -353,7 +353,7 @@ const AddProduct = (props) => {
                 <div className="flex flex-wrap">
                   <div className="w-full lg:w-1/4 px-4">
                     <div className="relative w-full mb-3">
-                      <label className="text-sm text-gray-400">
+                      <label className="text-sm text-gray-900">
                         Ürün Stokta Mı ?
                       </label>
                       <div className="flex items-center mt-4 mb-4">
@@ -372,7 +372,7 @@ const AddProduct = (props) => {
                   </div>
                   <div className="w-full lg:w-1/4 px-4">
                     <div className="relative w-full mb-3">
-                      <label className="text-sm text-gray-400">
+                      <label className="text-sm text-gray-900">
                         Ürünü Öne Çıkar
                       </label>
                       <div className="flex items-center mt-4 mb-4">
@@ -391,7 +391,7 @@ const AddProduct = (props) => {
                   </div>
                   <div className="w-full lg:w-1/4 px-4">
                     <div className="relative w-full mb-3">
-                      <label className="text-sm text-gray-400">
+                      <label className="text-sm text-gray-900">
                         Ürünü Gizle
                       </label>
                       <div className="flex items-center mt-4 mb-4">
@@ -410,7 +410,7 @@ const AddProduct = (props) => {
                   </div>
                   <div className="w-full lg:w-1/4 px-4">
                     <div className="relative w-full mb-3">
-                      <label className="text-sm text-gray-400">
+                      <label className="text-sm text-gray-900">
                         Aranan Ürün İlanı Mı ?
                       </label>
                       <div className="flex items-center mt-4 mb-4">

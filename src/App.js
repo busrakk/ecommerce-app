@@ -7,7 +7,6 @@ import ProductDetail from "./components/Product/ProductDetail";
 import AdminRoute from "./protectedRoute/AdminRoute";
 import Dashboard from "./components/admin/Dashboard";
 import Profile from "./components/admin/Profile";
-import UserDashboard from "./layouts/user/UserDashboard";
 import Page404 from "./layouts/error/Page404";
 import axios from "axios";
 import UserRoute from "./protectedRoute/UserRoute";
@@ -51,7 +50,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route element={<UserRoute />}>
-            <Route path="profile" element={<UserDashboard />} />
             <Route path="profile/info" element={<User />} /> 
             <Route path="profile/edit" element={<UserEdit />} />
             <Route path="profile/add-product" element={<AddProduct />} />

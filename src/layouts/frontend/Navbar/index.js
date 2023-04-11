@@ -173,7 +173,7 @@ const MegaMenu = () => {
                               className="text-sm cursor-pointer flex flex-col"
                             >
                               <Link
-                                to="/profile"
+                                to="/profile/list-product"
                                 className="text-gray-900 font-normal hover:text-gray-900 hover:bg-gray-100 p-2 rounded"
                               >
                                 <div className="flex hover:font-bold items-center space-x-4">
@@ -182,7 +182,7 @@ const MegaMenu = () => {
                                 </div>
                               </Link>
                               <Link
-                                to="/profile/setting"
+                                to="/profile/info"
                                 className="text-gray-900 font-normal hover:text-gray-900 hover:bg-gray-100 p-2 rounded"
                               >
                                 <div className="flex hover:font-bold items-center space-x-4">

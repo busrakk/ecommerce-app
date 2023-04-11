@@ -201,31 +201,30 @@ const UserProductList = () => {
   };
 
   return (
-    <div className="col-span-9 px-4 pb-4">
-      <div className="rounded-t bg-white mb-0 px-6 py-6">
-        <div className="text-center flex justify-between px-4 items-center">
+    <div className="col-span-10 pb-4">
+      <div className="rounded-t rounded-md bg-white mb-0 px-6 pt-10">
+        <div className="text-center pb-6 flex justify-between px-2 items-center">
           <h6 className="text-blueGray-700 text-xl uppercase font-bold">
             Ürünlerİm
           </h6>
-        </div>
-        <div className="flex justify-end">
-          <button
-          onClick={() => handleModal(true, 0)}
-            className="group relative inline-flex items-center overflow-hidden rounded bg-gray-50 px-8 py-3 border text-gray-800 focus:outline-none focus:ring"
-          >
-            <span className="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4">
-              <AiOutlinePlus size={20} />
-            </span>
+          <div className="flex justify-end pb-4">
+            <button
+              onClick={() => handleModal(true, 0)}
+              className="group relative inline-flex items-center overflow-hidden rounded bg-gray-50 px-8 py-3 border text-gray-800 focus:outline-none focus:ring"
+            >
+              <span className="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4">
+                <AiOutlinePlus size={20} />
+              </span>
 
-            <span className="text-sm font-medium transition-all group-hover:mr-4">
-              Yeni Ürün Ekle
-            </span>
-          </button>
-
+              <span className="text-sm font-medium transition-all group-hover:mr-4">
+                Yeni Ürün Ekle
+              </span>
+            </button>
+          </div>
         </div>
       </div>
       <div className="flex flex-col bg-white">
-        <div className="grid xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-x-8 gap-y-8 items-center px-6 py-5">
+        <div className="grid xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-x-8 gap-y-8 items-center px-6">
           {isLoading && <span className="visually-hidden">Loading...</span>}
           {!isLoading && renderTableData()}
         </div>
@@ -234,7 +233,7 @@ const UserProductList = () => {
       <Modal
         title={
           productId !== 0 ? (
-            <div className="rounded-t mb-0 px-6 pt-10">
+            <div className="rounded-t mb-0 px-6 pt-16">
               <div className="text-center flex justify-between px-4 items-center">
                 <h6 className="text-blueGray-700 text-xl uppercase font-bold">
                   Ürünü Güncelle
@@ -242,7 +241,7 @@ const UserProductList = () => {
               </div>
             </div>
           ) : (
-            <div className="rounded-t mb-0 px-6 pt-10">
+            <div className="rounded-t mb-0 px-6 pt-16">
               <div className="text-center flex justify-between px-4 items-center">
                 <h6 className="text-blueGray-700 text-xl uppercase font-bold">
                   Yeni Ürün Ekle
