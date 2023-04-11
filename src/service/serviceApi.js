@@ -7,7 +7,7 @@ export const productSaveApi = async (payload = []) => {
 }
 
 export const productDetailsApi = async (payload = []) => {
-    return sendRequest(POST, `/api/admin/product-details`, payload);
+    return sendRequest(POST, `/api/product-details`, payload);
 }
 
 export const productListApi = async (payload = []) => {

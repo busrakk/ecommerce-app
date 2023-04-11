@@ -74,7 +74,7 @@ const Footer = () => {
   ];
 
   return (
-    <div className="bg-gray-50 mt-14">
+    <div className="bg-white mt-14">
       <div className="container rounded-md mx-auto items-center justify-between">
         <div className="grid gap-y-6 md:grid-cols-2 lg:grid-cols-4 pt-5 md:pt-10">
           {menus.map((menu, index) => (
