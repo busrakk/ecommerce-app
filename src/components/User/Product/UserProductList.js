@@ -1,11 +1,15 @@
 import React, { useState } from "react";
+import swal from "sweetalert";
 import {
   productListApi,
   categoryDropdownApi,
+  productDeleteApi,
 } from "../../../service/serviceApi";
 import useDelayCallback from "../../helpers/useDelayCallback";
+import Modal from "./elements/Modal";
+import AddProduct from "./AddProduct";
 import { FaEdit } from "react-icons/fa";
-import { AiFillEye } from "react-icons/ai";
+import { AiFillEye, AiOutlinePlus } from "react-icons/ai";
 import { RiDeleteBin7Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
@@ -35,11 +39,62 @@ const UserProductList = () => {
     });
   };
 
+  const removeProduct = (removeId) => {
+    const newProduct = productList.filter((product) => product.id !== removeId);
+    setProductList(newProduct);
+  };
+
+  const handleDelete = (e, id) => {
+    e.preventDefault();
+    swal({
+      title: "Emin misin?",
+      text: "Bu bilgileri bir kez sildikten sonra kurtaramazsınız!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        productDeleteApi(id).then((res) => {
+          if (res.data.success) {
+            if (res.data.status === "success") {
+              swal({
+                title: "Success",
+                text: res.data.message,
+                icon: "success",
+                timer: 2000,
+                buttons: false,
+              });
+              removeProduct(id);
+            }
+          } else {
+            swal({
+              title: "Error",
+              text: res.data.message,
+              icon: "error",
+              timer: 2000,
+              buttons: false,
+            });
+          }
+        });
+      }
+    });
+  };
+
+  const onClose = (status = "close") => {
+    if (status === "success") {
+      getProductList();
+    }
+    setShow(false);
+  };
+
+  const handleModal = (isShow = false, newProductId = 0) => {
+    setProductId(newProductId);
+    setShow(isShow);
+  };
 
   const renderTableData = () => {
     let view = [];
     productList.map((item) => {
-      // console.log(item)
       view.push(
         <div key={item.id}>
           <div className="group group-hover:bg-opacity-10 transition duration-500 relative transform  hover:scale-105 shadow-md bg-gray-50 sm:p-25 py-28 px-10 flex justify-center items-center">
@@ -68,10 +123,10 @@ const UserProductList = () => {
               <Link to={`/product/${item?.id}`}>
                 <AiFillEye size={20} />
               </Link>
-              <button>
+              <button onClick={() => handleModal(true, item.id)}>
                 <FaEdit size={20} />
               </button>
-              <button>
+              <button onClick={(e) => handleDelete(e, item.id)}>
                 <RiDeleteBin7Fill size={20} />
               </button>
             </div>
@@ -116,9 +171,7 @@ const UserProductList = () => {
       return view;
     });
     if (view.length === 0) {
-      return (
-        <div> No data found! </div>
-      );
+      return <div> No data found! </div>;
     } else {
       return view;
     }
@@ -155,15 +208,58 @@ const UserProductList = () => {
             Ürünlerİm
           </h6>
         </div>
+        <div className="flex justify-end">
+          <button
+          onClick={() => handleModal(true, 0)}
+            className="group relative inline-flex items-center overflow-hidden rounded bg-gray-50 px-8 py-3 border text-gray-800 focus:outline-none focus:ring"
+          >
+            <span className="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4">
+              <AiOutlinePlus size={20} />
+            </span>
+
+            <span className="text-sm font-medium transition-all group-hover:mr-4">
+              Yeni Ürün Ekle
+            </span>
+          </button>
+
+        </div>
       </div>
       <div className="flex flex-col bg-white">
         <div className="grid xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-x-8 gap-y-8 items-center px-6 py-5">
           {isLoading && <span className="visually-hidden">Loading...</span>}
           {!isLoading && renderTableData()}
-
         </div>
       </div>
 
+      <Modal
+        title={
+          productId !== 0 ? (
+            <div className="rounded-t mb-0 px-6 pt-10">
+              <div className="text-center flex justify-between px-4 items-center">
+                <h6 className="text-blueGray-700 text-xl uppercase font-bold">
+                  Ürünü Güncelle
+                </h6>
+              </div>
+            </div>
+          ) : (
+            <div className="rounded-t mb-0 px-6 pt-10">
+              <div className="text-center flex justify-between px-4 items-center">
+                <h6 className="text-blueGray-700 text-xl uppercase font-bold">
+                  Yeni Ürün Ekle
+                </h6>
+              </div>
+            </div>
+          )
+        }
+        onClose={onClose}
+        show={show}
+      >
+        <AddProduct
+          onClose={onClose}
+          categoryList={categoryList}
+          productId={productId}
+        />
+      </Modal>
     </div>
   );
 };
