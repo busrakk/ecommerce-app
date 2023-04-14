@@ -5,8 +5,6 @@ import { STATUS } from "../utils/status";
 const initialState = {
     userProducts: [],
     userProductsStatus: STATUS.IDLE,
-    addUserProducts: [],
-    addUserProductsStatus: STATUS.IDLE,
 }
 
 const userproductSlice = createSlice({
@@ -26,22 +24,10 @@ const userproductSlice = createSlice({
         .addCase(getProductByUser.rejected, (state, action) => {
             state.userProductsStatus = STATUS.FAILED;
         })
-        // add product
-        // .addCase(addProductByUser.pending, (state, action) => {
-        //     state.addUserProductsStatus = STATUS.LOADING;
-        // })
-        // .addCase(addProductByUser.fulfilled, (state, action) => {
-        //     state.addUserProducts.push(action.payload);
-        //     state.addUserProductsStatus = STATUS.SUCCEEDED;
-        // })
-        // .addCase(addProductByUser.rejected, (state, action) => {
-        //     state.addUserProductsStatus = STATUS.FAILED;
-        // })
     }
 })
 
 export const getUserProducts = (state) => state.userproduct.userProducts;
 export const getUserProductsStatus = (state) => state.userproduct.userProductsStatus;
-export const getAddUserProducts = (state) => state.userproduct.addUserProducts;
-export const getAddUserProductsStatus = (state) => state.userproduct.addUserProductsStatus;
+
 export default userproductSlice.reducer;

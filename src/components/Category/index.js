@@ -32,7 +32,7 @@ const Category = () => {
       <div className="flex flex-col">
         <Title>Kategoriye Göre Alışveriş</Title>
 
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-3 xl:grid-cols-5"> 
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-x-4 w-full gap-6"> 
           {categories &&
             categories.map((item, key) => (
               <CategoryItem item={item} key={key} />

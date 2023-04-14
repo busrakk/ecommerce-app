@@ -22,7 +22,7 @@ import ProductList from "./components/Product/ProductList";
 import ProductBySale from "./components/ProductBySale";
 import ProductBySearch from "./components/ProductBySearch";
 
-axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.baseURL = process.env.REACT_APP_BACKEND_ROOT_URL;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.headers.post["Accept"] = "application/json";
 axios.defaults.withCredentials = true;

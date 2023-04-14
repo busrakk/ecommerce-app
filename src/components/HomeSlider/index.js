@@ -24,26 +24,26 @@ const HomeSlider = () => {
   };
 
   return (
-    <div className="relative h-auto md:h-[550px] before:bg-gradient-to-r before:from-black before:to-transparent before:absolute before:inset-0 before:w-full before:h-full before:z-10">
+    <div className="relative h-auto md:h-[580px] before:bg-gradient-to-r before:from-black before:to-transparent before:absolute before:inset-0 before:w-full before:h-full before:z-10">
       {windowWidth >= 768 && (
         <Slider {...settings}>
           <div>
             <img
-              className="w-full h-[550px] object-cover"
+              className="w-full h-[580px] object-cover"
               src={slider1}
               alt=""
             />
           </div>
           <div>
             <img
-              className="w-full h-[550px] object-cover"
+              className="w-full h-[580px] object-cover"
               src={slider2}
               alt=""
             />
           </div>
           <div>
             <img
-              className="w-full h-[550px] object-cover"
+              className="w-full h-[580px] object-cover"
               src={slider3}
               alt=""
             />

@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 const UserLayout = () => {
   return (
     <div className="bg-gray-50 mt-20">
-      <div className="mx-16">
+      <div className="mx-28">
         <main className="grid grid-cols-1 mt-1 px-2 justify-center pt-12">
           <Navbar />
         </main>

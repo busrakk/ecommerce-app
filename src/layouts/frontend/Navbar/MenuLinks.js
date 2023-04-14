@@ -13,7 +13,7 @@ const [open, setOpen] = useState(false);
             className="py-7 flex justify-between items-center md:pr-0 pr-5 group"
             onClick={() => setOpen(!open)}
           >
-            TÜM ÜRÜNLER
+            Kategoriler
             <span className="text-xl md:hidden inline">
               <ion-icon name="chevron-up"></ion-icon>
             </span>

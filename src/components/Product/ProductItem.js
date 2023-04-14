@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { MdAddCircle } from "react-icons/md";
 import { AiFillEye } from "react-icons/ai";
+import { GoGitCompare } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../features/cartSlice";
 // import moment from "moment";
 
 const ProductItem = ({ item }) => {
-  const [quantity, setQuantity] = useState(1);
+  const [quantity] = useState(1);
   const dispatch = useDispatch();
 
   const addToCartHandler = (product) => {
@@ -23,7 +24,7 @@ const ProductItem = ({ item }) => {
     <div className="group group-hover:bg-opacity-10 transition duration-500 relative transform  hover:scale-105 shadow-md bg-gray-50 sm:p-25 py-28 px-10 flex justify-center items-center">
       <img
         className="group-hover:opacity-60 w-[250px] h-[180px] transition duration-500"
-        src={item.image1}
+        src={item.image}
         alt={item.name}
       />
       <div className="absolute sm:top-8 top-4 left-4 sm:left-8 flex justify-start items-start flex-col space-y-2">
@@ -44,13 +45,19 @@ const ProductItem = ({ item }) => {
         <button className="bg-white border rounded-full focus:bg-gray-800 border-gray-600 p-1.5" />
       </div>
       <div className="flex flex-col bottom-8 left-8 space-y-4 absolute opacity-0 group-hover:opacity-100 transition duration-500">
-        <button
-          onClick={() => {
-            addToCartHandler(item);
-          }}
-        >
-          <MdAddCircle size={21} />
-        </button>
+        {item.type ? (
+          <button
+            onClick={() => {
+              addToCartHandler(item);
+            }}
+          >
+            <MdAddCircle size={21} />
+          </button>
+        ) : (
+          <Link to="/#">
+            <GoGitCompare size={21} />
+          </Link>
+        )}
         <Link to={`/product/${item?.id}`}>
           <AiFillEye size={21} />
         </Link>

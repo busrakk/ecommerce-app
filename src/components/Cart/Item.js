@@ -9,7 +9,7 @@ const Item = ({ data }) => {
 
   return (
     <div className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-      <img src={data.image1} alt="" className="w-full rounded-lg sm:w-40" />
+      <img src={data.image} alt="" className="w-full rounded-lg sm:w-40" />
       <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
         <div className="mt-5 sm:mt-0">
           <h2 className="text-lg font-bold text-gray-900">{data.name}</h2>
@@ -44,6 +44,7 @@ const Item = ({ data }) => {
               name="quantity"
               value={data?.quantity}
               min="0"
+              max={data?.quantity}
               onChange={() => null}
             />
             <span className="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50">

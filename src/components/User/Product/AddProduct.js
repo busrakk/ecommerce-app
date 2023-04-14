@@ -18,7 +18,7 @@ const AddProduct = (props) => {
     status: true,
     featured: false,
     type: false,
-    oldImage1: null,
+    oldImage: null,
     error_list: [],
   };
 
@@ -30,7 +30,7 @@ const AddProduct = (props) => {
   const [picture, setPicture] = useState([]);
 
   useDelayCallBack(() => {
-    if (props.id !== 0) {
+    if (props.productId !== 0) {
       loadData();
     } else {
       setLoader(false);
@@ -52,7 +52,7 @@ const AddProduct = (props) => {
               in_stock: res.data.data.in_stock === 1,
               featured: res.data.data.featured === 1,
               type: res.data.data.type === 1,
-              oldImage1: res.data.data.image1,
+              oldImage: res.data.data.image,
             };
             setProductInput({ ...productInput, ...tempData });
             let i = 0;
@@ -72,7 +72,7 @@ const AddProduct = (props) => {
   };
 
   const handleImage = (e) => {
-    setPicture({ image1: e.target.files[0] });
+    setPicture({ image: e.target.files[0] });
   };
 
   const handleInput = (e) => {
@@ -116,7 +116,7 @@ const AddProduct = (props) => {
     setProductInput({ ...productInput, error_list: [] });
 
     const formData = new FormData();
-    formData.append("image1", picture.image1);
+    formData.append("image", picture.image);
     formData.append("category", selectedCategory.value);
     formData.append("brand", selectedCategory.value);
     formData.append("name", productInput.name);
@@ -127,7 +127,7 @@ const AddProduct = (props) => {
     formData.append("in_stock", productInput.in_stock === true ? 1 : 0);
     formData.append("featured", productInput.featured === true ? 1 : 0);
     formData.append("status", productInput.status === true ? 1 : 0);
-    formData.append("type", productInput.type === true ? 0 : 1);
+    formData.append("type", productInput.type === true ? 1 : 0);
 
     if (props.productId !== 0) {
       // handleUpdate(formData);
@@ -295,54 +295,26 @@ const AddProduct = (props) => {
                       <div className="w-full inline-flex border">
                         <input
                           type="file"
-                          name="image1"
+                          name="image"
                           onChange={handleImage}
-                          accept="image/png, image/jpg, image/jpeg"
-                          className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
+                          accept="image/*"
+                          className="form-control w-11/12 focus:outline-none focus:text-gray-600 p-2"
                         />
-                        {productInput.oldImage1 != null &&
+                        <span className="text-danger">
+                          {productInput.error_list.image}
+                        </span>
+                      </div>
+                    </div>
+                    {productInput.oldImage != null &&
                           picture.length === 0 && (
                             <div>
                               <img
                                 style={{ maxWidth: "40px" }}
-                                src={`http://localhost:8000${productInput.oldImage1}`}
+                                src={`${process.env.REACT_APP_BACKEND_ROOT_URL}/uploads/images/product${productInput.oldImage}`}
                                 alt=""
                               />
                             </div>
                           )}
-                        <span className="text-danger">
-                          {productInput.error_list.image1}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="w-full lg:w-4/12 px-4">
-                    <div className="relative w-full mb-3">
-                      <label className="text-sm text-gray-900">
-                        Ürün Resmi 2
-                      </label>
-                      <div className="w-full inline-flex border">
-                        <input
-                          type="file"
-                          name="image2"
-                          className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="w-full lg:w-4/12 px-4">
-                    <div className="relative w-full mb-3">
-                      <label className="text-sm text-gray-900">
-                        Ürün Resmi 3
-                      </label>
-                      <div className="w-full inline-flex border">
-                        <input
-                          type="file"
-                          name="image3"
-                          className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
-                        />
-                      </div>
-                    </div>
                   </div>
                 </div>
 

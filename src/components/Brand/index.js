@@ -20,7 +20,7 @@ function Brand() {
  console.log(brands)
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-7">
       {/* <Title>Markalar</Title> */}
       <div className='grid grid-cols-3 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-10 2xl:grid-cols-10'>
           {brands.map((item, key) => (

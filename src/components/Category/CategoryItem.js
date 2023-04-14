@@ -5,20 +5,8 @@ const CategoryItem = ({ item }) => {
   return (
     <>
       {item.featured === 1 && (
-        // <div
-        //   key={item.id}
-        //   className="relative rounded-sm overflow-hidden group w-[120px] h-[120px] md:w-[240px] md:h-[240px]"
-        // >
-        //   <img src={item.image} alt={item.name} className="w-full" />
-        //   <Link
-        //     to={`/product/category/${item.id}`}
-        //     className="absolute inset-0 duration-300 bg-black bg-opacity-30 flex items-center justify-center text-sm md:text-xl text-white font-roboto font-medium group-hover:bg-opacity-50 transition"
-        //   >
-        //     {item.name}
-        //   </Link>
-        // </div>
         <Link to={`/product/category/${item.id}`}>
-          <div key={item.id} className="flex items-center justify-center px-2">
+          {/* <div key={item.id} className="flex items-center justify-center px-2">
           <div className="max-w-sm overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl">
             <img
               src={item.image} alt={item.name}
@@ -30,7 +18,16 @@ const CategoryItem = ({ item }) => {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
+        <div  key={item.id} className="flex flex-col md:flex-row items-strech justify-between bg-white border-gray-100 border-2 p-3 max-w-sm overflow-hidden shadow-sm duration-200 hover:shadow-xl">
+                    <div className="flex flex-col justify-center md:w-1/2">
+                        <h1 className="text-2xl lg:text-3xl font-semibold text-gray-800">{item.name}</h1>
+                        {/* <p className="text-base lg:text-xl text-gray-800 mt-2">Save upto <span className="font-bold">50%</span></p> */}
+                    </div>
+                    <div className="md:w-1/2 mt-8 md:mt-0 flex justify-center md:justify-end">
+                        <img src={item.image} alt={item.name}  className="w-[240px] h-[150px]" />
+                    </div>
+                </div>
         </Link>
       )}
     </>

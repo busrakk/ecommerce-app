@@ -14,6 +14,10 @@ export const productListApi = async (payload = []) => {
     return sendRequest(POST, '/api/product-list', payload);
 }
 
+export const productUserListApi = async (payload = []) => {
+    return sendRequest(POST, '/api/product-user-list', payload);
+}
+
 export const productDeleteApi = async (id, payload = []) => {
     return sendRequest(POST, `/api/product-delete/${id}`, payload);
 }

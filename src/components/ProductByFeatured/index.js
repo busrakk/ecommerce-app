@@ -33,9 +33,11 @@ function ProductByFeatured() {
     }
   }
 
+  console.log(tempProductsFetured)
+
   return (
-    <div className="mx-auto container mt-6">
-      <div className="flex flex-col">
+    <div className="mx-auto container mt-8 bg-gray-100">
+      <div className="flex flex-col pb-10">
         <Title>Öne Çıkan İlanlar</Title>
 
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-8 gap-y-8 items-center">

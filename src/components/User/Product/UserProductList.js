@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import swal from "sweetalert";
 import {
-  productListApi,
+  productUserListApi,
   categoryDropdownApi,
   productDeleteApi,
 } from "../../../service/serviceApi";
@@ -9,9 +9,8 @@ import useDelayCallback from "../../helpers/useDelayCallback";
 import Modal from "./elements/Modal";
 import AddProduct from "./AddProduct";
 import { FaEdit } from "react-icons/fa";
-import { AiFillEye, AiOutlinePlus } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
 import { RiDeleteBin7Fill } from "react-icons/ri";
-import { Link } from "react-router-dom";
 
 const UserProductList = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,7 +26,7 @@ const UserProductList = () => {
   }, []);
 
   const getProductList = () => {
-    productListApi().then((res) => {
+    productUserListApi().then((res) => {
       if (res.data.success) {
         if (res.data.status === "success") {
           setIsLoading(false);
@@ -100,7 +99,7 @@ const UserProductList = () => {
           <div className="group group-hover:bg-opacity-10 transition duration-500 relative transform  hover:scale-105 shadow-md bg-gray-50 sm:p-25 py-28 px-10 flex justify-center items-center">
             <img
               className="group-hover:opacity-60 w-[250px] h-[180px] transition duration-500"
-              src={item.image1}
+              src={item.image}
               alt={item.name}
             />
             <div className="absolute sm:top-8 top-4 left-4 sm:left-8 flex justify-start items-start flex-col space-y-2">
@@ -120,9 +119,9 @@ const UserProductList = () => {
               <button className="bg-white border rounded-full focus:bg-gray-800 border-gray-600 p-1.5" />
             </div>
             <div className="flex flex-col bottom-8 left-8 space-y-4 absolute opacity-0 group-hover:opacity-100 transition duration-500">
-              <Link to={`/product/${item?.id}`}>
+              {/* <Link to={`/product/${item?.id}`}>
                 <AiFillEye size={20} />
-              </Link>
+              </Link> */}
               <button onClick={() => handleModal(true, item.id)}>
                 <FaEdit size={20} />
               </button>
@@ -171,7 +170,19 @@ const UserProductList = () => {
       return view;
     });
     if (view.length === 0) {
-      return <div> No data found! </div>;
+      return(
+        <div className="flex justify-center">
+        <div className="flex w-full max-w-5xl overflow-hidden bg-white rounded-lg shadow-md">
+          <div className="px-4 py-2 -mx-3">
+            <div className="mx-3">
+              <p className="text-base font-medium m-2 text-gray-800">
+                Kayıtlı ürün bulunmamaktadır.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      );
     } else {
       return view;
     }
@@ -223,7 +234,7 @@ const UserProductList = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col bg-white">
+      <div className="flex flex-col pb-10 bg-white">
         <div className="grid xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-x-8 gap-y-8 items-center px-6">
           {isLoading && <span className="visually-hidden">Loading...</span>}
           {!isLoading && renderTableData()}

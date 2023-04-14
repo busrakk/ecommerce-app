@@ -67,7 +67,7 @@ const CartModal = ({ carts, open1, setOpen1 }) => {
                                   <li key={cart.id} className="flex py-6">
                                     <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                       <img
-                                        src={cart?.image1}
+                                        src={cart?.image}
                                         alt={cart?.name}
                                         className="h-full w-full object-cover object-center"
                                       />
