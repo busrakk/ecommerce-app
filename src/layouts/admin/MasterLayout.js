@@ -3,18 +3,23 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import { Outlet } from "react-router-dom";
+import Sidenav from "./Sidenav";
+import Box from "@mui/material/Box";
 
 const MasterLayout = () => {
   return (
-    <div>
+    <>
       <Navbar />
-        <Sidebar />
+      <Box sx={{ display: "flex" }}>
+        <Sidenav />
+        {/* <Sidebar />  */}
         <div>
           <Outlet />
         </div>
-      <Footer />
-    </div>
-  )
-}
+        {/* <Footer /> */}
+      </Box>
+    </>
+  );
+};
 
-export default MasterLayout
+export default MasterLayout;
