@@ -10,6 +10,7 @@ const MasterLayout = () => {
   return (
     <>
       <Navbar />
+      <Box height={30} />
       <Box sx={{ display: "flex" }}>
         <Sidenav />
         {/* <Sidebar />  */}

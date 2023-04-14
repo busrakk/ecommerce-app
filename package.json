@@ -34,7 +34,8 @@
     "slick-carousel": "^1.8.1",
     "sweetalert": "^2.1.2",
     "web-vitals": "^2.1.4",
-    "yup": "^1.0.2"
+    "yup": "^1.0.2",
+    "zustand": "^4.3.7"
   },
   "scripts": {
     "start": "set PORT= 3049 && react-scripts start",
