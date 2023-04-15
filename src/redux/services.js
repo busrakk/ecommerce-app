@@ -12,7 +12,7 @@ export const getCategories = createAsyncThunk("categories/getcategories", async 
 });
 
 export const getProducts = createAsyncThunk("products/getproducts", async () => {
-  const res = await axios("/api/allproduct");
+  const res = await axios.post("/api/allproduct");
   return res.data.data;
 });
 

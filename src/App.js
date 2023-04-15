@@ -3,25 +3,33 @@ import Home from "./components/frontend/Home";
 import Master from "./layouts/frontend/Master";
 import Login from "./components/frontend/auth/Login/index";
 import Register from "./components/frontend/auth/Register/index";
-import ProductDetail from "./components/Product/ProductDetail";
+import Page404 from "./layouts/error/Page404";
+
+// admin
 import AdminRoute from "./protectedRoute/AdminRoute";
 import Dashboard from "./components/admin/Dashboard";
 import Profile from "./components/admin/Profile";
-import Page404 from "./layouts/error/Page404";
-import axios from "axios";
+import Product from "./components/admin/Product";
+
+// user
 import UserRoute from "./protectedRoute/UserRoute";
-import Cart from "./components/Cart";
-import ProductByCategory from "./components/ProductByCategory";
-import ProductByBrand from "./components/ProductByBrand";
-import ProductByFeatured from "./components/ProductByFeatured/List";
-import AddProduct from "./components/User/Product/AddProduct";
 import User from "./components/User/User";
 import UserEdit from "./components/User/User/Edit";
 import UserProductList from "./components/User/Product/UserProductList";
+import AddProduct from "./components/User/Product/AddProduct";
+
+// home
 import ProductList from "./components/Product/ProductList";
+import ProductDetail from "./components/Product/ProductDetail";
+import ProductByCategory from "./components/ProductByCategory";
+import ProductByBrand from "./components/ProductByBrand";
+import ProductByFeatured from "./components/ProductByFeatured/List";
 import ProductBySale from "./components/ProductBySale";
 import ProductBySearch from "./components/ProductBySearch";
+import Cart from "./components/Cart";
 
+
+import axios from "axios";
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_ROOT_URL;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.headers.post["Accept"] = "application/json";
@@ -61,6 +69,7 @@ function App() {
           <Route path="" element={<Navigate replace to="/admin/dashboard" />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="product" element={<Product />} />
         </Route>
         <Route path="*" element={<Page404 />} />
       </Routes>
