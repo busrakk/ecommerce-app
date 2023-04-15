@@ -11,8 +11,11 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { Divider, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+
 import Stack from "@mui/material/Stack";
-import InfoIcon from '@mui/icons-material/Info';
+import InfoIcon from "@mui/icons-material/Info";
 import useDelayCallback from "../../helpers/useDelayCallback";
 
 export default function AdminProductList() {
@@ -20,6 +23,7 @@ export default function AdminProductList() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [rows, setRows] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [filteredRows, setFilteredRows] = useState([]);
 
   useDelayCallback(() => {
     getProductList();
@@ -45,6 +49,8 @@ export default function AdminProductList() {
     setPage(0);
   };
 
+  const dataRows = filteredRows.length > 0 ? filteredRows : rows;
+
   return (
     <Paper sx={{ width: "98%", overflow: "hidden", padding: "12px" }}>
       <Typography
@@ -58,6 +64,24 @@ export default function AdminProductList() {
       <Divider />
       <Box height={10} />
       <Stack direction="row" spacing={2} className="my-2 mb-2">
+        {/* filter */}
+        <Autocomplete
+          id="product-select"
+          sx={{ width: 300 }}
+          options={rows.map((row) => row.name)}
+          renderInput={(params) => (
+            <TextField {...params} label="Ürün Filtrele" margin="dense" />
+          )}
+          onChange={(event, value) => {
+            if (value) {
+              const filteredRows = rows.filter((row) => row.name === value);
+              setFilteredRows(filteredRows);
+            } else {
+              setFilteredRows([]);
+            }
+            setPage(0);
+          }}
+        />
         <Typography
           variant="h6"
           component="div"
@@ -91,7 +115,7 @@ export default function AdminProductList() {
           </TableHead>
           <TableBody>
             {!isLoading &&
-              rows
+              dataRows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
