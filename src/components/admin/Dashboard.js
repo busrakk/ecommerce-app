@@ -11,6 +11,7 @@ import CreditCardIcon from "@mui/icons-material/CreditCard";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import AccordionDashboard from "../../layouts/admin/AccordionDashboard";
 import BarChart from "../../charts/BarChart";
+import CountUp from 'react-countup';
 
 const Dashboard = () => {
   return (
@@ -26,7 +27,7 @@ const Dashboard = () => {
                     <CreditCardIcon />
                   </div>
                   <Typography gutterBottom variant="h5" component="div" sx={{ color: "#ffffff" }}>
-                    $500.00
+                    $ <CountUp delay={0.2} end={500.00} duration={0.3} />
                   </Typography>
                   <Typography gutterBottom variant="body2" component="div" sx={{ color: "#ccd1d1" }}>
                     Total Earnings
@@ -39,7 +40,7 @@ const Dashboard = () => {
                     <ShoppingBagIcon />
                   </div>
                   <Typography gutterBottom variant="h5" component="div" sx={{ color: "#ffffff" }}>
-                    $900.00
+                    $ <CountUp delay={0.2} end={900.00} duration={0.3} />
                   </Typography>
                   <Typography gutterBottom variant="body2" component="div" sx={{ color: "#ccd1d1" }}>
                     Total Orders
