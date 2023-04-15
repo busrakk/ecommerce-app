@@ -9,6 +9,7 @@ import "../../assets/css/adminDashboard.css";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import AccordionDashboard from "../../layouts/admin/AccordionDashboard";
 
 const Dashboard = () => {
   return (
@@ -79,12 +80,19 @@ const Dashboard = () => {
         <Grid container spacing={2}>
           <Grid item xs={8}>
             <Card sx={{ height: 60 + "vh" }}>
-              <CardContent></CardContent>
+              <CardContent>
+                
+              </CardContent>
             </Card>
           </Grid>
           <Grid item xs={4}>
             <Card sx={{ height: 60 + "vh" }}>
-              <CardContent></CardContent>
+              <CardContent>
+              <div className="paddingall">
+                    <span className="pricetitle">Popular Products</span>
+                  </div>
+                <AccordionDashboard />
+              </CardContent>
             </Card>
           </Grid>
         </Grid>
