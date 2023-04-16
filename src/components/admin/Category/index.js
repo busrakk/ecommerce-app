@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import Box from "@mui/material/Box";
-import List from './List';
+import List from "./List";
 
-const Product = () => {
+const index = () => {
   return (
     <>
       <Box height={30} />
@@ -13,4 +13,4 @@ const Product = () => {
   )
 }
 
-export default Product
+export default index

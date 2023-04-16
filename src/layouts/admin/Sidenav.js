@@ -7,6 +7,7 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import CategoryIcon from '@mui/icons-material/Category';
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -117,6 +118,33 @@ export default function MasterLayout() {
                 primary="Dashboard"
                 sx={{ opacity: open ? 1 : 0 }}
               />
+            </ListItemButton>
+          </ListItem>
+          <Divider />
+          <ListItem
+            disablePadding
+            sx={{ display: "block" }}
+            onClick={() => {
+              navigate("/admin/category");
+            }}
+          >
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <CategoryIcon />
+              </ListItemIcon>
+              <ListItemText primary="Ürünler" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
           <Divider />

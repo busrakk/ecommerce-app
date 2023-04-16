@@ -10,6 +10,7 @@ import AdminRoute from "./protectedRoute/AdminRoute";
 import Dashboard from "./components/admin/Dashboard";
 import Profile from "./components/admin/Profile";
 import Product from "./components/admin/Product";
+import Category from "./components/admin/Category";
 
 // user
 import UserRoute from "./protectedRoute/UserRoute";
@@ -70,6 +71,7 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="profile" element={<Profile />} />
           <Route path="product" element={<Product />} />
+          <Route path="category" element={<Category />} />
         </Route>
         <Route path="*" element={<Page404 />} />
       </Routes>

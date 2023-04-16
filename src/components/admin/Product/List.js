@@ -17,7 +17,7 @@ import Modal from "@mui/material/Modal";
 import Stack from "@mui/material/Stack";
 import InfoIcon from "@mui/icons-material/Info";
 import useDelayCallback from "../../helpers/useDelayCallback";
-import ShowProduct from "./ShowProduct";
+import Show from "./Show";
 
 const style = {
   position: "absolute",
@@ -31,7 +31,7 @@ const style = {
   p: 4,
 };
 
-export default function AdminProductList() {
+export default function List() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [rows, setRows] = useState([]);
@@ -106,7 +106,7 @@ export default function AdminProductList() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <ShowProduct closeEvent={handleClose} data={formid} />
+            <Show closeEvent={handleClose} data={formid} />
           </Box>
         </Modal>
       </div>

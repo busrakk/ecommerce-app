@@ -2,16 +2,23 @@ import { sendRequest } from "./rootApi";
 
 const POST = 'post';
 
+// admin
+export const productListApi = async (payload = []) => {
+    return sendRequest(POST, '/api/admin/product-list', payload);
+}
+
+export const categoryListApi = async (payload = []) => {
+    return sendRequest(POST, '/api/admin/category-list', payload);
+}
+
+//
+
 export const productSaveApi = async (payload = []) => {
     return sendRequest(POST, '/api/product-save', payload);
 }
 
 export const productDetailsApi = async (payload = []) => {
     return sendRequest(POST, `/api/product-details`, payload);
-}
-
-export const productListApi = async (payload = []) => {
-    return sendRequest(POST, '/api/product-list', payload);
 }
 
 export const productUserListApi = async (payload = []) => {

@@ -7,7 +7,7 @@ export const getBrands = createAsyncThunk("brands/getbrands", async () => {
 });
 
 export const getCategories = createAsyncThunk("categories/getcategories", async () => {
-  const res = await axios("/api/allcategory");
+  const res = await axios.post("/api/allcategory");
   return res.data.data;
 });
 
