@@ -1,6 +1,9 @@
 import * as React from "react";
 import { useState } from "react";
-import { categoryListApi } from "../../../service/serviceApi";
+import {
+  categoryListApi,
+  categoryDeleteApi,
+} from "../../../service/serviceApi";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -19,7 +22,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 import useDelayCallback from "../../helpers/useDelayCallback";
 
 export default function AdminProductList() {
@@ -54,6 +57,45 @@ export default function AdminProductList() {
   };
 
   const dataRows = filteredRows.length > 0 ? filteredRows : rows;
+
+  const handleDelete = (e, id) => {
+    e.preventDefault();
+    swal({
+      title: "Emin misin?",
+      text: "Bunu geri alamayacaksın",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        categoryDeleteApi(id).then((res) => {
+          if (res.data.success && res.data.status === "success") {
+            swal({
+              title: "Başarılı",
+              text: res.data.message,
+              icon: "success",
+              timer: 2000,
+              buttons: false,
+            });
+            deleteData(id);
+          } else {
+            swal({
+              title: "Hata",
+              text: res.data.message,
+              icon: "error",
+              timer: 2000,
+              buttons: false,
+            });
+          }
+        });
+      }
+    });
+  };
+
+  const deleteData = (removeId) => {
+    const newCategory = dataRows.filter((data) => data.id !== removeId);
+    setRows(newCategory);
+  };
 
   return (
     <Paper sx={{ width: "98%", overflow: "hidden", padding: "12px" }}>
@@ -140,19 +182,19 @@ export default function AdminProductList() {
                       </TableCell>
                       <TableCell align="left">
                         {row.status ? (
-                            <Chip
-                              label="Aktif"
-                              color="success"
-                              variant="outlined"
-                            />
-                          ) : (
-                            <Chip
-                              label="Pasif"
-                              color="error"
-                              variant="outlined"
-                            />
-                          )
-                        }</TableCell>
+                          <Chip
+                            label="Aktif"
+                            color="success"
+                            variant="outlined"
+                          />
+                        ) : (
+                          <Chip
+                            label="Pasif"
+                            color="error"
+                            variant="outlined"
+                          />
+                        )}
+                      </TableCell>
                       <TableCell align="left">
                         <Stack spacing={2} direction="row">
                           <EditIcon
@@ -171,7 +213,7 @@ export default function AdminProductList() {
                               cursor: "pointer",
                             }}
                             className="cursor-pointer"
-                            // onClick={() => deleteUser(row.id)}
+                            onClick={(e) => handleDelete(e, row.id)}
                           />
                         </Stack>
                       </TableCell>
