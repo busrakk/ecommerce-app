@@ -40,6 +40,7 @@ const categorySlice = createSlice({
 })
 
 export const getAllCategories = (state) => state.category.categories;
+export const getAllCategoriesStatus = (state) => state.category.categoriesStatus;
 export const getAllProductByCategory = (state) => state.category.categoryProducts;
 export const getAllProductByCategoryStatus = (state) => state.category.categoryProductsStatus;
 export default categorySlice.reducer;

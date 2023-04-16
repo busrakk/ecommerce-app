@@ -18,6 +18,7 @@ import Stack from "@mui/material/Stack";
 import InfoIcon from "@mui/icons-material/Info";
 import useDelayCallback from "../../helpers/useDelayCallback";
 import Show from "./Show";
+import Loader from "../../Loader";
 
 const style = {
   position: "absolute",
@@ -110,6 +111,7 @@ export default function List() {
           </Box>
         </Modal>
       </div>
+      {isLoading && <Loader />}
       {rows.length > 0 && (
         <Paper sx={{ width: "98%", overflow: "hidden", padding: "12px" }}>
           <Typography

@@ -24,6 +24,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import swal from "sweetalert";
 import useDelayCallback from "../../helpers/useDelayCallback";
+import Loader from "../../Loader"
 
 export default function List() {
   const [page, setPage] = useState(0);
@@ -99,6 +100,7 @@ export default function List() {
 
   return (
     <>
+    {isLoading && <Loader />}
     {rows.length > 0 && (
     <Paper sx={{ width: "98%", overflow: "hidden", padding: "12px" }}>
       <Typography

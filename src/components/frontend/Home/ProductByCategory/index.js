@@ -6,20 +6,23 @@ import TypeFilter from "../ProductByFilter/TypeFilter";
 // import useDelayCallback from "../helpers/useDelayCallback";
 import ProductItem from "../../Product/ProductItem";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProductByCategory, getAllProductByCategoryStatus } from "../../../../features/categorySlice";
+import {
+  getAllProductByCategory,
+  getAllProductByCategoryStatus,
+} from "../../../../features/categorySlice";
 import { productByCategory } from "../../../../redux/services";
 import { STATUS } from "../../../../utils/status";
-import Loader from "../../../Loader"
+import Loader from "../../../Loader";
 
 const ProductByCategory = () => {
-  const {id} = useParams();
+  const { id } = useParams();
   const dispatch = useDispatch();
   const categoryProducts = useSelector(getAllProductByCategory);
-  const categoryProductsStatus = useSelector(getAllProductByCategoryStatus)
+  const categoryProductsStatus = useSelector(getAllProductByCategoryStatus);
 
   useEffect(() => {
-    dispatch(productByCategory(id))
-  }, [dispatch, id])
+    dispatch(productByCategory(id));
+  }, [dispatch, id]);
 
   return (
     <div className="mx-16 mt-24">
@@ -29,15 +32,16 @@ const ProductByCategory = () => {
 
         <div className="col-span-3">
           <TypeFilter />
-
-          <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-6">
-            {
-              categoryProductsStatus === STATUS.LOADING ? <Loader /> : <>
+          {categoryProductsStatus === STATUS.LOADING ? (
+            <Loader />
+          ) : (
+            <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-6">
               {categoryProducts &&
-              categoryProducts.map((item, key) => <ProductItem key={key} item={item} />)}
-              </>
-            }
-          </div>
+                categoryProducts.map((item, key) => (
+                  <ProductItem key={key} item={item} />
+                ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import axios from 'axios';
 import MasterLayout from '../layouts/admin/MasterLayout';
 import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
+import Loader from "../components/Loader";
 
 function AdminRoute(props) {
     const [authenticate, setAuthenticate] = useState(false);
@@ -47,7 +48,7 @@ function AdminRoute(props) {
     );
 
     if(loading){
-      return <div className="text-center py-3"><h1>Loading...</h1></div>
+      return <div className="text-center py-3"><Loader /></div>
     }
 
     return ( 

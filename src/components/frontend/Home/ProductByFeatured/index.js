@@ -33,24 +33,22 @@ function ProductByFeatured() {
     }
   }
 
-  console.log(tempProductsFetured)
+  console.log(tempProductsFetured);
 
   return (
     <div className="mx-auto container mt-8 bg-gray-100">
       <div className="flex flex-col pb-10">
         <Title>Öne Çıkan İlanlar</Title>
 
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-8 gap-y-8 items-center">
-          {productFeaturedStatus === STATUS.LOADING ? (
-            <Loader />
-          ) : (
-            <>
-              {tempProductsFetured.map((item, key) => (
-                <ProductItem key={key} item={item} />
-              ))}
-            </>
-          )}
-        </div>
+        {productFeaturedStatus === STATUS.LOADING ? (
+          <Loader />
+        ) : (
+          <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-8 gap-y-8 items-center">
+            {tempProductsFetured.map((item, key) => (
+              <ProductItem key={key} item={item} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

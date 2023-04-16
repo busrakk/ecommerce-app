@@ -32,19 +32,16 @@ const ProductByBrand = () => {
 
         <div className="col-span-3">
           <TypeFilter />
-
-          <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-6">
             {brandProductsStatus === STATUS.LOADING ? (
               <Loader />
             ) : (
-              <>
+              <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-6">
                 {brandProducts &&
                   brandProducts.map((item, key) => (
                     <ProductItem key={key} item={item} />
                   ))}
-              </>
+              </div>
             )}
-          </div>
         </div>
       </div>
     </div>

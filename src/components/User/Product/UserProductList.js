@@ -11,6 +11,7 @@ import AddProduct from "./AddProduct";
 import { FaEdit } from "react-icons/fa";
 import { AiOutlinePlus } from "react-icons/ai";
 import { RiDeleteBin7Fill } from "react-icons/ri";
+import Loader from "../../Loader";
 
 const UserProductList = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -170,9 +171,8 @@ const UserProductList = () => {
       return view;
     });
     if (view.length === 0) {
-      return(
+      return (
         <div className="flex justify-center">
-        <div className="flex w-full max-w-5xl overflow-hidden bg-white rounded-lg shadow-md">
           <div className="px-4 py-2 -mx-3">
             <div className="mx-3">
               <p className="text-base font-medium m-2 text-gray-800">
@@ -181,7 +181,6 @@ const UserProductList = () => {
             </div>
           </div>
         </div>
-      </div>
       );
     } else {
       return view;
@@ -234,9 +233,9 @@ const UserProductList = () => {
           </div>
         </div>
       </div>
+      {isLoading && <Loader />}
       <div className="flex flex-col pb-10 bg-white">
         <div className="grid xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-x-8 gap-y-8 items-center px-6">
-          {isLoading && <span className="visually-hidden">Loading...</span>}
           {!isLoading && renderTableData()}
         </div>
       </div>

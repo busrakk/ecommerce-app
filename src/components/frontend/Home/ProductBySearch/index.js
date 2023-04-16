@@ -6,21 +6,23 @@ import TypeFilter from "../ProductByFilter/TypeFilter";
 //import useDelayCallback from "../helpers/useDelayCallback";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductSearchAsync } from "../../../../redux/services";
-import { getproductSearch, getProductSearchStatus } from "../../../../features/productSlice";
+import {
+  getproductSearch,
+  getProductSearchStatus,
+} from "../../../../features/productSlice";
 import { STATUS } from "../../../../utils/status";
 import Loader from "../../../Loader";
 
 const ProductBySearch = () => {
+  const dispatch = useDispatch();
+  const productSearch = useSelector(getproductSearch);
+  const productSearchStatus = useSelector(getProductSearchStatus);
 
-    const dispatch = useDispatch();
-    const productSearch = useSelector(getproductSearch);
-    const productSearchStatus = useSelector(getProductSearchStatus);
+  useEffect(() => {
+    dispatch(getProductSearchAsync());
+  }, [dispatch]);
 
-    useEffect(() => {
-        dispatch(getProductSearchAsync());
-    }, [dispatch]);
-
-    // randomizing the products in the list
+  // randomizing the products in the list
   const tempProductsSearch = [];
   if (productSearch.length > 0) {
     for (let i in productSearch) {
@@ -42,21 +44,19 @@ const ProductBySearch = () => {
         <div className="col-span-3">
           <TypeFilter />
 
-          <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-6">
           {productSearchStatus === STATUS.LOADING ? (
             <Loader />
           ) : (
-            <>
+            <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-6">
               {tempProductsSearch.map((item, key) => (
                 <ProductItem key={key} item={item} />
               ))}
-            </>
+            </div>
           )}
-          </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductBySearch
+export default ProductBySearch;

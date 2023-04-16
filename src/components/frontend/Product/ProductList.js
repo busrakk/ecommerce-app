@@ -44,17 +44,15 @@ const ProductList = () => {
         <div className="col-span-3">
           <TypeFilter />
 
-          <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-6">
-            {productStatus === STATUS.LOADING ? (
-              <Loader />
-            ) : (
-              <>
-                {tempProducts.map((item, key) => (
-                  <ProductItem key={key} item={item} />
-                ))}
-              </>
-            )}
-          </div>
+          {productStatus === STATUS.LOADING ? (
+            <Loader />
+          ) : (
+            <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-6">
+              {tempProducts.map((item, key) => (
+                <ProductItem key={key} item={item} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

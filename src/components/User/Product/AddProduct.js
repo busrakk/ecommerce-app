@@ -4,6 +4,7 @@ import Switch from "./elements/Switch";
 import useDelayCallBack from "../../helpers/useDelayCallback";
 import { productSaveApi, productDetailsApi } from "../../../service/serviceApi";
 import Select from "react-select";
+import Loader from "../../Loader";
 
 const AddProduct = (props) => {
   const initialData = {
@@ -142,7 +143,7 @@ const AddProduct = (props) => {
         <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg border-0">
           <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
             {loader === true ? (
-              <div>Loading...</div>
+              <Loader />
             ) : (
               <form onSubmit={handleSubmit} encType="multipart/form-data">
                 {isLoading && <div>Loading...</div>}

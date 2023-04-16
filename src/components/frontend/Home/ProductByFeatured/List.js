@@ -44,17 +44,15 @@ const List = () => {
         <div className="col-span-3">
           <TypeFilter />
 
-          <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-6">
           {productFeaturedStatus === STATUS.LOADING ? (
             <Loader />
           ) : (
-            <>
+            <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-6">
               {tempProductsFetured.map((item, key) => (
                 <ProductItem key={key} item={item} />
               ))}
-            </>
+            </div>
           )}
-          </div>
         </div>
       </div>
     </div>
