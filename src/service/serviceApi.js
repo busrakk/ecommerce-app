@@ -15,6 +15,10 @@ export const categoryDeleteApi = async (id, payload = []) => {
     return sendRequest(POST, `/api/admin/category-delete/${id}`, payload);
 }
 
+export const brandListApi = async (payload = []) => {
+    return sendRequest(POST, '/api/admin/brand-list', payload);
+}
+
 //
 
 export const productSaveApi = async (payload = []) => {

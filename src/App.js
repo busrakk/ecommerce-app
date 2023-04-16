@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Home from "./components/frontend/Home";
+import Home from "./components/frontend/Home/Home";
 import Master from "./layouts/frontend/Master";
 import Login from "./components/frontend/auth/Login/index";
 import Register from "./components/frontend/auth/Register/index";
@@ -11,6 +11,7 @@ import Dashboard from "./components/admin/Dashboard";
 import Profile from "./components/admin/Profile";
 import Product from "./components/admin/Product";
 import Category from "./components/admin/Category";
+import Brand from "./components/admin/Brand";
 
 // user
 import UserRoute from "./protectedRoute/UserRoute";
@@ -28,7 +29,6 @@ import ProductByFeatured from "./components/frontend/Home/ProductByFeatured/List
 import ProductBySale from "./components/frontend/Home/ProductBySale";
 import ProductBySearch from "./components/frontend/Home/ProductBySearch";
 import Cart from "./components/frontend/Cart";
-
 
 import axios from "axios";
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_ROOT_URL;
@@ -72,6 +72,7 @@ function App() {
           <Route path="profile" element={<Profile />} />
           <Route path="product" element={<Product />} />
           <Route path="category" element={<Category />} />
+          <Route path="brand" element={<Brand />} />
         </Route>
         <Route path="*" element={<Page404 />} />
       </Routes>

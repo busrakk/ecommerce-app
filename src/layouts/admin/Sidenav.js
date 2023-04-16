@@ -13,6 +13,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MailIcon from "@mui/icons-material/Mail";
+import TurnedInIcon from '@mui/icons-material/TurnedIn';
 import { useNavigate } from "react-router-dom";
 import { useAppStore } from "../../appStore";
 import Box from "@mui/material/Box";
@@ -145,6 +146,33 @@ export default function MasterLayout() {
                 <CategoryIcon />
               </ListItemIcon>
               <ListItemText primary="Kategoriler" sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+          <Divider />
+          <ListItem
+            disablePadding
+            sx={{ display: "block" }}
+            onClick={() => {
+              navigate("/admin/brand");
+            }}
+          >
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <TurnedInIcon />
+              </ListItemIcon>
+              <ListItemText primary="Markalar" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
           <Divider />

@@ -25,7 +25,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import swal from "sweetalert";
 import useDelayCallback from "../../helpers/useDelayCallback";
 
-export default function AdminProductList() {
+export default function List() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [rows, setRows] = useState([]);
@@ -113,11 +113,11 @@ export default function AdminProductList() {
       <Box height={10} />
       <Stack direction="row" spacing={2} className="my-2 mb-2">
         <Autocomplete
-          id="product-select"
+          id="category-select"
           sx={{ width: 300 }}
           options={rows.map((row) => row.name)}
           renderInput={(params) => (
-            <TextField {...params} label="Ürün Filtrele" margin="dense" />
+            <TextField {...params} label="Kategori Filtrele" margin="dense" />
           )}
           onChange={(event, value) => {
             if (value) {
