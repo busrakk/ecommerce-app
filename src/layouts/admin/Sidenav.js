@@ -144,7 +144,7 @@ export default function MasterLayout() {
               >
                 <CategoryIcon />
               </ListItemIcon>
-              <ListItemText primary="Ürünler" sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText primary="Kategoriler" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
           <Divider />

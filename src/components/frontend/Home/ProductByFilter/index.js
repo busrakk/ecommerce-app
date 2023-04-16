@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { getAllBrands } from "../../features/brandSlice";
-import { getAllCategories } from "../../features/categorySlice";
-import { getBrands, getCategories } from "../../redux/services";
+import { getAllBrands } from "../../../../features/brandSlice";
+import { getAllCategories } from "../../../../features/categorySlice";
+import { getBrands, getCategories } from "../../../../redux/services";
 import { useDispatch, useSelector } from "react-redux";
 
 const ProductByFilter = () => {

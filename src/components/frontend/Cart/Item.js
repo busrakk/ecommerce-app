@@ -1,7 +1,7 @@
 import React from "react";
 import { RiDeleteBin5Line, RiHeartLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
-import { removeFromCart, toggleCartQty } from "../../features/cartSlice";
+import { removeFromCart, toggleCartQty } from "../../../features/cartSlice";
 
 const Item = ({ data }) => {
 

@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import BrandItem from "./BrandItem";
 // import useDelayCallBack from "../helpers/useDelayCallback";
 import { useSelector, useDispatch } from "react-redux";
-import { getBrands } from "../../redux/services";
-import { getAllBrands } from "../../features/brandSlice";
+import { getBrands } from "../../../redux/services";
+import { getAllBrands } from "../../../features/brandSlice";
 
 function Brand() {
 

@@ -5,7 +5,7 @@ import { AiFillEye } from "react-icons/ai";
 import { GoGitCompare } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../features/cartSlice";
+import { addToCart } from "../../../features/cartSlice";
 // import moment from "moment";
 
 const ProductItem = ({ item }) => {

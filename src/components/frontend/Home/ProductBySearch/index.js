@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-import ProductItem from "../Product/ProductItem";
+import ProductItem from "../../Product/ProductItem";
 import ProductByFilter from "../ProductByFilter";
-import Subtitle from "../UI/Subtitle";
+import Subtitle from "../../../UI/Subtitle";
 import TypeFilter from "../ProductByFilter/TypeFilter";
 //import useDelayCallback from "../helpers/useDelayCallback";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductSearchAsync } from "../../redux/services";
-import { getproductSearch, getProductSearchStatus } from "../../features/productSlice";
-import { STATUS } from "../../utils/status";
-import Loader from "../Loader";
+import { getProductSearchAsync } from "../../../../redux/services";
+import { getproductSearch, getProductSearchStatus } from "../../../../features/productSlice";
+import { STATUS } from "../../../../utils/status";
+import Loader from "../../../Loader";
 
 const ProductBySearch = () => {
 

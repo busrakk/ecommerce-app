@@ -1,19 +1,17 @@
 import React, { useEffect } from "react";
-import ProductItem from "../Product/ProductItem";
-import ProductByFilter from "../ProductByFilter";
-import Subtitle from "../UI/Subtitle";
-import TypeFilter from "../ProductByFilter/TypeFilter";
-//import useDelayCallback from "../helpers/useDelayCallback";
+import Title from "../../../UI/Title";
+import ProductItem from "../../Product/ProductItem";
+// import useDelayCallback from "../helpers/useDelayCallback";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getProductFeatured,
   getProductsFeturedStatus,
-} from "../../features/productSlice";
-import { getProductFeaturedAsync } from "../../redux/services";
-import { STATUS } from "../../utils/status";
-import Loader from "../Loader";
+} from "../../../../features/productSlice";
+import { getProductFeaturedAsync } from "../../../../redux/services";
+import { STATUS } from "../../../../utils/status";
+import Loader from "../../../Loader";
 
-const List = () => {
+function ProductByFeatured() {
   const productFetured = useSelector(getProductFeatured);
   const productFeaturedStatus = useSelector(getProductsFeturedStatus);
   const dispatch = useDispatch();
@@ -35,16 +33,14 @@ const List = () => {
     }
   }
 
+  console.log(tempProductsFetured)
+
   return (
-    <div className="mx-16 mt-24">
-      <Subtitle>Ürünler</Subtitle>
-      <div className="grid grid-cols-4 gap-6 pt-4 pb-16 items-start">
-        <ProductByFilter />
+    <div className="mx-auto container mt-8 bg-gray-100">
+      <div className="flex flex-col pb-10">
+        <Title>Öne Çıkan İlanlar</Title>
 
-        <div className="col-span-3">
-          <TypeFilter />
-
-          <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-6">
+        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-8 gap-y-8 items-center">
           {productFeaturedStatus === STATUS.LOADING ? (
             <Loader />
           ) : (
@@ -54,11 +50,10 @@ const List = () => {
               ))}
             </>
           )}
-          </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
-export default List;
+export default ProductByFeatured;

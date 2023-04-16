@@ -3,21 +3,21 @@ import { Link, useParams } from "react-router-dom";
 import { BsFacebook, BsTwitter, BsInstagram } from "react-icons/bs";
 // import useDelayCallback from "../helpers/useDelayCallback";
 import { useDispatch, useSelector } from "react-redux";
-import Subtitle from "../UI/Subtitle";
+import Subtitle from "../../UI/Subtitle";
 import {
   getSingleProduct,
   getSingleProductStatus,
-} from "../../features/productSlice";
-import { getProductSingle } from "../../redux/services";
-import { STATUS } from "../../utils/status";
-import Loader from "../Loader";
+} from "../../../features/productSlice";
+import { getProductSingle } from "../../../redux/services";
+import { STATUS } from "../../../utils/status";
+import Loader from "../../Loader";
 import {
   addToCart,
   getCartMessageStatus,
   setCartMessageOff,
   setCartMessageOn,
-} from "../../features/cartSlice";
-import CartMessage from "../CartMessage";
+} from "../../../features/cartSlice";
+import CartMessage from "../Cart/CartMessage";
 import { GoGitCompare } from "react-icons/go";
 import { BsFillSuitHeartFill } from "react-icons/bs";
 

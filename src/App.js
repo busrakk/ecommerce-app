@@ -20,14 +20,14 @@ import UserProductList from "./components/User/Product/UserProductList";
 import AddProduct from "./components/User/Product/AddProduct";
 
 // home
-import ProductList from "./components/Product/ProductList";
-import ProductDetail from "./components/Product/ProductDetail";
-import ProductByCategory from "./components/ProductByCategory";
-import ProductByBrand from "./components/ProductByBrand";
-import ProductByFeatured from "./components/ProductByFeatured/List";
-import ProductBySale from "./components/ProductBySale";
-import ProductBySearch from "./components/ProductBySearch";
-import Cart from "./components/Cart";
+import ProductList from "./components/frontend/Product/ProductList";
+import ProductDetail from "./components/frontend/Product/ProductDetail";
+import ProductByCategory from "./components/frontend/Home/ProductByCategory";
+import ProductByBrand from "./components/frontend/Home/ProductByBrand";
+import ProductByFeatured from "./components/frontend/Home/ProductByFeatured/List";
+import ProductBySale from "./components/frontend/Home/ProductBySale";
+import ProductBySearch from "./components/frontend/Home/ProductBySearch";
+import Cart from "./components/frontend/Cart";
 
 
 import axios from "axios";

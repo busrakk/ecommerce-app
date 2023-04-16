@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import ProductItem from "./ProductItem";
-import ProductByFilter from "../ProductByFilter";
-import Subtitle from "../UI/Subtitle";
-import TypeFilter from "../ProductByFilter/TypeFilter";
+import ProductByFilter from "../Home/ProductByFilter";
+import Subtitle from "../../UI/Subtitle";
+import TypeFilter from "../Home/ProductByFilter/TypeFilter";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../redux/services";
+import { getProducts } from "../../../redux/services";
 import {
   getAllProducts,
   getAllProductsStatus,
-} from "../../features/productSlice";
-import { STATUS } from "../../utils/status";
-import Loader from "../Loader";
+} from "../../../features/productSlice";
+import { STATUS } from "../../../utils/status";
+import Loader from "../../Loader";
 // import useDelayCallback from "../helpers/useDelayCallback";
 
 const ProductList = () => {

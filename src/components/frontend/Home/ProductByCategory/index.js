@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProductByFilter from "../ProductByFilter";
-import Subtitle from "../UI/Subtitle";
+import Subtitle from "../../../UI/Subtitle";
 import TypeFilter from "../ProductByFilter/TypeFilter";
 // import useDelayCallback from "../helpers/useDelayCallback";
-import ProductItem from "../Product/ProductItem";
+import ProductItem from "../../Product/ProductItem";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProductByCategory, getAllProductByCategoryStatus } from "../../features/categorySlice";
-import { productByCategory } from "../../redux/services";
-import { STATUS } from "../../utils/status";
-import Loader from "../Loader"
+import { getAllProductByCategory, getAllProductByCategoryStatus } from "../../../../features/categorySlice";
+import { productByCategory } from "../../../../redux/services";
+import { STATUS } from "../../../../utils/status";
+import Loader from "../../../Loader"
 
 const ProductByCategory = () => {
   const {id} = useParams();

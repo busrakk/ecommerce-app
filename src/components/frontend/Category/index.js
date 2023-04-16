@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCategories } from "../../features/categorySlice";
-import { getCategories } from "../../redux/services";
+import { getAllCategories } from "../../../features/categorySlice";
+import { getCategories } from "../../../redux/services";
 // import useDelayCallback from "../helpers/useDelayCallback";
 
-import Title from "../UI/Title";
+import Title from "../../UI/Title";
 import CategoryItem from "./CategoryItem";
 
 const Category = () => {

@@ -98,6 +98,8 @@ export default function AdminProductList() {
   };
 
   return (
+    <>
+    {rows.length > 0 && (
     <Paper sx={{ width: "98%", overflow: "hidden", padding: "12px" }}>
       <Typography
         gutterBottom
@@ -105,7 +107,7 @@ export default function AdminProductList() {
         component="div"
         sx={{ padding: "20px" }}
       >
-        Ürünler Listesi
+        Kategoriler Listesi
       </Typography>
       <Divider />
       <Box height={10} />
@@ -233,5 +235,7 @@ export default function AdminProductList() {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
+    )}
+    </>
   );
 }

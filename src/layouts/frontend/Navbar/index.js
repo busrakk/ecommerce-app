@@ -20,7 +20,7 @@ import {
   getCartItemsCount,
   getCartTotal,
 } from "../../../features/cartSlice";
-import CartModal from "../../../components/CartModal";
+import CartModal from "../../../components/frontend/Cart/CartModal";
 
 const MegaMenu = () => {
   const [open, setOpen] = useState(false);

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { removeFromCart } from "../../features/cartSlice";
+import { removeFromCart } from "../../../../features/cartSlice";
 
 const CartModal = ({ carts, open1, setOpen1 }) => {
   const dispatch = useDispatch();

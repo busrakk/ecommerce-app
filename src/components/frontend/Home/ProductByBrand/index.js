@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProductByFilter from "../ProductByFilter";
-import Subtitle from "../UI/Subtitle";
+import Subtitle from "../../../UI/Subtitle";
 import TypeFilter from "../ProductByFilter/TypeFilter";
 // import useDelayCallback from "../helpers/useDelayCallback";
-import ProductItem from "../Product/ProductItem";
+import ProductItem from "../../Product/ProductItem";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllProductByBrand,
   getAllProductByBrandStatus,
-} from "../../features/brandSlice";
-import { productByBrand } from "../../redux/services";
-import { STATUS } from "../../utils/status";
-import Loader from "../Loader";
+} from "../../../../features/brandSlice";
+import { productByBrand } from "../../../../redux/services";
+import { STATUS } from "../../../../utils/status";
+import Loader from "../../../Loader";
 
 const ProductByBrand = () => {
   const { id } = useParams();

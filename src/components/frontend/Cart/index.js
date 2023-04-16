@@ -2,8 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Item from "./Item";
 import { HiOutlineShoppingBag } from "react-icons/hi";
-import Subtitle from "../UI/Subtitle";
-import { clearCart, getAllCarts } from "../../features/cartSlice";
+import Subtitle from "../../UI/Subtitle";
+import { clearCart, getAllCarts } from "../../../features/cartSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
