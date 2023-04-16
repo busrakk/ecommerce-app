@@ -2,7 +2,7 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getBrands = createAsyncThunk("brands/getbrands", async () => {
-  const res = await axios("/api/allbrand");
+  const res = await axios.post("/api/allbrand");
   return res.data.data;
 });
 

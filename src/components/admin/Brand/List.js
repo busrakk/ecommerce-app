@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import {
   brandListApi,
+  brandDeleteApi
 } from "../../../service/serviceApi";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -22,6 +23,7 @@ import Stack from "@mui/material/Stack";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import useDelayCallback from "../../helpers/useDelayCallback";
+import swal from "sweetalert";
 
 export default function AdminProductList() {
     const [page, setPage] = useState(0);
@@ -55,6 +57,45 @@ export default function AdminProductList() {
     };
   
     const dataRows = filteredRows.length > 0 ? filteredRows : rows;
+
+    const handleDelete = (e, id) => {
+        e.preventDefault();
+        swal({
+            title: "Emin misin?",
+            text: "Bunu geri alamayacaksın",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if(willDelete){
+                brandDeleteApi(id).then((res) => {
+                    if(res.data.success && res.data.status === 'success'){
+                        swal({
+                            title: "Başarılı",
+                            text: res.data.message,
+                            icon: "success",
+                            timer: 2000,
+                            buttons: false
+                        });
+                        deleteData(id);
+                    }else{
+                        swal({
+                            title: "Hata",
+                            text: res.data.message,
+                            icon: "error",
+                            timer: 2000,
+                            buttons: false
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    const deleteData = (removeId) => {
+        const newBrand = dataRows.filter((data) => data.id !== removeId);
+        setRows(newBrand);
+    }
   
     return (
       <>
@@ -174,7 +215,7 @@ export default function AdminProductList() {
                                 cursor: "pointer",
                               }}
                               className="cursor-pointer"
-                              // onClick={(e) => handleDelete(e, row.id)}
+                              onClick={(e) => handleDelete(e, row.id)}
                             />
                           </Stack>
                         </TableCell>
