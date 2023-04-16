@@ -12,6 +12,7 @@ import Profile from "./components/admin/Profile";
 import Product from "./components/admin/Product";
 import Category from "./components/admin/Category";
 import Brand from "./components/admin/Brand";
+import Settings from "./components/admin/Settings";
 
 // user
 import UserRoute from "./protectedRoute/UserRoute";
@@ -73,6 +74,7 @@ function App() {
           <Route path="product" element={<Product />} />
           <Route path="category" element={<Category />} />
           <Route path="brand" element={<Brand />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
         <Route path="*" element={<Page404 />} />
       </Routes>

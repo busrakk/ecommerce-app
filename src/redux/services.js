@@ -49,7 +49,7 @@ export const getProductSearchAsync = createAsyncThunk("productSearch/getproductS
 // user
 
 export const getUserAsync = createAsyncThunk("user/getUser", async () => {
-  const res = await axios("/api/user");
+  const res = await axios.post("/api/user");
   return res.data.data;
 })
 

@@ -14,10 +14,14 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MailIcon from "@mui/icons-material/Mail";
 import TurnedInIcon from '@mui/icons-material/TurnedIn';
+import SettingsIcon from '@mui/icons-material/Settings';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useNavigate } from "react-router-dom";
 import { useAppStore } from "../../appStore";
 import Box from "@mui/material/Box";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import axios from "axios";
+import swal from "sweetalert"
 
 const drawerWidth = 240;
 
@@ -72,9 +76,20 @@ export default function MasterLayout() {
   const theme = useTheme();
   //const [open, setOpen] = React.useState(true);
   const navigate = useNavigate();
-
   //const updateOpen = useAppStore((state) => state.updateOpen);
   const open = useAppStore((state) => state.dopen);
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    axios.post("/api/logout").then((res) => {
+      if (res.data.success) {
+        localStorage.removeItem("auth_token");
+        localStorage.removeItem("auth_name");
+        swal("Success", res.data.message, "success");
+        navigate("/");
+      }
+    });
+  };
 
   return (
     <>
@@ -121,7 +136,6 @@ export default function MasterLayout() {
               />
             </ListItemButton>
           </ListItem>
-          <Divider />
           <ListItem
             disablePadding
             sx={{ display: "block" }}
@@ -148,7 +162,6 @@ export default function MasterLayout() {
               <ListItemText primary="Kategoriler" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          <Divider />
           <ListItem
             disablePadding
             sx={{ display: "block" }}
@@ -175,7 +188,6 @@ export default function MasterLayout() {
               <ListItemText primary="Markalar" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          <Divider />
           <ListItem
             disablePadding
             sx={{ display: "block" }}
@@ -200,6 +212,56 @@ export default function MasterLayout() {
                 <ShoppingCartIcon />
               </ListItemIcon>
               <ListItemText primary="Ürünler" sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem
+            disablePadding
+            sx={{ display: "block" }}
+            onClick={() => {
+              navigate("/admin/settings");
+            }}
+          >
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <SettingsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Ayarlar" sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem
+            disablePadding
+            sx={{ display: "block" }}
+            onClick={handleLogout}
+          >
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <ExitToAppIcon />
+              </ListItemIcon>
+              <ListItemText primary="Çıkış Yap" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
         </List>
