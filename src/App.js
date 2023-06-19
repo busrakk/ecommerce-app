@@ -32,6 +32,7 @@ import ProductBySearch from "./components/frontend/Home/ProductBySearch";
 import Cart from "./components/frontend/Cart";
 
 import axios from "axios";
+import UserProfile from "./components/User/UserProfile";
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_ROOT_URL;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.headers.post["Accept"] = "application/json";
@@ -59,8 +60,9 @@ function App() {
           <Route path="cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="users/:id" element={<UserProfile />} />
           <Route element={<UserRoute />}>
-            <Route path="profile/info" element={<User />} /> 
+            <Route path="profile/info" element={<User />} />
             <Route path="profile/edit" element={<UserEdit />} />
             <Route path="profile/add-product" element={<AddProduct />} />
             <Route path="profile/list-product" element={<UserProductList />} />

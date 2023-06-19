@@ -69,8 +69,6 @@ const ProductDetail = () => {
     dispatch(setCartMessageOn(true));
   };
 
-  // console.log(product?.['user']?.name)
-
   return (
     <div>
       {product && (
@@ -100,9 +98,13 @@ const ProductDetail = () => {
                   ${product?.special_price}
                 </p>
                 {product.in_stock ? (
-                  <span className="text-green-600 font-medium">Stokta</span>
+                  <span className="text-green-600 font-medium text-xl">
+                    Stokta
+                  </span>
                 ) : (
-                  <span className="text-red-600 font-medium">Tükendi</span>
+                  <span className="text-red-600 font-medium text-xl">
+                    Tükendi
+                  </span>
                 )}
               </div>
               <div className="space-y-2 mt-4">
@@ -110,9 +112,12 @@ const ProductDetail = () => {
                   <span className="text-gray-800 font-semibold">
                     {product?.type ? "Ürünü Satan:" : "Ürünü Arayan:"}{" "}
                   </span>
-                  <span className="text-gray-600">
+                  <Link
+                    to={`/users/${product?.["user"]?.id}`}
+                    className="text-indigo-600 underline text-lg font-semibold hover:text-indigo-400"
+                  >
                     {product?.["user"]?.name}
-                  </span>
+                  </Link>
                 </p>
                 <p className="space-x-2">
                   <span className="text-gray-800 font-semibold">Marka: </span>
@@ -145,7 +150,7 @@ const ProductDetail = () => {
                         </button>
                         <input
                           type="number"
-                          className="focus:outline-none text-center w-full bg-gray-50 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
+                          className="focus:outline-none text-center w-full bg-gray-50 font-semibold text-md hover:text-black focus:text-black flex items-center text-gray-700  outline-none"
                           name="custom-input-number"
                           value={quantity}
                         />
