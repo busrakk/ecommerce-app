@@ -1,25 +1,40 @@
 import React from "react";
 import { TbCategory } from "react-icons/tb";
+import "./style.css"
 
-const TypeFilter = () => {
+const TypeFilter = ({ handleSort }) => {
   return (
     <div className="flex items-center mb-4">
-      <select
-        name="sort"
-        id="sort"
-        className="w-44 text-sm text-gray-600 py-3 px-4 border-gray-300 shadow-sm rounded focus:ring-primary focus:border-primary"
+      <button
+        className="button-filter"
+        onClick={() => handleSort("name", "asc")}
       >
-        <option value="">Default sorting</option>
-        <option value="price-low-to-high">Price low to high</option>
-        <option value="price-high-to-low">Price high to low</option>
-        <option value="latest">Latest product</option>
-      </select>
+        Sort by Name (A-Z)
+      </button>
+      <button
+        className="button-filter"
+        onClick={() => handleSort("name", "desc")}
+      >
+        Sort by Name (Z-A)
+      </button>
+      <button
+        className="button-filter"
+        onClick={() => handleSort("price", "asc")}
+      >
+        Sort by Price (Low to High)
+      </button>
+      <button
+        className="button-filter"
+        onClick={() => handleSort("price", "desc")}
+      >
+        Sort by Price (High to Low)
+      </button>
 
       <div className="flex gap-2 ml-auto">
-        <div className="border border-primary w-10 h-9 flex items-center justify-center text-white bg-primary rounded cursor-pointer">
+        <div className="icon-filter border-primary text-white bg-primary">
           <TbCategory />
         </div>
-        <div className="border border-gray-300 w-10 h-9 flex items-center justify-center text-gray-600 rounded cursor-pointer">
+        <div className="icon-filter border-gray-300 text-gray-600">
           <TbCategory />
         </div>
       </div>

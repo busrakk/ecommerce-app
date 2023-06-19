@@ -25,6 +25,11 @@ export const brandDeleteApi = async (id, payload = []) => {
 
 //
 
+export const getProductListApi = async (payload = []) => {
+    return sendRequest(POST, '/api/allproduct', payload);
+}
+
+
 export const productSaveApi = async (payload = []) => {
     return sendRequest(POST, '/api/product-save', payload);
 }

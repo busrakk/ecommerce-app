@@ -1,39 +1,50 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ProductItem from "./ProductItem";
 import ProductByFilter from "../Home/ProductByFilter";
 import Subtitle from "../../UI/Subtitle";
 import TypeFilter from "../Home/ProductByFilter/TypeFilter";
-import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../../redux/services";
-import {
-  getAllProducts,
-  getAllProductsStatus,
-} from "../../../features/productSlice";
-import { STATUS } from "../../../utils/status";
 import Loader from "../../Loader";
-// import useDelayCallback from "../helpers/useDelayCallback";
+// import useDelayCallback from "../../helpers/useDelayCallback";
+import { getProductListApi } from "../../../service/serviceApi";
+import axios from "axios";
 
 const ProductList = () => {
-  const products = useSelector(getAllProducts);
-  const productStatus = useSelector(getAllProductsStatus);
-  const dispatch = useDispatch();
+  const [product, setProduct] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // randomizing the products in the list
-  const tempProducts = [];
-  if (products.length > 0) {
-    for (let i in products) {
-      let randomIndex = Math.floor(Math.random() * products.length);
-
-      while (tempProducts.includes(products[randomIndex])) {
-        randomIndex = Math.floor(Math.random() * products.length);
-      }
-      tempProducts[i] = products[randomIndex];
-    }
-  }
-
+  // useDelayCallback(() => {
+  //   getProductList();
+  // }, []);
   useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+    getProductList();
+  }, []);
+
+  const getProductList = () => {
+    getProductListApi().then((res) => {
+      if (res.data.success) {
+        if (res.data.status === "success") {
+          setIsLoading(false);
+          setProduct(res.data.data);
+        }
+      } else {
+        setProduct([]);
+      }
+    });
+  };
+
+  const handleSort = async (sortBy, sortOrder) => {
+    try {
+      const response = await axios.get("/api/sorting", {
+        params: {
+          sortBy,
+          sortOrder,
+        },
+      });
+      setProduct(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="mx-16 mt-24">
@@ -42,13 +53,13 @@ const ProductList = () => {
         <ProductByFilter />
 
         <div className="col-span-3">
-          <TypeFilter />
+          <TypeFilter handleSort={handleSort} />
 
-          {productStatus === STATUS.LOADING ? (
+          {isLoading ? (
             <Loader />
           ) : (
             <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-6">
-              {tempProducts.map((item, key) => (
+              {product.map((item, key) => (
                 <ProductItem key={key} item={item} />
               ))}
             </div>
