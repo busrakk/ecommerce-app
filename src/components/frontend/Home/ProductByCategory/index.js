@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductByFilter from "../ProductByFilter";
 import Subtitle from "../../../UI/Subtitle";
@@ -19,10 +19,15 @@ const ProductByCategory = () => {
   const dispatch = useDispatch();
   const categoryProducts = useSelector(getAllProductByCategory);
   const categoryProductsStatus = useSelector(getAllProductByCategoryStatus);
+  const [isThreeColumn, setIsThreeColumn] = useState(true);
 
   useEffect(() => {
     dispatch(productByCategory(id));
   }, [dispatch, id]);
+
+  const toggleColumnLayout = () => {
+    setIsThreeColumn((prevState) => !prevState);
+  };
 
   return (
     <div className="mx-16 mt-24">
@@ -31,11 +36,19 @@ const ProductByCategory = () => {
         <ProductByFilter />
 
         <div className="col-span-3">
-          <TypeFilter />
+          <TypeFilter
+            isThreeColumn={isThreeColumn}
+            toggleColumnLayout={toggleColumnLayout}
+          />
+
           {categoryProductsStatus === STATUS.LOADING ? (
             <Loader />
           ) : (
-            <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-6">
+            <div
+              className={`grid grid-cols-1 ${
+                isThreeColumn ? "xl:grid-cols-3" : "xl:grid-cols-4"
+              } lg:grid-cols-2 sm:grid-cols-2 gap-6`}
+            >
               {categoryProducts &&
                 categoryProducts.map((item, key) => (
                   <ProductItem key={key} item={item} />

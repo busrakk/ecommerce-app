@@ -68,7 +68,7 @@ const MegaMenu = () => {
           </div>
         </div>
 
-        <div className="w-[850px] z-50 flex justify-center">
+        <div className="w-[850px] z-50 justify-center md:flex hidden">
           <SearchBar />
         </div>
 

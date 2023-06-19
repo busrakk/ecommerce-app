@@ -11,6 +11,7 @@ import axios from "axios";
 const ProductList = () => {
   const [product, setProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isThreeColumn, setIsThreeColumn] = useState(true);
 
   // useDelayCallback(() => {
   //   getProductList();
@@ -46,6 +47,10 @@ const ProductList = () => {
     }
   };
 
+  const toggleColumnLayout = () => {
+    setIsThreeColumn((prevState) => !prevState);
+  };
+
   return (
     <div className="mx-16 mt-24">
       <Subtitle>Ürünler</Subtitle>
@@ -53,12 +58,20 @@ const ProductList = () => {
         <ProductByFilter />
 
         <div className="col-span-3">
-          <TypeFilter handleSort={handleSort} />
+          <TypeFilter
+            handleSort={handleSort}
+            isThreeColumn={isThreeColumn}
+            toggleColumnLayout={toggleColumnLayout}
+          />
 
           {isLoading ? (
             <Loader />
           ) : (
-            <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-6">
+            <div
+              className={`grid grid-cols-1 ${
+                isThreeColumn ? "xl:grid-cols-3" : "xl:grid-cols-4"
+              } lg:grid-cols-2 sm:grid-cols-2 gap-6`}
+            >
               {product.map((item, key) => (
                 <ProductItem key={key} item={item} />
               ))}

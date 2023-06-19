@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../../features/cartSlice";
 // import moment from "moment";
 
-const ProductItem = ({ item }) => {
+const ProductItem = ({ item, isThreeColumn }) => {
   const [quantity] = useState(1);
   const dispatch = useDispatch();
 
@@ -21,9 +21,11 @@ const ProductItem = ({ item }) => {
   //console.log(item)
 
   return (
-    <div className="group group-hover:bg-opacity-10 transition duration-500 relative transform  hover:scale-105 shadow-md bg-gray-50 sm:p-25 py-28 px-10 flex justify-center items-center">
+    <div className={`group group-hover:bg-opacity-10 transition duration-500 relative transform  hover:scale-105 shadow-md bg-gray-50 sm:p-25 py-28 px-10 flex justify-center items-center`}>
       <img
-        className="group-hover:opacity-60 w-[250px] h-[180px] transition duration-500"
+        className={`group-hover:opacity-60 transition duration-500 ${
+          isThreeColumn ? "w-[250px] h-[180px]" : "w-[200px] h-[100px]"
+        }`}
         src={item.image}
         alt={item.name}
       />

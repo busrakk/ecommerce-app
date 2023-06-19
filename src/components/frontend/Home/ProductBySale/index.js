@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ProductItem from "../../Product/ProductItem";
 import ProductByFilter from "../ProductByFilter";
 import Subtitle from "../../../UI/Subtitle";
@@ -17,6 +17,7 @@ const ProductBySale = () => {
   const productSell = useSelector(getProductSell);
   const productSellStatus = useSelector(getProductSellStatus);
   const dispatch = useDispatch();
+  const [isThreeColumn, setIsThreeColumn] = useState(true);
 
   useEffect(() => {
     dispatch(getProductSaleAsync());
@@ -35,6 +36,10 @@ const ProductBySale = () => {
     }
   }
 
+  const toggleColumnLayout = () => {
+    setIsThreeColumn((prevState) => !prevState);
+  };
+
   return (
     <div className="mx-16 mt-24">
       <Subtitle>Ürünler</Subtitle>
@@ -42,14 +47,25 @@ const ProductBySale = () => {
         <ProductByFilter />
 
         <div className="col-span-3">
-          <TypeFilter />
+          <TypeFilter
+            isThreeColumn={isThreeColumn}
+            toggleColumnLayout={toggleColumnLayout}
+          />
 
           {productSellStatus === STATUS.LOADING ? (
             <Loader />
           ) : (
-            <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 gap-6">
+            <div
+              className={`grid grid-cols-1 ${
+                isThreeColumn ? "xl:grid-cols-3" : "xl:grid-cols-4"
+              } lg:grid-cols-2 sm:grid-cols-2 gap-6`}
+            >
               {tempProductsSell.map((item, key) => (
-                <ProductItem key={key} item={item} />
+                <ProductItem
+                  key={key}
+                  item={item}
+                  isThreeColumn={isThreeColumn}
+                />
               ))}
             </div>
           )}
