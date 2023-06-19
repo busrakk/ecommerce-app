@@ -11,6 +11,9 @@ import {
 import { getProductSingle } from "../../../redux/services";
 import { STATUS } from "../../../utils/status";
 import Loader from "../../Loader";
+import { addToCartApi } from "../../../service/serviceApi";
+import axios from "axios";
+import swal from "sweetalert";
 import {
   addToCart,
   getCartMessageStatus,

@@ -24,26 +24,26 @@ const HomeSlider = () => {
   };
 
   return (
-    <div className="relative h-auto md:h-[580px] before:bg-gradient-to-r before:from-black before:to-transparent before:absolute before:inset-0 before:w-full before:h-full before:z-10">
+    <div className="relative h-auto mt-[100px] md:h-[450px] before:bg-gradient-to-r before:from-black before:to-transparent before:absolute before:inset-0 before:w-full before:h-full before:z-10">
       {windowWidth >= 768 && (
         <Slider {...settings}>
           <div>
             <img
-              className="w-full h-[580px] object-cover"
+              className="w-full h-[450px] object-cover"
               src={slider1}
               alt=""
             />
           </div>
           <div>
             <img
-              className="w-full h-[580px] object-cover"
+              className="w-full h-[450px] object-cover"
               src={slider2}
               alt=""
             />
           </div>
           <div>
             <img
-              className="w-full h-[580px] object-cover"
+              className="w-full h-[450px] object-cover"
               src={slider3}
               alt=""
             />
@@ -57,14 +57,21 @@ const HomeSlider = () => {
             <h1 className="font text-3xl font-bold uppercase tracking-tight text-white sm:text-5xl">
               hoşgeldİnİz
             </h1>
-            <p className="mt-4 text-2xl text-gray-300">
-              Milyonlarca satılan ürünler, aranan ürünler, kısaca keşfedilecek bütün ilanlar...
-            </p>
+            <div className="flex flex-col mt-4">
+              <p className="text-xl text-gray-300 mt-4">
+                <span>Tek Bir Platformda</span>
+              </p>
+              <p className="text-2xl text-gray-300 mt-2">
+                <span>
+                  Hem Ürün Aramak Hem de Ürün Satmak İster Misiniz ...
+                </span>
+              </p>
+            </div>
           </div>
           <div className="flex mt-10">
             <Link to="/productlist">
               <button className="inline-block rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-center font-medium text-white hover:bg-indigo-700">
-              Şimdi keşfedin
+                Şimdi keşfedin
               </button>
             </Link>
           </div>

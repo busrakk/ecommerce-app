@@ -29,6 +29,10 @@ export const productSaveApi = async (payload = []) => {
     return sendRequest(POST, '/api/product-save', payload);
 }
 
+export const productUpdateApi = async (id, payload = []) => {
+    return sendRequest(POST, `/api/product-update/${id}`, payload);
+}
+
 export const productDetailsApi = async (payload = []) => {
     return sendRequest(POST, `/api/product-details`, payload);
 }
@@ -43,4 +47,8 @@ export const productDeleteApi = async (id, payload = []) => {
 
 export const categoryDropdownApi = async (payload = []) => {
     return sendRequest(POST, '/api/category-dropdown-list', payload);
+}
+
+export const addToCartApi = async (id, payload = []) => {
+    return sendRequest(POST, '/api/add-to-cart', payload);
 }

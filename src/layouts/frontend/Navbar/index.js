@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import useDelayCallback from "../../../components/helpers/useDelayCallback";
-import MenuLinks from "./MenuLinks";
+import MenuLinks from "../Menu/MenuLinks";
 import { HiOutlineShoppingBag, HiOutlineUser } from "react-icons/hi";
 import {
   RiUserLine,
@@ -21,6 +21,7 @@ import {
   getCartTotal,
 } from "../../../features/cartSlice";
 import CartModal from "../../../components/frontend/Cart/CartModal";
+import SearchBar from "./SearchBar";
 
 const MegaMenu = () => {
   const [open, setOpen] = useState(false);
@@ -53,11 +54,11 @@ const MegaMenu = () => {
 
   return (
     <nav className="bg-white fixed z-50 w-full top-0">
-      <div className="flex items-center font-medium shadow-lg justify-between">
-        <div className="z-50 p-4 md:w-auto w-full flex justify-between">
+      <div className="flex items-center font-medium shadow-sm justify-between">
+        <div className=" p-4 md:w-auto w-full flex justify-between">
           <Link to="/" className="flex items-center ml-6">
-            <RiShoppingBasketLine size={32} className="text-gray-900" />
-            <span className="ml-2 text-2xl font-bold uppercase text-gray-900">
+            <RiShoppingBasketLine size={40} className="text-gray-900" />
+            <span className="ml-4 text-2xl font-bold uppercase text-gray-900">
               Shopper
             </span>
           </Link>
@@ -66,45 +67,33 @@ const MegaMenu = () => {
             <ion-icon name={`${open ? "close" : "menu"}`}></ion-icon>
           </div>
         </div>
-        <ul className="md:flex hidden z-50 uppercase text-sm items-center gap-2 font-semibold">
-          {/* <li>
-            <Link to="/" className="py-7 px-3 inline-block">
-              Home
-            </Link>
-          </li> */}
-          <MenuLinks categories={categories} />
-          <li>
-            <Link to="/product/sale" className="py-7 px-3 inline-block">
-              Satılan Ürünler
-            </Link>
-          </li>
-          <li>
-            <Link to="/product/search" className="py-7 px-3 inline-block">
-              Aranan Ürünler
-            </Link>
-          </li>
-          <li>
-            <Link to="/product/featured" className="py-7 px-3 inline-block">
-              Öne Çıkan Ürünler
-            </Link>
-          </li>
-        </ul>
+
+        <div className="w-[850px] z-50 flex justify-center">
+          <SearchBar />
+        </div>
+
         <div className="flex flex-row space-x-4 mr-6">
           <div className="md:block hidden">
             {!localStorage.getItem("auth_token") ? (
               <>
                 <div className="ml-2 flex space-x-1">
-                  <button onClick={() => setOpen1(!open1)} className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100">
+                  <button
+                    onClick={() => setOpen1(!open1)}
+                    className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100"
+                  >
                     <div className="relative">
                       <HiOutlineShoppingBag size={25} />
                       <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-white">
                         {itemsCount}
                       </span>
-                      <CartModal carts={carts} open1={open1} setOpen1={setOpen1} />
+                      <CartModal
+                        carts={carts}
+                        open1={open1}
+                        setOpen1={setOpen1}
+                      />
                     </div>
                     <span className="text-sm font-normal">Sepetim</span>
                   </button>
-
                   <div
                     className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100"
                     onClick={() => setOpen(!open)}
@@ -148,13 +137,20 @@ const MegaMenu = () => {
             ) : (
               <>
                 <div className="ml-2 flex space-x-1">
-                  <button onClick={() => setOpen1(!open1)} className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100">
+                  <button
+                    onClick={() => setOpen1(!open1)}
+                    className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100"
+                  >
                     <div className="relative">
                       <HiOutlineShoppingBag size={25} />
                       <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-white">
                         {itemsCount}
                       </span>
-                      <CartModal carts={carts} open1={open1} setOpen1={setOpen1} />
+                      <CartModal
+                        carts={carts}
+                        open1={open1}
+                        setOpen1={setOpen1}
+                      />
                     </div>
                     <span className="text-sm font-normal">Sepetim</span>
                   </button>

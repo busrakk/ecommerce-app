@@ -4,7 +4,7 @@ import { AiOutlineHome, AiOutlineRight } from "react-icons/ai";
 
 const Subtitle = ({ children }) => {
   return (
-    <div className="py-4 flex items-center gap-3 mt-24">
+    <div className="py-4 flex items-center gap-3 mt-32">
       <Link to="/" className="text-primary text-base">
         <AiOutlineHome />
       </Link>

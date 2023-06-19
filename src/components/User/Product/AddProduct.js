@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import swal from "sweetalert";
 import Switch from "./elements/Switch";
 import useDelayCallBack from "../../helpers/useDelayCallback";
-import { productSaveApi, productDetailsApi } from "../../../service/serviceApi";
+import {
+  productSaveApi,
+  productDetailsApi,
+  productUpdateApi,
+} from "../../../service/serviceApi";
 import Select from "react-select";
 import Loader from "../../Loader";
 
@@ -99,6 +103,36 @@ const AddProduct = (props) => {
           setProductInput({ ...productInput, error_list: res.data.errors });
         } else {
           swal({
+            title: "Hata",
+            text: res.data.message,
+            icon: "error",
+            timer: 2000,
+            buttons: false,
+          });
+        }
+      }
+      setIsLoading(false);
+    });
+  };
+
+  const handleUpdate = (formData) => {
+    productUpdateApi(props.productId, formData).then((res) => {
+      if (res.data.success) {
+        if (res.data.status === "success") {
+          swal({
+            title: "Success",
+            text: res.data.message,
+            icon: "success",
+            timer: 2000,
+            buttons: false,
+          });
+          props.onClose("success");
+        }
+      } else {
+        if (res.data.status === "validation-error") {
+          setProductInput({ ...productInput, error_list: res.data.errors });
+        } else {
+          swal({
             title: "Error",
             text: res.data.message,
             icon: "error",
@@ -131,7 +165,7 @@ const AddProduct = (props) => {
     formData.append("type", productInput.type === true ? 1 : 0);
 
     if (props.productId !== 0) {
-      // handleUpdate(formData);
+      handleUpdate(formData);
     } else {
       handleCreate(formData);
     }
@@ -291,14 +325,14 @@ const AddProduct = (props) => {
                   <div className="w-full lg:w-4/12 px-4">
                     <div className="relative w-full mb-3">
                       <label className="text-sm text-gray-900">
-                        Ürün Resmi 1
+                        Ürün Resmi
                       </label>
                       <div className="w-full inline-flex border">
                         <input
                           type="file"
                           name="image"
                           onChange={handleImage}
-                          accept="image/*"
+                          accept="image/png, image/jpg, image/jpeg"
                           className="form-control w-11/12 focus:outline-none focus:text-gray-600 p-2"
                         />
                         <span className="text-danger">
@@ -306,16 +340,15 @@ const AddProduct = (props) => {
                         </span>
                       </div>
                     </div>
-                    {productInput.oldImage != null &&
-                          picture.length === 0 && (
-                            <div>
-                              <img
-                                style={{ maxWidth: "40px" }}
-                                src={`${process.env.REACT_APP_BACKEND_ROOT_URL}/uploads/images/product${productInput.oldImage}`}
-                                alt=""
-                              />
-                            </div>
-                          )}
+                    {productInput.oldImage !== null && picture.length === 0 && (
+                      <div>
+                        <img
+                          style={{ maxWidth: "40px" }}
+                          src={`${process.env.REACT_APP_BACKEND_ROOT_URL}${productInput.oldImage}`}
+                          alt=""
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
 

@@ -10,7 +10,7 @@ const [open, setOpen] = useState(false);
       <div>
         <div className="px-3 text-left md:cursor-pointer group">
           <h1
-            className="py-7 flex justify-between items-center md:pr-0 pr-5 group"
+            className="py-2 flex justify-between items-center md:pr-0 pr-5 group"
             onClick={() => setOpen(!open)}
           >
             Kategoriler
@@ -23,7 +23,7 @@ const [open, setOpen] = useState(false);
           </h1>
           {categories.map((link) => (
             <div key={link.id} >
-              <div className="absolute top-20 hidden group-hover:md:block hover:md:block">
+              <div className="absolute top-6 hidden group-hover:md:block hover:md:block">
                 <div className="py-3">
                   <div
                     className="w-4 h-4 left-3 absolute 
