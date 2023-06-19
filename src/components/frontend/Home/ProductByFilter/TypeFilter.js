@@ -31,7 +31,7 @@ const TypeFilter = (props) => {
         Sort by Price (High to Low)
       </button>
 
-      <div className="flex gap-2 ml-auto">
+      <div className="flex gap-2 ml-auto my-2">
         <button
           className={`mr-2 icon-filter  px-3 py-1 rounded ${
             props.isThreeColumn

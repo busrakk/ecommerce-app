@@ -43,10 +43,10 @@ const ProductBySale = () => {
   return (
     <div className="mx-16 mt-24">
       <Subtitle>Ürünler</Subtitle>
-      <div className="grid grid-cols-4 gap-6 pt-4 pb-16 items-start">
+      <div className="grid md:grid-cols-5 grid-cols-1 pt-4 pb-16 items-start space-x-4">
         <ProductByFilter />
 
-        <div className="col-span-3">
+        <div className="col-span-4">
           <TypeFilter
             isThreeColumn={isThreeColumn}
             toggleColumnLayout={toggleColumnLayout}
