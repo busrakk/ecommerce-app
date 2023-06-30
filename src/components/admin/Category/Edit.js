@@ -151,7 +151,7 @@ const Edit = (props) => {
         <form onSubmit={handleSubmit}>
           <Box sx={{ m: 2 }} />
           <Typography id="modal-modal-title" variant="h5" align="center">
-            Kategori Ekle
+            Kategori Düzenle
           </Typography>
           <IconButton
             style={{ position: "absolute", top: "0", right: "0" }}

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { categoryInsertApi } from "../../../service/serviceApi";
+import React, { useState } from "react";
 import swal from "sweetalert";
 import {
   Box,
@@ -16,6 +15,8 @@ import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/material/styles";
+import useDelayCallback from "../../helpers/useDelayCallback";
+import { brandFindApi, brandUpdateApi } from "../../../service/serviceApi";
 import Loading from "../../Loader/Loading";
 
 const ImagePreview = styled("img")({
@@ -23,27 +24,57 @@ const ImagePreview = styled("img")({
   maxHeight: "50%",
 });
 
-const Add = (props) => {
+const Edit = (props) => {
   const initialData = {
     name: "",
     status: true,
     featured: false,
-    oldImage: null,
+    oldLogo: null,
     error_list: [],
   };
 
-  const [categoryInput, setCategoryInput] = useState(initialData);
+  const [brandInput, setBrandInput] = useState(initialData);
   const [status, setStatus] = useState(true);
   const [featured, setFeatured] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [error_list, setErrorList] = useState([]);
 
-  useEffect(() => {
-    setTimeout(setIsLoading(false));
-  }, []);
+  useDelayCallback(() => {
+    getCurrentData(props.brandId);
+  }, [props.brandId]);
+
+  const getCurrentData = (id) => {
+    brandFindApi(id, []).then((res) => {
+      if (res.data.success) {
+        if (res.data.status === "success") {
+          setBrandInput(res.data.data);
+          setStatus(res.data.data.status === 1 ? true : false);
+          setFeatured(res.data.data.featured === 1 ? true : false);
+          setIsLoading(false);
+        } else {
+          swal({
+            title: "Error",
+            text: res.data.message,
+            icon: "error",
+            timer: 2000,
+            buttons: false,
+          });
+        }
+      } else {
+        swal({
+          title: "Error",
+          text: res.data.message,
+          icon: "error",
+          timer: 2000,
+          buttons: false,
+        });
+      }
+    });
+  };
 
   const handleInput = (e) => {
     e.persist();
-    setCategoryInput({ ...categoryInput, [e.target.name]: e.target.value });
+    setBrandInput({ ...brandInput, [e.target.name]: e.target.value });
   };
 
   const handleStatus = () => {
@@ -55,14 +86,14 @@ const Add = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setCategoryInput({ ...categoryInput, error_list: [] });
+    setBrandInput({ ...brandInput, error_list: [] });
     const data = {
-      name: categoryInput.name,
+      name: brandInput.name,
       status: status,
       featured: featured,
     };
 
-    categoryInsertApi(data).then((res) => {
+    brandUpdateApi(props.brandId, data).then((res) => {
       if (res.data.success) {
         if (res.data.status === "success") {
           swal({
@@ -76,7 +107,7 @@ const Add = (props) => {
         }
       } else {
         if (res.data.status === "validation-error") {
-          setCategoryInput({ ...categoryInput, error_list: res.data.errors });
+          setErrorList(res.data.errors);
         } else {
           swal({
             title: "Error",
@@ -92,7 +123,7 @@ const Add = (props) => {
     props.closeEvent();
   };
 
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedLogo, setSelectedLogo] = useState(null);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -101,7 +132,7 @@ const Add = (props) => {
       const reader = new FileReader();
 
       reader.onloadend = () => {
-        setSelectedImage(reader.result);
+        setSelectedLogo(reader.result);
       };
 
       reader.readAsDataURL(file);
@@ -115,7 +146,7 @@ const Add = (props) => {
         <form onSubmit={handleSubmit}>
           <Box sx={{ m: 2 }} />
           <Typography id="modal-modal-title" variant="h5" align="center">
-            Kategori Ekle
+            Marka Düzenle
           </Typography>
           <IconButton
             style={{ position: "absolute", top: "0", right: "0" }}
@@ -128,23 +159,21 @@ const Add = (props) => {
             <Grid item xs={12}>
               <TextField
                 id="outlined-basic"
-                label="Kategori Adı"
+                label="Marka Adı"
                 variant="outlined"
                 size="small"
                 sx={{ minWidth: "100%" }}
                 name="name"
                 onChange={handleInput}
-                value={categoryInput.name}
+                value={brandInput.name}
               />
-              <span className="text-red-500">
-                {categoryInput.error_list.name}
-              </span>
+              <span className="text-red-500">{error_list.name}</span>
             </Grid>
             <Grid item xs={12}>
               <Card>
                 <CardContent>
                   <Typography variant="h6" gutterBottom>
-                    Resim Seç
+                    Logo Seç
                   </Typography>
                   <input
                     accept="image/*"
@@ -158,9 +187,9 @@ const Add = (props) => {
                       Choose File
                     </Button>
                   </label>
-                  {selectedImage && (
+                  {selectedLogo && (
                     <div>
-                      <ImagePreview src={selectedImage} alt="Selected" />
+                      <ImagePreview src={selectedLogo} alt="Selected" />
                     </div>
                   )}
                 </CardContent>
@@ -189,7 +218,7 @@ const Add = (props) => {
             <Grid item xs={12}>
               <Typography variant="h5" align="center">
                 <Button variant="contained" type="submit">
-                  Kaydet
+                  Güncelle
                 </Button>
               </Typography>
             </Grid>
@@ -201,4 +230,4 @@ const Add = (props) => {
   );
 };
 
-export default Add;
+export default Edit;

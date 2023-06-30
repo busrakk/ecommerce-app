@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { categoryInsertApi } from "../../../service/serviceApi";
+import { brandInsertApi } from "../../../service/serviceApi";
 import swal from "sweetalert";
 import {
   Box,
@@ -32,7 +32,7 @@ const Add = (props) => {
     error_list: [],
   };
 
-  const [categoryInput, setCategoryInput] = useState(initialData);
+  const [brandInput, setBrandInput] = useState(initialData);
   const [status, setStatus] = useState(true);
   const [featured, setFeatured] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -43,7 +43,7 @@ const Add = (props) => {
 
   const handleInput = (e) => {
     e.persist();
-    setCategoryInput({ ...categoryInput, [e.target.name]: e.target.value });
+    setBrandInput({ ...brandInput, [e.target.name]: e.target.value });
   };
 
   const handleStatus = () => {
@@ -55,14 +55,14 @@ const Add = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setCategoryInput({ ...categoryInput, error_list: [] });
+    setBrandInput({ ...brandInput, error_list: [] });
     const data = {
-      name: categoryInput.name,
+      name: brandInput.name,
       status: status,
       featured: featured,
     };
 
-    categoryInsertApi(data).then((res) => {
+    brandInsertApi(data).then((res) => {
       if (res.data.success) {
         if (res.data.status === "success") {
           swal({
@@ -76,7 +76,7 @@ const Add = (props) => {
         }
       } else {
         if (res.data.status === "validation-error") {
-          setCategoryInput({ ...categoryInput, error_list: res.data.errors });
+          setBrandInput({ ...brandInput, error_list: res.data.errors });
         } else {
           swal({
             title: "Error",
@@ -92,16 +92,16 @@ const Add = (props) => {
     props.closeEvent();
   };
 
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedLogo, setSelectedLogo] = useState(null);
 
-  const handleImageUpload = (event) => {
+  const handleLogoUpload = (event) => {
     const file = event.target.files[0];
 
     if (file) {
       const reader = new FileReader();
 
       reader.onloadend = () => {
-        setSelectedImage(reader.result);
+        setSelectedLogo(reader.result);
       };
 
       reader.readAsDataURL(file);
@@ -115,7 +115,7 @@ const Add = (props) => {
         <form onSubmit={handleSubmit}>
           <Box sx={{ m: 2 }} />
           <Typography id="modal-modal-title" variant="h5" align="center">
-            Kategori Ekle
+            Marka Ekle
           </Typography>
           <IconButton
             style={{ position: "absolute", top: "0", right: "0" }}
@@ -128,29 +128,29 @@ const Add = (props) => {
             <Grid item xs={12}>
               <TextField
                 id="outlined-basic"
-                label="Kategori Adı"
+                label="Marka Adı"
                 variant="outlined"
                 size="small"
                 sx={{ minWidth: "100%" }}
                 name="name"
                 onChange={handleInput}
-                value={categoryInput.name}
+                value={brandInput.name}
               />
               <span className="text-red-500">
-                {categoryInput.error_list.name}
+                {brandInput.error_list.name}
               </span>
             </Grid>
             <Grid item xs={12}>
               <Card>
                 <CardContent>
                   <Typography variant="h6" gutterBottom>
-                    Resim Seç
+                    Logo Seç
                   </Typography>
                   <input
                     accept="image/*"
                     id="image-input"
                     type="file"
-                    onChange={handleImageUpload}
+                    onChange={handleLogoUpload}
                     style={{ display: "none" }}
                   />
                   <label htmlFor="image-input">
@@ -158,9 +158,9 @@ const Add = (props) => {
                       Choose File
                     </Button>
                   </label>
-                  {selectedImage && (
+                  {selectedLogo && (
                     <div>
-                      <ImagePreview src={selectedImage} alt="Selected" />
+                      <ImagePreview src={selectedLogo} alt="Selected" />
                     </div>
                   )}
                 </CardContent>
