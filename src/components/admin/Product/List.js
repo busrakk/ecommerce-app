@@ -129,13 +129,14 @@ export default function List() {
             <Autocomplete
               id="product-select"
               sx={{ width: 300 }}
-              options={rows.map((row) => row.name)}
+              options={[...new Set(rows.map((row) => row?.["user"]?.name))]} 
+              // options={rows.map((row) => row?.["user"]?.name)}
               renderInput={(params) => (
-                <TextField {...params} label="Ürün Filtrele" margin="dense" />
+                <TextField {...params} label="Kullanıcı Filtrele" margin="dense" />
               )}
               onChange={(event, value) => {
                 if (value) {
-                  const filteredRows = rows.filter((row) => row.name === value);
+                  const filteredRows = rows.filter((row) => row?.["user"]?.name === value);
                   setFilteredRows(filteredRows);
                 } else {
                   setFilteredRows([]);

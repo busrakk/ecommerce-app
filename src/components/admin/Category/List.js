@@ -24,7 +24,22 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import swal from "sweetalert";
 import useDelayCallback from "../../helpers/useDelayCallback";
-import Loader from "../../Loader"
+import Loader from "../../Loader";
+import Modal from "@mui/material/Modal";
+import Add from "./Add";
+import Edit from "./Edit";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 export default function List() {
   const [page, setPage] = useState(0);
@@ -32,6 +47,13 @@ export default function List() {
   const [rows, setRows] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filteredRows, setFilteredRows] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [categoryId, setCategoryId] = useState(0);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const handleEditOpen = () => setEditOpen(true);
+  const handleEditClose = () => setEditOpen(false);
 
   useDelayCallback(() => {
     getCategoryList();
@@ -98,146 +120,192 @@ export default function List() {
     setRows(newCategory);
   };
 
+  const handleUpdate = (newCategoryId = 0) => {
+    setCategoryId(newCategoryId);
+    handleEditOpen();
+  };
+
   return (
     <>
-    {isLoading && <Loader />}
-    {rows.length > 0 && (
-    <Paper sx={{ width: "98%", overflow: "hidden", padding: "12px" }}>
-      <Typography
-        gutterBottom
-        variant="h5"
-        component="div"
-        sx={{ padding: "20px" }}
-      >
-        Kategoriler Listesi
-      </Typography>
-      <Divider />
-      <Box height={10} />
-      <Stack direction="row" spacing={2} className="my-2 mb-2">
-        <Autocomplete
-          id="category-select"
-          sx={{ width: 300 }}
-          options={rows.map((row) => row.name)}
-          renderInput={(params) => (
-            <TextField {...params} label="Kategori Filtrele" margin="dense" />
-          )}
-          onChange={(event, value) => {
-            if (value) {
-              const filteredRows = rows.filter((row) => row.name === value);
-              setFilteredRows(filteredRows);
-            } else {
-              setFilteredRows([]);
-            }
-            setPage(0);
-          }}
-        />
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{ flexGrow: 1 }}
-        ></Typography>
-        <Button variant="contained" endIcon={<AddCircleIcon />}>
-          Kategori Ekle
-        </Button>
-      </Stack>
-      <Box height={10} />
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="left" style={{ minWidth: "100px" }}>
-                Adı
-              </TableCell>
-              <TableCell align="left" style={{ minWidth: "100px" }}>
-                Öne Çıkar
-              </TableCell>
-              <TableCell align="left" style={{ minWidth: "100px" }}>
-                Status
-              </TableCell>
-              <TableCell align="left" style={{ minWidth: "100px" }}>
-                Action
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {!isLoading &&
-              dataRows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <TableRow key={row.id} hover role="checkbox" tabIndex={-1}>
-                      <TableCell align="left">{row.name}</TableCell>
-                      <TableCell align="left">
-                        <Stack direction="row" spacing={1}>
-                          {row.featured ? (
-                            <Chip
-                              label="Evet"
-                              color="primary"
-                              variant="outlined"
-                            />
-                          ) : (
-                            <Chip
-                              label="Hayır"
-                              color="secondary"
-                              variant="outlined"
-                            />
-                          )}
-                        </Stack>
-                      </TableCell>
-                      <TableCell align="left">
-                        {row.status ? (
-                          <Chip
-                            label="Aktif"
-                            color="success"
-                            variant="outlined"
-                          />
-                        ) : (
-                          <Chip
-                            label="Pasif"
-                            color="error"
-                            variant="outlined"
-                          />
-                        )}
-                      </TableCell>
-                      <TableCell align="left">
-                        <Stack spacing={2} direction="row">
-                          <EditIcon
-                            style={{
-                              fonstSize: "20px",
-                              color: "#3f50b5",
-                              cursor: "pointer",
-                            }}
-                            className="cursor-pointer"
-                            // onClick={() => editUser(row.id)}
-                          />
-                          <DeleteIcon
-                            style={{
-                              fonstSize: "20px",
-                              color: "#ba000d",
-                              cursor: "pointer",
-                            }}
-                            className="cursor-pointer"
-                            onClick={(e) => handleDelete(e, row.id)}
-                          />
-                        </Stack>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
-    )}
+      <div>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Add closeEvent={handleClose} />
+          </Box>
+        </Modal>
+
+        <Modal
+          open={editOpen}
+          // onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Edit closeEvent={handleEditClose} categoryId={categoryId} />
+          </Box>
+        </Modal>
+      </div>
+
+      {isLoading && <Loader />}
+      {rows.length > 0 && (
+        <Paper sx={{ width: "98%", overflow: "hidden", padding: "12px" }}>
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="div"
+            sx={{ padding: "20px" }}
+          >
+            Kategoriler Listesi
+          </Typography>
+          <Divider />
+          <Box height={10} />
+          <Stack direction="row" spacing={2} className="my-2 mb-2">
+            <Autocomplete
+              id="category-select"
+              sx={{ width: 300 }}
+              options={rows.map((row) => row.name)}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Kategori Filtrele"
+                  margin="dense"
+                />
+              )}
+              onChange={(event, value) => {
+                if (value) {
+                  const filteredRows = rows.filter((row) => row.name === value);
+                  setFilteredRows(filteredRows);
+                } else {
+                  setFilteredRows([]);
+                }
+                setPage(0);
+              }}
+            />
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1 }}
+            ></Typography>
+            <Button
+              variant="contained"
+              endIcon={<AddCircleIcon />}
+              onClick={handleOpen}
+            >
+              Kategori Ekle
+            </Button>
+          </Stack>
+          <Box height={10} />
+          <TableContainer sx={{ maxHeight: 440 }}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left" style={{ minWidth: "100px" }}>
+                    Adı
+                  </TableCell>
+                  <TableCell align="left" style={{ minWidth: "100px" }}>
+                    Öne Çıkar
+                  </TableCell>
+                  <TableCell align="left" style={{ minWidth: "100px" }}>
+                    Status
+                  </TableCell>
+                  <TableCell align="left" style={{ minWidth: "100px" }}>
+                    Action
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {!isLoading &&
+                  dataRows
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => {
+                      return (
+                        <TableRow
+                          key={row.id}
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                        >
+                          <TableCell align="left">{row.name}</TableCell>
+                          <TableCell align="left">
+                            <Stack direction="row" spacing={1}>
+                              {row.featured ? (
+                                <Chip
+                                  label="Evet"
+                                  color="primary"
+                                  variant="outlined"
+                                />
+                              ) : (
+                                <Chip
+                                  label="Hayır"
+                                  color="secondary"
+                                  variant="outlined"
+                                />
+                              )}
+                            </Stack>
+                          </TableCell>
+                          <TableCell align="left">
+                            {row.status ? (
+                              <Chip
+                                label="Aktif"
+                                color="success"
+                                variant="outlined"
+                              />
+                            ) : (
+                              <Chip
+                                label="Pasif"
+                                color="error"
+                                variant="outlined"
+                              />
+                            )}
+                          </TableCell>
+                          <TableCell align="left">
+                            <Stack spacing={2} direction="row">
+                              <EditIcon
+                                style={{
+                                  fonstSize: "20px",
+                                  color: "#3f50b5",
+                                  cursor: "pointer",
+                                }}
+                                className="cursor-pointer"
+                                onClick={() =>
+                                  handleUpdate(
+                                    row.id,
+                                  )
+                                }
+                              />
+                              <DeleteIcon
+                                style={{
+                                  fonstSize: "20px",
+                                  color: "#ba000d",
+                                  cursor: "pointer",
+                                }}
+                                className="cursor-pointer"
+                                onClick={(e) => handleDelete(e, row.id)}
+                              />
+                            </Stack>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+      )}
     </>
   );
 }

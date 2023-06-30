@@ -15,6 +15,18 @@ export const categoryDeleteApi = async (id, payload = []) => {
     return sendRequest(POST, `/api/admin/category-delete/${id}`, payload);
 }
 
+export const categoryInsertApi = async (payload = []) => {
+    return sendRequest(POST, '/api/admin/category-store', payload);
+}
+
+export const categoryUpdateApi = async (id, payload = []) => {
+    return sendRequest(POST, `/api/admin/category-update/${id}`, payload);
+}
+
+export const categoryFindApi = async (id, payload = []) => {
+    return sendRequest(POST, `/api/admin/category/${id}`, payload);
+}
+
 export const brandListApi = async (payload = []) => {
     return sendRequest(POST, '/api/admin/brand-list', payload);
 }
