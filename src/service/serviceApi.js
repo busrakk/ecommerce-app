@@ -84,3 +84,7 @@ export const brandDropdownApi = async (payload = []) => {
 export const addToCartApi = async (id, payload = []) => {
     return sendRequest(POST, '/api/add-to-cart', payload);
 }
+
+export const dashboardDataApi = async (payload = []) => {
+    return sendRequest(POST, '/api/admin/dashboard-data', payload);
+}

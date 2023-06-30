@@ -22,13 +22,23 @@
 }
 
 .gradient{
-    background: rgb(40, 34, 70);
-    background: linear-gradient(158deg, rgba(40, 34, 70, 1) 0%, rgba(30, 47, 141, 1) 100%);
+    background: rgb(89, 58, 240);
+    background: linear-gradient(158deg, rgba(89, 58, 240, 1) 0%, rgba(30, 47, 141, 1) 100%);
 }
 
 .gradientlight{
     background: rgb(51, 138, 148);
     background: linear-gradient(158deg, rgba(53, 138, 148, 1) 0%, rgba(91, 180, 96, 1) 100%);
+}
+
+.gradientsecondary{
+    background: rgb(237, 66, 169);
+    background: linear-gradient(158deg, rgba(237, 66, 169, 1) 0%, rgb(116, 75, 109) 100%);
+}
+
+.gradientend{
+    background: rgb(198, 26, 236);
+    background: linear-gradient(158deg, rgba(198, 26, 236, 1) 0%, rgb(94, 7, 182) 100%);
 }
 
 .bgcolor{
