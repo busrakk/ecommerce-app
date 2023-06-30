@@ -3,6 +3,7 @@ import swal from "sweetalert";
 import {
   productUserListApi,
   categoryDropdownApi,
+  brandDropdownApi,
   productDeleteApi,
 } from "../../../service/serviceApi";
 import useDelayCallback from "../../helpers/useDelayCallback";
@@ -20,10 +21,13 @@ const UserProductList = () => {
   const [productId, setProductId] = useState(0);
   const DEFAULT_CATEGORY = { label: "Select Category", value: "" };
   const [categoryList, setCategoryList] = useState([DEFAULT_CATEGORY]);
+  const DEFAULT_BRAND = { label: "Select Brand", value: "" };
+  const [brandList, setBrandList] = useState([DEFAULT_BRAND]);
 
   useDelayCallback(() => {
     getProductList();
     getCategoryDropdown();
+    getBrandDropdown();
   }, []);
 
   const getProductList = () => {
@@ -210,6 +214,29 @@ const UserProductList = () => {
       });
   };
 
+  const getBrandDropdown = () => {
+    brandDropdownApi()
+      .then((res) => {
+        if (res.data.success) {
+          if (res.data.status === "success") {
+            let allOptions = [];
+            if (res.data.data.length > 0) {
+              allOptions = res.data.data.map((item) => {
+                return {
+                  value: item.id,
+                  label: item.name,
+                };
+              });
+              setBrandList([DEFAULT_BRAND, ...allOptions]);
+            }
+          }
+        }
+      })
+      .catch((error) => {
+        console.log("something is wrong" + error);
+      });
+  };
+
   return (
     <div className="col-span-10 pb-4">
       <div className="rounded-t rounded-md bg-white mb-0 px-6 pt-10">
@@ -266,6 +293,7 @@ const UserProductList = () => {
         <AddProduct
           onClose={onClose}
           categoryList={categoryList}
+          brandList={brandList}
           productId={productId}
         />
       </Modal>

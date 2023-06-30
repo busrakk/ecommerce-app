@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import {AiOutlineCloseSquare} from "react-icons/ai"
 
 const Modal = ({title, show, onClose, size="md", customClass, children}) => {
     const openModal =()=> {
@@ -34,14 +35,16 @@ const Modal = ({title, show, onClose, size="md", customClass, children}) => {
             <div className={`modal-dialog modal-${size} ${customClass}`} role="document">
                 <div className="modal-content">
                     <div className="modal-header d-flex">
-                        <h5 className="modal-title" id="exampleModalLabel">{title}</h5>
+                        <h5 className="modal-title flex justify-center" id="exampleModalLabel">{title}</h5>
 
                         {/* <button type="button" className="close" aria-label="Close" onClick={()=>onClose()}>
                             <span aria-hidden="true">×</span>
                         </button> */}
-                        <span type="button" className="close p-0" data-dismiss="modal" aria-label="Close" onClick={()=>onClose()} >
-                            <span aria-hidden="true">&times;</span>
-                        </span>
+                        <span type="button" className="close p-5 flex justify-end" data-dismiss="modal" aria-label="Close" onClick={()=>onClose()} >
+                            <span aria-hidden="true">
+                                <AiOutlineCloseSquare className="bg-red-500 text-white" size={22} />
+                            </span>
+                        </span> 
                         {/* <div>
                             <FontAwesomeIcon icon="fa-solid fa-xmark" size="2x" className="close pointer" onClick={()=>onClose()} />
                         </div> */}

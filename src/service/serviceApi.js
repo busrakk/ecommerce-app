@@ -54,6 +54,10 @@ export const categoryDropdownApi = async (payload = []) => {
     return sendRequest(POST, '/api/category-dropdown-list', payload);
 }
 
+export const brandDropdownApi = async (payload = []) => {
+    return sendRequest(POST, '/api/brand-dropdown-list', payload);
+}
+
 export const addToCartApi = async (id, payload = []) => {
     return sendRequest(POST, '/api/add-to-cart', payload);
 }

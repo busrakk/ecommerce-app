@@ -28,10 +28,12 @@ const AddProduct = (props) => {
   };
 
   const DEFAULT_CATEGORY = { label: "Select Category", value: "" };
+  const DEFAULT_BRAND = { label: "Select Brand", value: "" };
   const [productInput, setProductInput] = useState(initialData);
   const [isLoading, setIsLoading] = useState(false);
   const [loader, setLoader] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState(DEFAULT_CATEGORY);
+  const [selectedBrand, setSelectedBrand] = useState(DEFAULT_BRAND);
   const [picture, setPicture] = useState([]);
 
   useDelayCallBack(() => {
@@ -64,6 +66,12 @@ const AddProduct = (props) => {
             while (i < props.categoryList.length) {
               if (props.categoryList[i].value === res.data.data.category_id) {
                 setSelectedCategory(props.categoryList[i]);
+              }
+              i++;
+            }
+            while (i < props.brandList.length) {
+              if (props.brandList[i].value === res.data.data.brand_id) {
+                setSelectedBrand(props.brandList[i]);
               }
               i++;
             }
@@ -153,7 +161,7 @@ const AddProduct = (props) => {
     const formData = new FormData();
     formData.append("image", picture.image);
     formData.append("category", selectedCategory.value);
-    formData.append("brand", selectedCategory.value);
+    formData.append("brand", selectedBrand.value);
     formData.append("name", productInput.name);
     formData.append("description", productInput.description);
     formData.append("price", productInput.price);
@@ -207,13 +215,13 @@ const AddProduct = (props) => {
                     <div className="relative w-full mb-3">
                       <label className="text-sm text-gray-900">Marka Adı</label>
                       <div className="w-full inline-flex border">
-                        {/* <Select
-                        options={props.categoryList}
-                        onChange={setSelectedCategory}
-                        value={selectedCategory}
-                      /> */}
+                        <Select
+                        options={props.brandList}
+                        onChange={setSelectedBrand}
+                        value={selectedBrand}
+                      /> 
                         <span className="text-danger">
-                          {productInput.error_list.category}
+                          {productInput.error_list.brand}
                         </span>
                       </div>
                     </div>
@@ -398,7 +406,7 @@ const AddProduct = (props) => {
                   <div className="w-full lg:w-1/4 px-4">
                     <div className="relative w-full mb-3">
                       <label className="text-sm text-gray-900">
-                        Ürünü Gizle
+                        Status
                       </label>
                       <div className="flex items-center mt-4 mb-4">
                         <Switch
@@ -434,12 +442,14 @@ const AddProduct = (props) => {
                     </div>
                   </div>
                 </div>
+                <div className="flex justify-end p-6">
                 <button
                   type="submit"
-                  className="btn btn-primary px-4 mb-4 float-end"
+                  className="btn flex justify-center items-center bg-indigo-600 px-7 py-4 text-white hover:bg-indigo-500 rounded-md"
                 >
                   {props.productId !== 0 ? "Ürünü Güncelle" : "Ürünü Kaydet"}
                 </button>
+                </div>
               </form>
             )}
           </div>

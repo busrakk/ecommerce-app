@@ -21,7 +21,9 @@ const ProductItem = ({ item, isThreeColumn }) => {
   //console.log(item)
 
   return (
-    <div className={`group group-hover:bg-opacity-10 transition duration-500 relative transform  hover:scale-105 shadow-md bg-gray-50 sm:p-25 py-28 px-10 flex justify-center items-center`}>
+    <div
+      className={`group group-hover:bg-opacity-10 transition duration-500 relative transform  hover:scale-105 shadow-md bg-gray-50 sm:p-25 py-28 px-10 flex justify-center items-center`}
+    >
       <img
         className={`group-hover:opacity-60 transition duration-500 ${
           isThreeColumn ? "w-[250px] h-[180px]" : "w-[200px] h-[100px]"
@@ -37,12 +39,16 @@ const ProductItem = ({ item, isThreeColumn }) => {
           </p>
         </div>
         <div>
-          <p className="group-hover:opacity-60 transition duration-500 text-md font-semibold leading-5 text-gray-800">
+          {/* <p className="group-hover:opacity-60 transition duration-500 text-md font-semibold leading-5 text-gray-800">
             $ {item.price}
-          </p>
+          </p> */}
         </div>
       </div>
+
       <div className="group-hover:opacity-60 transition duration-500 absolute bottom-8 right-8 flex justify-start items-start flex-row space-x-2">
+        <p className="group-hover:opacity-60 transition duration-500 text-2xl font-bold leading-5 text-gray-800 mr-10">
+           {item.price} ₺
+        </p>
         <button className="bg-white border rounded-full focus:bg-gray-800 border-gray-600 p-1.5" />
         <button className="bg-white border rounded-full focus:bg-gray-800 border-gray-600 p-1.5" />
       </div>
